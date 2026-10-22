@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0f766e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Latviešu Sarunvaloda · B2–C2</title>
+<link rel="manifest" href="manifest.json">
+<style>
+:root{
+  --bg:#f4f7f6; --card:#ffffff; --card-2:#f0f4f2; --text:#1a2e2a; --muted:#5e7a74;
+  --accent:#0f766e; --accent-2:#14b8a6; --accent-light:#ccfbf1;
+  --danger:#be123c; --success:#15803d; --warning:#b45309; --gold:#f59e0b;
+  --border:#d1e0dc; --border-2:#b2cfc8;
+  --shadow:0 10px 30px rgba(15,118,110,.08); --shadow-2:0 4px 14px rgba(0,0,0,.04);
+  --radius:20px; --radius-sm:14px;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+[data-theme="dark"]{
+  --bg:#0f1a19; --card:#1a2b29; --card-2:#243a37; --text:#e6f0ed; --muted:#8ba8a3;
+  --accent:#14b8a6; --accent-2:#2dd4bf; --accent-light:#115e59;
+  --border:#2e4a46; --border-2:#3d5d58;
+  --shadow:0 10px 30px rgba(0,0,0,.4); --shadow-2:0 4px 14px rgba(0,0,0,.2);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--font); background:var(--bg); color:var(--text);
+  line-height:1.6; -webkit-font-smoothing:antialiased; transition: background .3s, color .3s;
+  min-height:100vh; display:flex; flex-direction:column; overflow-x:hidden;
+}
+.app{max-width:900px; margin:0 auto; padding:16px 12px 60px; width:100%; flex:1; position:relative; z-index:2;}
+
+header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; flex-wrap:wrap}
+h1{font-size:1.4rem; font-weight:800; letter-spacing:-.03em; display:flex; align-items:center; gap:8px}
+h1 span{color:var(--accent); font-size:.85rem; font-weight:600; background:var(--accent-light); padding:4px 10px; border-radius:20px;}
+.header-actions{display:flex; gap:8px; align-items:center}
+.icon-btn{background:var(--card); border:1px solid var(--border); border-radius:50%; width:40px; height:40px; font-size:1.1rem; cursor:pointer; transition:.2s; display:flex; align-items:center; justify-content:center; color:var(--text)}
+.icon-btn:hover{background:var(--card-2); transform:scale(1.05)}
+
+.search-wrapper { position: relative; margin-bottom: 16px; }
+.search-input { width: 100%; padding: 12px 16px 12px 40px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); color: var(--text); font-family: inherit; font-size: 0.95rem; outline: none; }
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+.search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 1rem; color: var(--muted); }
+
+.game-stats { display: flex; gap: 8px; margin-bottom: 16px; }
+.stat-badge { background: var(--card); border: 1px solid var(--border); padding: 8px 10px; border-radius: 12px; font-weight: 800; font-size: 0.95rem; display: flex; align-items: center; gap: 4px; box-shadow: var(--shadow-2); flex: 1; justify-content: center; flex-direction: column; text-align: center; }
+.stat-badge .label { font-size: 0.6rem; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.stat-badge.streak { color: var(--danger); }
+.stat-badge.xp { color: var(--gold); }
+.stat-badge.goal { color: var(--accent); }
+
+.badges-container { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
+.badge-icon { width: 42px; height: 42px; border-radius: 50%; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; opacity: 0.3; filter: grayscale(1); transition: 0.3s; }
+.badge-icon.unlocked { opacity: 1; filter: grayscale(0); border-color: var(--gold); box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
+
+.level-filter { display: flex; gap: 8px; margin-bottom: 16px; background: var(--card); padding: 6px; border-radius: 12px; border: 1px solid var(--border); width: 100%; overflow-x: auto; }
+.level-filter button { flex: 1; background: transparent; border: none; padding: 10px 16px; border-radius: 8px; font-family: inherit; font-weight: 700; font-size: 0.9rem; cursor: pointer; color: var(--muted); transition: 0.2s; white-space: nowrap; }
+.level-filter button.active { background: var(--accent); color: #fff; }
+
+.global-progress { margin-bottom: 20px; }
+.progress-text { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+.progress-track { height: 10px; background: var(--border); border-radius: 5px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); width: 0%; transition: width 0.5s ease; border-radius: 5px; }
+
+.dashboard-grid{display:grid; grid-template-columns:1fr; gap:16px; margin-bottom:20px}
+@media(min-width:600px){.dashboard-grid{grid-template-columns:1fr 1fr}}
+.mode-card{ background:var(--card); border-radius:var(--radius); border:1px solid var(--border); padding:20px; box-shadow:var(--shadow-2); cursor:pointer; transition:.25s; display:flex; flex-direction:column; gap:12px; position:relative; overflow:hidden; }
+.mode-card:hover{border-color:var(--accent-2); box-shadow:var(--shadow); transform:translateY(-3px)}
+.mode-card.mixed-card { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; border: none; }
+.mode-card.mixed-card p { color: rgba(255,255,255,0.9); }
+.mode-card .icon{font-size:2.4rem; margin-bottom:4px}
+.mode-card h2{font-size:1.15rem; font-weight:700; display: flex; justify-content: space-between; align-items: center;}
+.mode-card p{font-size:.88rem; line-height:1.4}
+
+.content-area{background:var(--card); border-radius:var(--radius); border:1px solid var(--border); padding:20px; box-shadow:var(--shadow-2); min-height:400px}
+.content-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid var(--border)}
+.content-header h2{font-size:1.2rem; font-weight:800;}
+.back-btn{background:transparent; border:none; color:var(--muted); font-size:.9rem; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px; font-family:inherit; padding:6px 10px; border-radius:8px; min-height:44px;}
+.back-btn:hover{background:var(--card-2); color:var(--text)}
+
+.lv-text{font-size:1.05rem; font-weight:500; margin:8px 0; line-height:1.7}
+.ru-text{font-size:.9rem; color:var(--muted); margin:4px 0 10px; font-style:italic}
+.hint{font-size:.9rem; color:var(--warning); background:var(--card-2); padding:12px 16px; border-radius:12px; margin:12px 0; border-left:4px solid var(--warning)}
+
+.speak-btn{background:var(--accent-light); border:none; border-radius:50%; width:32px; height:32px; font-size:1rem; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; margin-left:8px; vertical-align:middle; color:var(--accent); transition:0.2s;}
+.speak-btn:hover{background:var(--accent); color:#fff; transform:scale(1.1);}
+
+.btn{ background:var(--card); border:1px solid var(--border); color:var(--text); padding:12px 18px; border-radius:var(--radius-sm); font-family:inherit; font-size:.95rem; font-weight:600; cursor:pointer; transition:.2s; display:inline-flex; align-items:center; gap:8px; justify-content:center; min-height:48px; }
+.btn.primary{background:var(--accent); border-color:var(--accent); color:#fff}
+.btn.success{background:#dcfce7; border-color:#bbf7d0; color:#166534}
+.btn.danger{background:#fee2e2; border-color:#fecaca; color:#991b1b}
+.btn-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:20px; border-top:1px solid var(--border); padding-top:20px;}
+
+.mic-btn { background: var(--danger); color: white; border: none; border-radius: 50%; width: 54px; height: 54px; font-size: 1.4rem; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; margin: 10px auto; box-shadow: 0 4px 12px rgba(190, 18, 60, 0.3); }
+.mic-btn.recording { animation: pulse 1.5s infinite; background: #9f1239; transform: scale(1.1); }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+.shadow-box { background: var(--card-2); padding: 20px; border-radius: 12px; text-align: center; border: 1px dashed var(--border-2); margin-bottom: 16px; }
+.shadow-target { font-size: 1.3rem; font-weight: 800; color: var(--accent); margin-bottom: 10px; }
+.shadow-result { font-size: 1rem; font-weight: 600; margin-top: 10px; min-height: 24px; }
+.shadow-result.match { color: var(--success); }
+.shadow-result.partial { color: var(--warning); }
+.shadow-result.miss { color: var(--danger); }
+
+.info-card{background:linear-gradient(135deg, var(--card-2), var(--card)); border:1px solid var(--border); border-radius:var(--radius-sm); padding:20px; margin-bottom:16px}
+.info-card .phrase{font-size:1.3rem; font-weight:800; color:var(--accent); line-height:1.3;}
+.info-card .example{font-size:.95rem; margin-top:16px; padding:12px 16px; background:var(--card); border-radius:10px; border-left:3px solid var(--accent-2)}
+.info-card .mnemonic{background:#fffbeb; border:1px solid #fde68a; color:#92400e; padding:12px; border-radius:8px; margin-top:12px; font-size:0.9rem;}
+[data-theme="dark"] .info-card .mnemonic{background:#78350f; border-color:#92400e; color:#fed7aa;}
+
+.lv-input{ width:100%; padding:16px; border-radius:var(--radius-sm); border:2px solid var(--border); font-size:16px; font-family:inherit; background:var(--card); color:var(--text); outline:none; resize:vertical; min-height:100px; }
+.lv-input:focus{border-color:var(--accent-2); box-shadow:0 0 0 4px rgba(20,184,166,.1)}
+
+.grammar-table { width: 100%; border-collapse: collapse; margin: 10px 0 20px; font-size: 0.9rem; }
+.grammar-table th, .grammar-table td { padding: 10px; text-align: left; border-bottom: 1px solid var(--border); }
+.grammar-table th { background: var(--card-2); font-weight: 700; color: var(--accent); }
+.grammar-table td:first-child { font-weight: 600; color: var(--muted); }
+
+#toast-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 10px; align-items: center; pointer-events: none; }
+.toast { background: var(--text); color: var(--card); padding: 12px 20px; border-radius: 30px; font-weight: 700; font-size: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 10px; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.toast.success { background: var(--success); color: white; }
+.toast.gold { background: var(--gold); color: white; }
+.toast.danger { background: var(--danger); color: white; }
+@keyframes popIn { 0% { opacity: 0; transform: scale(0.5) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0; } }
+#confetti-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
+
+.wordle-grid { display: grid; grid-template-rows: repeat(6, 1fr); gap: 6px; justify-content: center; margin: 20px 0; }
+.wordle-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.wordle-cell { width: 50px; height: 50px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; text-transform: uppercase; border-radius: 8px; transition: 0.3s; }
+.wordle-cell.correct { background: var(--success); color: white; border-color: var(--success); }
+.wordle-cell.present { background: var(--gold); color: white; border-color: var(--gold); }
+.wordle-cell.absent { background: var(--muted); color: white; border-color: var(--muted); }
+.wordle-keyboard { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 20px; }
+.wordle-key { background: var(--card-2); border: 1px solid var(--border); padding: 10px 14px; border-radius: 8px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-family: inherit; color: var(--text); min-width: 36px; }
+.wordle-key.correct { background: var(--success); color: white; }
+.wordle-key.present { background: var(--gold); color: white; }
+.wordle-key.absent { background: var(--muted); color: white; opacity: 0.7; }
+
+.qf-timer { font-size: 2rem; font-weight: 800; color: var(--danger); text-align: center; margin-bottom: 10px; }
+.qf-question { font-size: 1.5rem; font-weight: 800; text-align: center; margin-bottom: 20px; color: var(--accent); }
+.qf-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.qf-btn { background: var(--card-2); border: 2px solid var(--border); padding: 15px; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.2s; color: var(--text); }
+.qf-btn:hover { border-color: var(--accent); }
+.qf-btn.correct { background: var(--success); color: white; border-color: var(--success); }
+.qf-btn.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+</style>
+</head>
+<body>
+<canvas id="confetti-canvas" class="hidden"></canvas>
+<div id="toast-container"></div>
+
+<div class="app">
+  <header>
+    <h1>🇱🇻 Latviešu <span>B2–C2</span></h1>
+    <div class="header-actions">
+      <button class="icon-btn" id="themeToggle" title="Сменить тему">🌓</button>
+      <button class="icon-btn" id="resetProgress" title="Сбросить прогресс">🔄</button>
+    </div>
+  </header>
+
+  <div class="search-wrapper" id="searchWrapper">
+    <span class="search-icon">🔍</span>
+    <input type="text" class="search-input" id="globalSearch" placeholder="Поиск по всем темам и идиомам...">
+  </div>
+
+  <div class="game-stats">
+    <div class="stat-badge streak"><span class="label">Стрик</span>🔥 <span id="streakCount">1</span></div>
+    <div class="stat-badge xp"><span class="label">Опыт</span>⭐️ <span id="xpCount">0</span></div>
+    <div class="stat-badge goal"><span class="label">Цель (50)</span>🎯 <span id="goalCount">0</span></div>
+  </div>
+
+  <div class="badges-container" id="badgesContainer"></div>
+
+  <div class="global-progress">
+    <div class="progress-text"><span>Освоено тем</span><span id="progressPct">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="globalProgressFill"></div></div>
+  </div>
+
+  <div class="level-filter" id="levelFilter">
+    <button class="active" data-level="all">Все</button>
+    <button data-level="B2">B2</button>
+    <button data-level="C1">C1</button>
+    <button data-level="C2">C2</button>
+  </div>
+
+  <div id="mainDashboard" class="dashboard-grid fade-in">
+    <div class="mode-card mode-cat" data-mode="quickfire" style="background: linear-gradient(135deg, #be123c, #e11d48); color: white; border: none;">
+      <div class="icon">⚡️</div>
+      <h2>Быстрый огонь</h2>
+      <p style="color: rgba(255,255,255,0.9)">60 секунд на скорость. Сколько слов вы угадаете?</p>
+    </div>
+    <div class="mode-card mode-cat" data-mode="wordle" style="background: linear-gradient(135deg, #15803d, #22c55e); color: white; border: none;">
+      <div class="icon">🟩</div>
+      <h2>Vārdu spēle</h2>
+      <p style="color: rgba(255,255,255,0.9)">Угадайте латышское слово из 5 букв за 6 попыток.</p>
+    </div>
+
+    <div class="mode-card mixed-card" data-mode="mixed">
+      <div class="icon">🎲</div>
+      <h2>Daily Mix</h2>
+      <p>Случайные задания из всех категорий. Идеально для быстрой практики.</p>
+    </div>
+    
+    <!-- NEW PROFESSIONAL CATEGORIES -->
+    <div class="mode-card mode-cat" data-mode="food_tech">
+      <div class="icon">🥫</div>
+      <h2>Технологу пищ. пр-ва</h2>
+      <p>Профессиональная лексика: производство, контроль качества, безопасность.</p>
+    </div>
+    <div class="mode-card mode-cat" data-mode="automotive">
+      <div class="icon">🚗</div>
+      <h2>Автомобилисту</h2>
+      <p>Устройство авто, вождение, правила дорожного движения.</p>
+    </div>
+
+    <div class="mode-card mode-cat" data-mode="vocab">
+      <div class="icon">📖</div>
+      <h2>Словарь (Vocab)</h2>
+      <p>Продвинутая лексика: Бизнес, IT, Эмоции, Политика.</p>
+    </div>
+    <div class="mode-card mode-cat" data-mode="discussions">
+      <div class="icon">🗣️</div>
+      <h2>Дискуссии и дебаты</h2>
+      <p>Аргументы, контраргументы, выражение мнения на сложные темы.</p>
+    </div>
+    <div class="mode-card mode-cat" data-mode="dialogues">
+      <div class="icon">💬</div>
+      <h2>Живые диалоги</h2>
+      <p>Профессиональные и бытовые ситуации: от переговоров до конфликтов.</p>
+    </div>
+    <div class="mode-card mode-cat" data-mode="shadowing" style="border-color: var(--danger);">
+      <div class="icon">🗣️</div>
+      <h2>Тренажер речи</h2>
+      <p>Слушайте и повторяйте вслух. ИИ проверит ваше произношение.</p>
+    </div>
+    <div class="mode-card mode-cat" data-mode="idioms">
+      <div class="icon">🎭</div>
+      <h2>Идиомы и сленг</h2>
+      <p>Фразеологизмы с мнемотехниками для быстрого запоминания.</p>
+    </div>
+    <div class="mode-card mode-cat" data-mode="paraphrase">
+      <div class="icon">✍️</div>
+      <h2>Перефразирование</h2>
+      <p>Учитесь выражать мысль разными способами.</p>
+    </div>
+    <div class="mode-card mode-cat" data-mode="cheatsheets">
+      <div class="icon">📋</div>
+      <h2>Шпаргалки</h2>
+      <p>Готовые речевые клише и коннекторы.</p>
+    </div>
+    <div class="mode-card mode-cat" data-mode="lifehacks">
+      <div class="icon">🧠</div>
+      <h2>Лайфхаки</h2>
+      <p>Правила, которые спасают в разговоре.</p>
+    </div>
+    <div class="mode-card mode-cat" data-mode="grammar">
+      <div class="icon">📚</div>
+      <h2>Грамматика</h2>
+      <p>Падежи и спряжения для уровня B2-C2.</p>
+    </div>
+  </div>
+
+  <div id="contentView" class="content-area hidden fade-in"></div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   ДАННЫЕ
+   ============================================================ */
+const DATA = {
+  discussions: [
+    { id: "d1", level: "B2", title: "Darbs no mājām vs. Darbs birojā", ruTitle: "Удалённая работа vs. Работа в офисе", text: "Pēc pandēmijas daudzi uzņēmumi turpina piedāvāt iespēju strādāt attālināti. Tas dod elastību, bet var arī novest pie sociālās izolācijas.", ruText: "После пандемии многие компании продолжают предлагать удалённую работу.", questions: ["Kāda ir jūsu pieredze ar attālināto darbu?"] },
+    { id: "d2", level: "C1", title: "Pieaugošā dzīves dārdzība un inflācija", ruTitle: "Инфляция", text: "Pēdējo gadu laikā cenas pārtikai, mājoklim un pakalpojumiem ir ievērojami pieaugušas. Daudzi cilvēki saskaras ar finansiālām grūtībām.", ruText: "За последние годы цены значительно выросли.", questions: ["Vai esat pamanījuši cenu pieaugumu?"] },
+    { id: "d3", level: "C2", title: "Vai mākslīgais intelekts apdraud radošās profesijas?", ruTitle: "ИИ и творчество", text: "Mākslīgā intelekta attīstība ir radījusi diskusijas par to, vai tas var aizstāt cilvēku radošajās profesijās.", ruText: "Развитие ИИ вызвало споры.", questions: ["Kā jūs domājat, vai AI var būt patiesi radošs?"] }
+  ],
+  dialogues: [
+    { id: "dl1", level: "B2", title: "Saruna kafejnīcā", ruTitle: "В кафе", turns: [ { speaker: "A", text: "Labdien! Ko jūs vēlētos pasūtīt?", ru: "Здравствуйте! Что бы вы хотели заказать?" }, { speaker: "B", text: "Sveiki! Es domāju, ka ņemšu kafiju.", ru: "Привет! Думаю, возьму кофе." } ] },
+    { id: "dl2", level: "C1", title: "Darba intervija", ruTitle: "Собеседование", turns: [ { speaker: "A", text: "Pastāstiet nedaudz par sevi.", ru: "Расскажите о себе." }, { speaker: "B", text: "Man ir piecu gadu pieredze mārketingā.", ru: "У меня пятилетний опыт в маркетинге." } ] }
+  ],
+  idioms: [
+    { id: "i1", level: "B2", phrase: "Pūst pīlītes", literal: "Дуть уточек", meaning: "Говорить ерунду.", example: "Beidz pūst pīlītes!", ruEx: "Хватит нести чушь!", mnemonic: "Дуть на уточек — глупость." },
+    { id: "i2", level: "C1", phrase: "Palaist gar ausīm", literal: "Мимо ушей", meaning: "Игнорировать.", example: "Viņš palaida gar ausīm visus padomus.", ruEx: "Он пропустил мимо ушей все советы.", mnemonic: "Звук пролетает мимо." }
+  ],
+  paraphrases: [
+    { id: "p1", level: "B2", original: "Es domāju, ka šī ideja ir ļoti laba.", ruOriginal: "Я думаю, это хорошая идея.", answers: ["Manuprāt, šī ideja ir izcila.", "Es uzskatu, ka šī ideja ir lieliska."] }
+  ],
+  cheatsheets: [
+    { id: "c1", level: "B2", title: "Мнение", items: [ { lv: "Manuprāt...", ru: "По моему мнению..." }, { lv: "Es uzskatu, ka...", ru: "Я считаю, что..." } ] }
+  ],
+  lifehacks: [
+    { id: "lh1", level: "B2", title: "Слова-паразиты", text: "Выиграйте время.", items: [ { lv: "Nu...", ru: "Ну..." }, { lv: "Tātad...", ru: "Итак..." } ] }
+  ],
+  shadowing: [
+    { id: "s1", level: "B2", text: "Labdien, kā jums iet?", ru: "Здравствуйте, как ваши дела?" },
+    { id: "s2", level: "B2", text: "Es gribētu pasūtīt kafiju, lūdzu.", ru: "Я хотел бы заказать кофе, пожалуйста." },
+    { id: "s3", level: "C1", text: "Manuprāt, šis projekts ir ļoti perspektīvs.", ru: "По моему мнению, этот проект очень перспективный." }
+  ],
+  grammar: [
+    { id: "g1", level: "B2", title: "Locījumi (Падежи)", content: `<p>В латышском 7 падежей.</p><table class="grammar-table"><tr><th>Падеж</th><th>Вопрос</th><th>Пример</th></tr><tr><td>Nominatīvs</td><td>Kas?</td><td>draug<b>s</b></td></tr><tr><td>Ģenitīvs</td><td>Kā?</td><td>draug<b>a</b></td></tr><tr><td>Datīvs</td><td>Kam?</td><td>draug<b>am</b></td></tr><tr><td>Akuzatīvs</td><td>Ko?</td><td>draug<b>u</b></td></tr></table>` }
+  ],
+  vocab: [
+    { id: "v1", level: "C1", title: "Эмоции и чувства", items: [ { lv: "sašutums", ru: "возмущение" }, { lv: "vīls", ru: "разочарование" }, { lv: "skaudība", ru: "зависть" }, { lv: "līdzjūtība", ru: "сострадание" }, { lv: "apmulsums", ru: "замешательство" }, { lv: "gandarījums", ru: "удовлетворение" } ] },
+    { id: "v2", level: "C1", title: "Бизнес и работа", items: [ { lv: "uzņēmums", ru: "предприятие" }, { lv: "ieņēmumi", ru: "доходы" }, { lv: "izdevumi", ru: "расходы" }, { lv: "konkurence", ru: "конкуренция" }, { lv: "līgums", ru: "договор" }, { lv: "piedāvājums", ru: "предложение" } ] },
+    { id: "v3", level: "C2", title: "IT и Технологии", items: [ { lv: "lietotne", ru: "приложение" }, { lv: "datu bāze", ru: "база данных" }, { lv: "mākoņskaitļošana", ru: "облачные вычисления" }, { lv: "kiberdrošība", ru: "кибербезопасность" }, { lv: "mākslīgais intelekts", ru: "искусственный интеллект" } ] },
+    { id: "v4", level: "C2", title: "Политика и общество", items: [ { lv: "likumdošana", ru: "законодательство" }, { lv: "pilsoniskā sabiedrība", ru: "гражданское общество" }, { lv: "referendums", ru: "референдум" }, { lv: "opozīcija", ru: "оппозиция" }, { lv: "korupcija", ru: "коррупция" } ] }
+  ],
+  // NEW PROFESSIONAL VOCABULARIES
+  food_tech: [
+    { id: "ft1", level: "C1", title: "Производство и сырье", items: [ 
+      { lv: "izejvielas", ru: "сырье" }, 
+      { lv: "ražošanas process", ru: "производственный процесс" }, 
+      { lv: "pasterizācija", ru: "пастеризация" }, 
+      { lv: "fermentācija", ru: "ферментация" }, 
+      { lv: "iepakojums", ru: "упаковка" }, 
+      { lv: "derīguma termiņš", ru: "срок годности" } 
+    ] },
+    { id: "ft2", level: "C1", title: "Контроль и безопасность", items: [ 
+      { lv: "kvalitātes kontrole", ru: "контроль качества" }, 
+      { lv: "pārtikas drošība", ru: "пищевая безопасность" }, 
+      { lv: "higiēna", ru: "гигиена" }, 
+      { lv: "kontaminācija", ru: "загрязнение (контаминация)" }, 
+      { lv: "piedevas", ru: "добавки" }, 
+      { lv: "konservanti", ru: "консерванты" } 
+    ] }
+  ],
+  automotive: [
+    { id: "au1", level: "B2", title: "Устройство автомобиля", items: [ 
+      { lv: "dzinējs", ru: "двигатель" }, 
+      { lv: "bremzes", ru: "тормоза" }, 
+      { lv: "riepas", ru: "шины" }, 
+      { lv: "stūre", ru: "руль" }, 
+      { lv: "degviela", ru: "топливо" }, 
+      { lv: "eļļa", ru: "масло" }, 
+      { lv: "ātrumkārba", ru: "коробка передач" } 
+    ] },
+    { id: "au2", level: "C1", title: "Дорога и правила", items: [ 
+      { lv: "brauktuve", ru: "проезжая часть" }, 
+      { lv: "ceļa zīmes", ru: "дорожные знаки" }, 
+      { lv: "luksofors", ru: "светофор" }, 
+      { lv: "sastrēgums", ru: "пробка (затор)" }, 
+      { lv: "apdrošināšana", ru: "страховка" }, 
+      { lv: "tehniskā apskate", ru: "техосмотр" }, 
+      { lv: "autovadītāja apliecība", ru: "водительские права" } 
+    ] }
+  ],
+  quickfire: [
+    { q: "sašutums", a: "возмущение", w: ["радость", "спокойствие", "удивление"] },
+    { q: "uzņēmums", a: "предприятие", w: ["сотрудник", "здание", "отпуск"] },
+    { q: "lietotne", a: "приложение", w: ["компьютер", "интернет", "экран"] },
+    { q: "piedāvājums", a: "предложение", w: ["отказ", "вопрос", "ответ"] },
+    { q: "likumdošana", a: "законодательство", w: ["судья", "полиция", "тюрьма"] },
+    { q: "skaudība", a: "зависть", w: ["гордость", "смелость", "лень"] },
+    { q: "ieņēmumi", a: "доходы", w: ["долги", "расходы", "налоги"] },
+    { q: "kiberdrošība", a: "кибербезопасность", w: ["пароль", "вирус", "антивирус"] },
+    { q: "izejvielas", a: "сырье", w: ["продукт", "отходы", "упаковка"] },
+    { q: "pasterizācija", a: "пастеризация", w: ["заморозка", "сушка", "жарка"] },
+    { q: "dzinējs", a: "двигатель", w: ["колесо", "кузов", "фара"] },
+    { q: "bremzes", a: "тормоза", w: ["газ", "сцепление", "поворотник"] }
+  ],
+  wordleWords: ["DARBS", "LAIKS", "VIETA", "KAFIJA", "VALODA", "DRAUGS", "SKOLA", "PRATS", "SAULE", "LAPA"]
+};
+
+const ALL_ITEMS = [
+  ...DATA.discussions.map(i => ({...i, type: 'discussions', icon: '🗣️'})),
+  ...DATA.dialogues.map(i => ({...i, type: 'dialogues', icon: '💬'})),
+  ...DATA.idioms.map(i => ({...i, type: 'idioms', icon: '🎭'})),
+  ...DATA.paraphrases.map(i => ({...i, type: 'paraphrase', icon: '✍️'})),
+  ...DATA.cheatsheets.map(i => ({...i, type: 'cheatsheets', icon: '📋'})),
+  ...DATA.lifehacks.map(i => ({...i, type: 'lifehacks', icon: '🧠'})),
+  ...DATA.shadowing.map(i => ({...i, type: 'shadowing', icon: '🗣️'})),
+  ...DATA.grammar.map(i => ({...i, type: 'grammar', icon: '📚'})),
+  ...DATA.vocab.map(i => ({...i, type: 'vocab', icon: '📖'})),
+  ...DATA.food_tech.map(i => ({...i, type: 'food_tech', icon: '🥫'})),
+  ...DATA.automotive.map(i => ({...i, type: 'automotive', icon: '🚗'}))
+];
+const TOTAL_TOPICS = ALL_ITEMS.length;
+
+/* ============================================================
+   ОЗВУЧКА И РАСПОЗНАВАНИЕ
+   ============================================================ */
+function speakText(text) {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'lv-LV';
+    utterance.rate = 0.9;
+    const voices = window.speechSynthesis.getVoices();
+    const lvVoice = voices.find(v => v.lang.includes('lv') || v.lang.includes('LV'));
+    if (lvVoice) utterance.voice = lvVoice;
+    window.speechSynthesis.speak(utterance);
+  }
+}
+function createSpeakBtn(text) {
+  const btn = document.createElement("button");
+  btn.className = "speak-btn";
+  btn.innerHTML = "🔊";
+  btn.addEventListener("click", (e) => { e.stopPropagation(); speakText(text); });
+  return btn;
+}
+
+let recognition = null;
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SpeechRecognition();
+  recognition.lang = 'lv-LV';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+}
+
+/* ============================================================
+   СОСТОЯНИЕ И ГЕЙМИФИКАЦИЯ
+   ============================================================ */
+let state = {
+  theme: localStorage.getItem("lv_theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"),
+  currentFilter: "all",
+  xp: parseInt(localStorage.getItem("lv_xp")) || 0,
+  streak: parseInt(localStorage.getItem("lv_streak")) || 1,
+  dailyXp: parseInt(localStorage.getItem("lv_daily_xp")) || 0,
+  lastXpDate: localStorage.getItem("lv_last_xp_date") || "",
+  lastVisit: localStorage.getItem("lv_last_visit") || "",
+  badges: JSON.parse(localStorage.getItem("lv_badges")) || [],
+  progress: JSON.parse(localStorage.getItem("lv_progress")) || {}
+};
+const DAILY_GOAL = 50;
+
+const ALL_BADGES = [
+  { id: "first_step", icon: "🐣", name: "Первый шаг", desc: "Завершена первая тема" },
+  { id: "streak_3", icon: "🔥", name: "3 дня", desc: "Стрик 3 дня" },
+  { id: "xp_100", icon: "🌟", name: "100 XP", desc: "Накоплено 100 XP" },
+  { id: "speaker", icon: "🗣️", name: "Оратор", desc: "Идеальное произношение" }
+];
+
+function saveState() {
+  localStorage.setItem("lv_theme", state.theme);
+  localStorage.setItem("lv_xp", state.xp);
+  localStorage.setItem("lv_streak", state.streak);
+  localStorage.setItem("lv_daily_xp", state.dailyXp);
+  localStorage.setItem("lv_last_xp_date", state.lastXpDate);
+  localStorage.setItem("lv_last_visit", state.lastVisit);
+  localStorage.setItem("lv_badges", JSON.stringify(state.badges));
+  localStorage.setItem("lv_progress", JSON.stringify(state.progress));
+}
+
+function showToast(message, type = 'success') {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = message;
+  container.appendChild(toast);
+  setTimeout(() => { toast.style.animation = 'fadeOut 0.3s forwards'; setTimeout(() => toast.remove(), 300); }, 3500);
+}
+
+function triggerMotivation(isBig = false) {
+  const msgs = ["Супер!", "Ты молодец!", "Lieliski!", "Так держать!"];
+  showToast(msgs[Math.floor(Math.random() * msgs.length)], isBig ? 'gold' : 'success');
+  if (isBig) fireConfetti();
+}
+
+function fireConfetti() {
+  const canvas = document.getElementById('confetti-canvas');
+  canvas.classList.remove('hidden');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const particles = [];
+  const colors = ['#0f766e', '#14b8a6', '#f59e0b', '#be123c', '#15803d'];
+  for (let i = 0; i < 80; i++) {
+    particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height - canvas.height, w: Math.random() * 8 + 4, h: Math.random() * 8 + 4, vx: Math.random() * 4 - 2, vy: Math.random() * 5 + 2, color: colors[Math.floor(Math.random() * colors.length)], rot: Math.random() * Math.PI });
+  }
+  function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.x += p.vx; p.y += p.vy; p.rot += 0.1; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.fillStyle = p.color; ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h); ctx.restore(); });
+    if (particles.some(p => p.y < canvas.height)) requestAnimationFrame(update); else canvas.classList.add('hidden');
+  }
+  update();
+}
+
+function addXp(amount) {
+  const today = new Date().toISOString().split('T')[0];
+  if (state.lastXpDate !== today) { state.dailyXp = 0; state.lastXpDate = today; }
+  state.xp += amount; state.dailyXp += amount;
+  saveState(); updateGameStats();
+  if (state.dailyXp >= DAILY_GOAL && state.dailyXp - amount < DAILY_GOAL) {
+    showToast("🎯 Ежедневная цель достигнута!", "gold"); fireConfetti();
+  }
+}
+
+function updateGameStats() {
+  document.getElementById('xpCount').textContent = state.xp;
+  document.getElementById('streakCount').textContent = state.streak;
+  document.getElementById('goalCount').textContent = state.dailyXp;
+  let completed = 0;
+  Object.values(state.progress).forEach(cat => Object.values(cat).forEach(item => { if (item.completed) completed++; }));
+  document.getElementById('globalProgressFill').style.width = `${(completed / TOTAL_TOPICS) * 100}%`;
+  document.getElementById('progressPct').textContent = `${Math.round((completed / TOTAL_TOPICS) * 100)}%`;
+  renderBadges();
+}
+
+function unlockBadge(id) {
+  if (!state.badges.includes(id)) {
+    state.badges.push(id); saveState();
+    const badge = ALL_BADGES.find(b => b.id === id);
+    if (badge) showToast(`🏆 Достижение: ${badge.name}`, 'gold');
+    renderBadges();
+  }
+}
+
+function renderBadges() {
+  const container = document.getElementById('badgesContainer');
+  container.innerHTML = '';
+  ALL_BADGES.forEach(b => {
+    const div = document.createElement('div');
+    div.className = `badge-icon ${state.badges.includes(b.id) ? 'unlocked' : ''}`;
+    div.innerHTML = b.icon; div.title = `${b.name}: ${b.desc}`;
+    container.appendChild(div);
+  });
+}
+
+function checkStreakAndBadges() {
+  const today = new Date().toISOString().split('T')[0];
+  if (state.lastVisit !== today) {
+    const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+    if (state.lastVisit === yesterday) {
+      state.streak++;
+      if (state.streak >= 3) unlockBadge('streak_3');
+    } else if (state.lastVisit !== "") state.streak = 1;
+    state.lastVisit = today; saveState();
+  }
+}
+
+/* ============================================================
+   ЭКСПОРТ / ИМПОРТ
+   ============================================================ */
+function exportProgress() {
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
+  const dlAnchorElem = document.createElement('a');
+  dlAnchorElem.setAttribute("href", dataStr);
+  dlAnchorElem.setAttribute("download", `latviesu_progress_${new Date().toISOString().split('T')[0]}.json`);
+  dlAnchorElem.click();
+  showToast("Прогресс скачан!", "success");
+}
+function importProgress(e) {
+  const file = e.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    try {
+      const importedState = JSON.parse(event.target.result);
+      if (importedState.xp !== undefined) {
+        state = { ...state, ...importedState };
+        saveState(); updateGameStats();
+        showToast("Прогресс успешно загружен!", "success");
+      }
+    } catch (err) { showToast("Ошибка файла", "danger"); }
+  };
+  reader.readAsText(file);
+}
+
+/* ============================================================
+   UI ХЕЛПЕРЫ
+   ============================================================ */
+const $ = s => document.querySelector(s);
+function el(tag, className, html) { const e = document.createElement(tag); if (className) e.className = className; if (html) e.innerHTML = html; return e; }
+function getBadge(level) { return `<span style="font-size:.7rem; padding:3px 8px; border-radius:6px; background:var(--accent-light); color:var(--accent); font-weight:800; margin-left:8px;">${level}</span>`; }
+
+function applyTheme() {
+  document.documentElement.dataset.theme = state.theme;
+  $("#themeToggle").textContent = state.theme === "light" ? "🌙" : "☀️";
+}
+
+function switchView(viewId, data = null) {
+  $("#mainDashboard").classList.add("hidden");
+  $("#levelFilter").classList.add("hidden");
+  document.querySelector(".global-progress").classList.add("hidden");
+  document.querySelector(".badges-container").classList.add("hidden");
+  document.getElementById("searchWrapper").classList.add("hidden");
+  $("#contentView").classList.remove("hidden");
+  $("#contentView").innerHTML = "";
+  window.scrollTo(0, 0);
+  
+  if (viewId === "quickfire") return renderQuickFire();
+  if (viewId === "wordle") return renderWordle();
+  
+  if (data) {
+    if (viewId === "discussions") renderDiscussionDetail(data);
+    else if (viewId === "dialogues") renderDialogueDetail(data);
+    else if (viewId === "idioms") renderIdiomDetail(data);
+    else if (viewId === "paraphrase") renderParaphraseDetail(data);
+    else if (viewId === "cheatsheets") renderCheatsheetDetail(data);
+    else if (viewId === "lifehacks") renderLifehackDetail(data);
+    else if (viewId === "shadowing") renderShadowingDetail(data);
+    else if (viewId === "grammar") renderGrammarDetail(data);
+    else if (viewId === "vocab" || viewId === "food_tech" || viewId === "automotive") renderVocabDetail(data);
+  } else {
+    if (viewId === "mixed") renderMixedDetail();
+    else if (viewId === "discussions") renderList(DATA.discussions, "Дискуссии", renderDiscussionDetail);
+    else if (viewId === "dialogues") renderList(DATA.dialogues, "Диалоги", renderDialogueDetail);
+    else if (viewId === "idioms") renderList(DATA.idioms, "Идиомы", renderIdiomDetail);
+    else if (viewId === "paraphrase") renderList(DATA.paraphrases, "Перефразирование", renderParaphraseDetail);
+    else if (viewId === "cheatsheets") renderList(DATA.cheatsheets, "Шпаргалки", renderCheatsheetDetail);
+    else if (viewId === "lifehacks") renderList(DATA.lifehacks, "Лайфхаки", renderLifehackDetail);
+    else if (viewId === "shadowing") renderList(DATA.shadowing, "Тренажер речи", renderShadowingDetail);
+    else if (viewId === "grammar") renderList(DATA.grammar, "Грамматика", renderGrammarDetail);
+    else if (viewId === "vocab") renderList(DATA.vocab, "Словарь (Vocab)", renderVocabDetail);
+    else if (viewId === "food_tech") renderList(DATA.food_tech, "Технологу пищ. пр-ва", renderVocabDetail);
+    else if (viewId === "automotive") renderList(DATA.automotive, "Автомобилисту", renderVocabDetail);
+  }
+}
+
+function goHome() {
+  $("#contentView").classList.add("hidden");
+  $("#mainDashboard").classList.remove("hidden");
+  $("#levelFilter").classList.remove("hidden");
+  document.querySelector(".global-progress").classList.remove("hidden");
+  document.querySelector(".badges-container").classList.remove("hidden");
+  document.getElementById("searchWrapper").classList.remove("hidden");
+  $("#contentView").innerHTML = "";
+}
+function createBackButton(text, callback) { const btn = el("button", "back-btn", `← ${text}`); btn.addEventListener("click", callback); return btn; }
+
+/* ============================================================
+   БЫСТРЫЙ ОГОНЬ (QUICK FIRE)
+   ============================================================ */
+function renderQuickFire() {
+  const container = $("#contentView");
+  const header = el("div", "content-header");
+  header.appendChild(createBackButton("На главную", goHome));
+  header.appendChild(el("h2", "", "⚡️ Быстрый огонь"));
+  container.appendChild(header);
+
+  let score = 0;
+  let timeLeft = 60;
+  let timer;
+  let currentQ = null;
+  let isActive = false;
+
+  const timerEl = el("div", "qf-timer", "01:00");
+  const scoreEl = el("div", "qf-question", "Нажмите, чтобы начать!");
+  const optsContainer = el("div", "qf-options");
+  const startBtn = el("button", "btn primary", "Старт");
+
+  container.appendChild(timerEl);
+  container.appendChild(scoreEl);
+  container.appendChild(optsContainer);
+  container.appendChild(startBtn);
+
+  function nextQuestion() {
+    if (!isActive) return;
+    const q = DATA.quickfire[Math.floor(Math.random() * DATA.quickfire.length)];
+    currentQ = q;
+    scoreEl.textContent = q.q;
+    
+    const allOpts = shuffle([q.a, ...q.w]);
+    optsContainer.innerHTML = "";
+    allOpts.forEach(opt => {
+      const btn = el("button", "qf-btn", opt);
+      btn.addEventListener("click", () => {
+        if (!isActive) return;
+        if (opt === q.a) {
+          btn.classList.add("correct");
+          score++; addXp(2);
+          setTimeout(nextQuestion, 200);
+        } else {
+          btn.classList.add("wrong");
+          scoreEl.textContent = "❌ Ошибка! " + q.q;
+          setTimeout(nextQuestion, 800);
+        }
+      });
+      optsContainer.appendChild(btn);
+    });
+  }
+
+  startBtn.addEventListener("click", () => {
+    startBtn.style.display = "none";
+    isActive = true;
+    score = 0;
+    timeLeft = 60;
+    nextQuestion();
+    timer = setInterval(() => {
+      timeLeft--;
+      timerEl.textContent = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        isActive = false;
+        scoreEl.textContent = `Игра окончена! Очков: ${score}`;
+        optsContainer.innerHTML = "";
+        const retry = el("button", "btn primary", "Играть снова");
+        retry.addEventListener("click", () => renderQuickFire());
+        container.appendChild(retry);
+        if (score > 5) triggerMotivation(true);
+      }
+    }, 1000);
+  });
+}
+
+/* ============================================================
+   WORDLE (VĀRDU SPĒLE)
+   ============================================================ */
+function renderWordle() {
+  const container = $("#contentView");
+  const header = el("div", "content-header");
+  header.appendChild(createBackButton("На главную", goHome));
+  header.appendChild(el("h2", "", "🟩 Vārdu spēle"));
+  container.appendChild(header);
+
+  const targetWord = DATA.wordleWords[Math.floor(Math.random() * DATA.wordleWords.length)];
+  let currentRow = 0;
+  let currentGuess = "";
+  let gameOver = false;
+
+  const grid = el("div", "wordle-grid");
+  for (let i = 0; i < 6; i++) {
+    const row = el("div", "wordle-row");
+    for (let j = 0; j < 5; j++) row.appendChild(el("div", "wordle-cell"));
+    grid.appendChild(row);
+  }
+  container.appendChild(grid);
+
+  const msgEl = el("div", "hint", "Угадайте слово из 5 букв (латышский)");
+  msgEl.style.textAlign = "center";
+  container.appendChild(msgEl);
+
+  const keyboard = el("div", "wordle-keyboard");
+  const keys = ["Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M","BACK"];
+  keys.forEach(k => {
+    const btn = el("button", "wordle-key", k === "BACK" ? "⌫" : k);
+    btn.addEventListener("click", () => handleKey(k));
+    keyboard.appendChild(btn);
+  });
+  container.appendChild(keyboard);
+
+  function handleKey(key) {
+    if (gameOver) return;
+    if (key === "BACK") {
+      if (currentGuess.length > 0) { currentGuess = currentGuess.slice(0, -1); updateGrid(); }
+    } else if (key === "ENTER") {
+      if (currentGuess.length === 5) checkGuess();
+    } else if (currentGuess.length < 5 && key.match(/[A-Z]/)) {
+      currentGuess += key; updateGrid();
+    }
+  }
+
+  function updateGrid() {
+    const row = grid.children[currentRow];
+    for (let i = 0; i < 5; i++) row.children[i].textContent = currentGuess[i] || "";
+  }
+
+  function checkGuess() {
+    const row = grid.children[currentRow];
+    const targetArr = targetWord.split("");
+    const guessArr = currentGuess.split("");
+    const used = new Array(5).fill(false);
+
+    for (let i = 0; i < 5; i++) {
+      if (guessArr[i] === targetArr[i]) { row.children[i].classList.add("correct"); updateKeyColor(guessArr[i], "correct"); used[i] = true; }
+    }
+    for (let i = 0; i < 5; i++) {
+      if (!row.children[i].classList.contains("correct")) {
+        const foundIdx = targetArr.findIndex((char, idx) => char === guessArr[i] && !used[idx]);
+        if (foundIdx !== -1) { row.children[i].classList.add("present"); updateKeyColor(guessArr[i], "present"); used[foundIdx] = true; }
+        else { row.children[i].classList.add("absent"); updateKeyColor(guessArr[i], "absent"); }
+      }
+    }
+
+    if (currentGuess === targetWord) {
+      gameOver = true; msgEl.textContent = "🎉 Поздравляем! Вы угадали слово!";
+      addXp(20); triggerMotivation(true);
+    } else {
+      currentRow++; currentGuess = "";
+      if (currentRow === 6) { gameOver = true; msgEl.textContent = `Игра окончена. Слово было: ${targetWord}`; }
+    }
+  }
+
+  function updateKeyColor(letter, color) {
+    document.querySelectorAll(".wordle-key").forEach(k => {
+      if (k.textContent === letter && !k.classList.contains("correct")) {
+        k.classList.remove("present", "absent"); k.classList.add(color);
+      }
+    });
+  }
+
+  const keyListener = (e) => {
+    if (e.key === "Enter") handleKey("ENTER");
+    else if (e.key === "Backspace") handleKey("BACK");
+    else if (e.key.match(/[a-zA-Z]/)) handleKey(e.key.toUpperCase());
+  };
+  document.addEventListener("keydown", keyListener);
+  window._currentCleanup = () => document.removeEventListener("keydown", keyListener);
+}
+
+const originalGoHome = goHome;
+goHome = function() {
+  if (window._currentCleanup) { window._currentCleanup(); window._currentCleanup = null; }
+  originalGoHome();
+};
+
+/* ============================================================
+   СЛОВАРИ (VOCAB, FOOD TECH, AUTOMOTIVE)
+   ============================================================ */
+function renderVocabDetail(item) {
+  const container = $("#contentView");
+  const header = el("div", "content-header");
+  header.appendChild(createBackButton("Назад", goHome));
+  header.appendChild(el("h2", "", item.title));
+  container.appendChild(header);
+  
+  item.items.forEach(i => {
+    const div = el("div", "info-card", `
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div style="font-weight:800; color:var(--accent); font-size:1.2rem;" class="phrase-item">${i.lv}</div>
+        <div style="font-size:0.95rem; color:var(--text);">${i.ru}</div>
+      </div>
+    `);
+    div.querySelector(".phrase-item").appendChild(createSpeakBtn(i.lv));
+    container.appendChild(div);
+  });
+  addProgressButton(container, item.type || "vocab", item.id);
+}
+
+/* ============================================================
+   СТАРЫЕ РЕНДЕРЫ
+   ============================================================ */
+function renderList(dataArray, title, detailRenderer) {
+  const container = $("#contentView");
+  const header = el("div", "content-header");
+  header.appendChild(createBackButton("На главную", goHome));
+  header.appendChild(el("h2", "", title));
+  container.appendChild(header);
+  const list = el("div", "dashboard-grid");
+  const filtered = state.currentFilter === "all" ? dataArray : dataArray.filter(item => item.level === state.currentFilter);
+  if (filtered.length === 0) { container.appendChild(el("p", "hint", "Нет тем для выбранного уровня.")); return; }
+  filtered.forEach(item => {
+    const card = el("div", "mode-card");
+    card.innerHTML = `<h2>${item.title || item.phrase || item.text} ${getBadge(item.level)}</h2><p>${item.ruTitle || item.meaning || item.ruOriginal || item.ru || 'Нажмите'}</p>`;
+    card.addEventListener("click", () => detailRenderer(item));
+    list.appendChild(card);
+  });
+  container.appendChild(list);
+}
+
+function renderDiscussionDetail(disc) {
+  const container = $("#contentView");
+  const header = el("div", "content-header");
+  header.appendChild(createBackButton("Назад", goHome));
+  header.appendChild(el("h2", "", "Дискуссия"));
+  container.appendChild(header);
+  container.appendChild(el("p", "ru-text", `<strong>RU:</strong> ${disc.ruTitle} ${getBadge(disc.level)}`));
+  const textWrapper = el("div", "lv-text", disc.text + " ");
+  textWrapper.appendChild(createSpeakBtn(disc.text));
+  container.appendChild(textWrapper);
+  container.appendChild(el("p", "ru-text", disc.ruText));
+  disc.questions.forEach(q => { const qWrapper = el("div", "hint", `❓ ${q} `); qWrapper.appendChild(createSpeakBtn(q)); container.appendChild(qWrapper); });
+  addProgressButton(container, "discussions", disc.id);
+}
+function renderDialogueDetail(dial) {
+  const container = $("#contentView");
+  const header = el("div", "content-header");
+  header.appendChild(createBackButton("Назад", goHome));
+  header.appendChild(el("h2", "", dial.title));
+  container.appendChild(header);
+  const dialogBox = el("div", "dialog-container");
+  dial.turns.forEach(turn => {
+    const turnEl = el("div", `dialog-turn ${turn.speaker === "A" ? "left" : "right"}`);
+    const bubble = el("div", "dialog-bubble");
+    bubble.innerHTML = `<div style="font-weight:700; font-size:1rem;">${turn.text}</div><div style="font-size:0.85rem; color:var(--muted); margin-top:6px;">${turn.ru}</div>`;
+    bubble.querySelector("div").appendChild(createSpeakBtn(turn.text));
+    turnEl.innerHTML = `<div class="dialog-avatar">${turn.speaker}</div>`; turnEl.appendChild(bubble); dialogBox.appendChild(turnEl);
+  });
+  container.appendChild(dialogBox); addProgressButton(container, "dialogues", dial.id);
+}
+function renderIdiomDetail(idiom) {
+  const container = $("#contentView");
+  const header = el("div", "content-header");
+  header.appendChild(createBackButton("Назад", goHome));
+  header.appendChild(el("h2", "", "Идиома"));
+  container.appendChild(header);
+  const card = el("div", "info-card");
+  card.innerHTML = `<div class="top-row"><div><div class="literal" style="font-size:.8rem; color:var(--muted); text-transform:uppercase;">${idiom.literal}</div><div class="phrase" id="idiom-phrase">${idiom.phrase}</div></div>${getBadge(idiom.level)}</div><div class="meaning" style="margin-top:8px;">${idiom.meaning}</div><div class="example" id="idiom-example"><div style="font-weight:600;">${idiom.example}</div><div class="ru-ex" style="font-size:.85rem; color:var(--muted); font-style:italic; margin-top:6px;">${idiom.ruEx}</div></div><div class="mnemonic">🧠 <strong>Как запомнить:</strong> ${idiom.mnemonic}</div>`;
+  card.querySelector("#idiom-phrase").appendChild(createSpeakBtn(idiom.phrase));
+  card.querySelector("#idiom-example div").appendChild(createSpeakBtn(idiom.example));
+  container.appendChild(card); addProgressButton(container, "idioms", idiom.id);
+}
+function renderCheatsheetDetail(sheet) {
+  const container = $("#contentView");
+  const header = el("div", "content-header");
+  header.appendChild(createBackButton("Назад", goHome));
+  header.appendChild(el("h2", "", sheet.title));
+  container.appendChild(header);
+  sheet.items.forEach(i => { const div = el("div", "info-card", `<div style="font-weight:700; color:var(--accent); font-size:1.1rem;" class="phrase-item">${i.lv}</div><div style="font-size:0.9rem; color:var(--muted);">${i.ru}</div>`); div.querySelector(".phrase-item").appendChild(createSpeakBtn(i.lv)); container.appendChild(div); });
+}
+function renderLifehackDetail(lh) {
+  const container = $("#contentView");
+  const header = el("div", "content-header");
+  header.appendChild(createBackButton("Назад", goHome));
+  header.appendChild(el("h2", "", lh.title));
+  container.appendChild(header);
+  container.appendChild(el("p", "hint", lh.text));
+  lh.items.forEach(i => { const div = el("div", "info-card", `<div style="font-weight:700; font-size:1.1rem;" class="phrase-item">${i.lv}</div><div style="font-size:0.9rem; color:var(--muted);">${i.ru}</div>`); div.querySelector(".phrase-item").appendChild(createSpeakBtn(i.lv)); container.appendChild(div); });
+}
+function renderParaphraseDetail(q) {
+  const container = $("#contentView");
+  const header = el("div", "content-header");
+  header.appendChild(createBackButton("Назад", goHome));
+  header.appendChild(el("h2", "", "Перефразирование"));
+  container.appendChild(header);
+  container.appendChild(el("p", "ru-text", `<strong>RU:</strong> ${q.ruOriginal} ${getBadge(q.level)}`));
+  const origWrapper = el("p", "lv-text", `Оригинал: <em>${q.original}</em> `); origWrapper.appendChild(createSpeakBtn(q.original)); container.appendChild(origWrapper);
+  container.appendChild(el("p", "hint", "Напишите или произнесите свой вариант:"));
+  const input = el("textarea", "lv-input"); input.rows = 3; container.appendChild(input);
+  const micBtn = el("button", "mic-btn", "🎤");
+  if (recognition) {
+    micBtn.addEventListener("click", () => { input.value = ""; recognition.start(); micBtn.classList.add("recording"); });
+    recognition.onresult = (event) => { input.value = event.results[0][0].transcript; micBtn.classList.remove("recording"); };
+    recognition.onerror = () => micBtn.classList.remove("recording");
+    recognition.onend = () => micBtn.classList.remove("recording");
+  } else micBtn.style.display = 'none';
+  container.appendChild(micBtn);
+  const btnRow = el("div", "btn-row"); const checkBtn = el("button", "btn primary", "Проверить"); btnRow.appendChild(checkBtn); container.appendChild(btnRow);
+  const feedback = el("div", "feedback-box"); container.appendChild(feedback);
+  checkBtn.addEventListener("click", () => { feedback.className = "feedback-box show correct"; feedback.innerHTML = `✅ Отлично! Один из вариантов: <strong>${q.answers[0]}</strong>`; checkBtn.disabled = true; addXp(5); triggerMotivation(false); micBtn.disabled = true; });
+}
+function renderShadowingDetail(item) {
+  const container = $("#contentView");
+  const header = el("div", "content-header");
+  header.appendChild(createBackButton("Назад", goHome));
+  header.appendChild(el("h2", "", "Тренажер речи"));
+  container.appendChild(header);
+  const box = el("div", "shadow-box"); box.innerHTML = `<div class="shadow-target">${item.text}</div><div style="color:var(--muted); font-size:0.9rem;">${item.ru}</div>`;
+  box.querySelector('.shadow-target').appendChild(createSpeakBtn(item.text)); container.appendChild(box);
+  container.appendChild(el("p", "hint", "Нажмите на микрофон и прочитайте фразу вслух."));
+  const micBtn = el("button", "mic-btn", "🎤"); container.appendChild(micBtn);
+  const result = el("div", "shadow-result"); container.appendChild(result);
+  let isRecording = false;
+  micBtn.addEventListener("click", () => { if (!recognition) return; if (isRecording) recognition.stop(); else { result.textContent = ""; result.className = "shadow-result"; recognition.start(); micBtn.classList.add("recording"); isRecording = true; } });
+  recognition.onresult = (event) => {
+    isRecording = false; micBtn.classList.remove("recording");
+    const transcript = event.results[0][0].transcript;
+    const normalize = str => str.toLowerCase().replace(/[.,!?;:]/g, '').trim();
+    const target = normalize(item.text); const spoken = normalize(transcript);
+    const targetWords = target.split(" "); const spokenWords = spoken.split(" ");
+    const overlap = targetWords.filter(w => spokenWords.includes(w)).length;
+    const accuracy = Math.round((overlap / targetWords.length) * 100);
+    if (accuracy === 100) { result.textContent = `🎉 Идеально!`; result.className = "shadow-result match"; addXp(5); unlockBadge('speaker'); triggerMotivation(false); }
+    else if (accuracy >= 50) { result.textContent = `👍 Хорошо! (${accuracy}%)`; result.className = "shadow-result partial"; addXp(2); }
+    else { result.textContent = `❌ Попробуйте еще раз (${accuracy}%)`; result.className = "shadow-result miss"; }
+  };
+  recognition.onerror = () => { isRecording = false; micBtn.classList.remove("recording"); };
+  recognition.onend = () => { isRecording = false; micBtn.classList.remove("recording"); };
+}
+function renderGrammarDetail(item) {
+  const container = $("#contentView");
+  const header = el("div", "content-header");
+  header.appendChild(createBackButton("Назад", goHome));
+  header.appendChild(el("h2", "", item.title));
+  container.appendChild(header);
+  const card = el("div", "info-card"); card.innerHTML = item.content; container.appendChild(card);
+}
+function addProgressButton(container, category, id) {
+  if (!state.progress[category]) state.progress[category] = {};
+  if (!state.progress[category][id]) state.progress[category][id] = { completed: false };
+  const btnRow = el("div", "btn-row");
+  const completeBtn = el("button", "btn success", "✅ Завершить тему (+10 XP)");
+  if (state.progress[category][id].completed) { completeBtn.textContent = "✅ Уже пройдено!"; completeBtn.disabled = true; completeBtn.style.opacity = "0.6"; }
+  completeBtn.addEventListener("click", () => {
+    if (state.progress[category][id].completed) return;
+    state.progress[category][id].completed = true; addXp(10);
+    if (state.xp >= 100) unlockBadge('xp_100'); unlockBadge('first_step');
+    completeBtn.textContent = "✅ Уже пройдено!"; completeBtn.disabled = true; completeBtn.style.opacity = "0.6";
+    triggerMotivation(true); updateGameStats();
+  });
+  btnRow.appendChild(completeBtn); container.appendChild(btnRow);
+}
+
+function shuffle(array) {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+}
+
+/* ============================================================
+   ИНИЦИАЛИЗАЦИЯ
+   ============================================================ */
+function init() {
+  applyTheme(); checkStreakAndBadges(); updateGameStats();
+  document.querySelectorAll("#levelFilter button").forEach(btn => { btn.addEventListener("click", () => { document.querySelectorAll("#levelFilter button").forEach(b => b.classList.remove("active")); btn.classList.add("active"); state.currentFilter = btn.dataset.level; updateDashboardCounts(); }); });
+  $("#themeToggle").addEventListener("click", () => { state.theme = state.theme === "light" ? "dark" : "light"; applyTheme(); saveState(); });
+  $("#resetProgress").addEventListener("click", () => { if (confirm("Сбросить весь прогресс?")) { localStorage.clear(); location.reload(); } });
+  document.querySelectorAll(".mode-card").forEach(card => { card.addEventListener("click", () => switchView(card.dataset.mode)); });
+  updateDashboardCounts();
+}
+
+function updateDashboardCounts() {
+  const lvl = state.currentFilter;
+  const categories = { discussions: DATA.discussions, dialogues: DATA.dialogues, idioms: DATA.idioms, paraphrase: DATA.paraphrases, cheatsheets: DATA.cheatsheets, lifehacks: DATA.lifehacks, shadowing: DATA.shadowing, grammar: DATA.grammar, vocab: DATA.vocab, food_tech: DATA.food_tech, automotive: DATA.automotive };
+  document.querySelectorAll(".mode-cat").forEach(card => {
+    const arr = categories[card.dataset.mode];
+    if (!arr) return;
+    const count = lvl === "all" ? arr.length : arr.filter(i => i.level === lvl).length;
+    let counter = card.querySelector(".topic-count");
+    if (!counter) { counter = document.createElement("div"); counter.className = "topic-count"; counter.style.cssText = "font-size:0.8rem; font-weight:700; color:var(--accent); margin-top:auto;"; card.appendChild(counter); }
+    counter.textContent = `Доступно: ${count}`;
+    card.style.opacity = count === 0 ? "0.5" : "1";
+    card.style.pointerEvents = count === 0 ? "none" : "auto";
+  });
+}
+
+document.addEventListener("DOMContentLoaded", init);
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(err => console.log('SW error', err))); }
+
+// Привязка кнопок Экспорта/Импорта
+setTimeout(() => {
+  const resetBtn = document.getElementById('resetProgress');
+  if (resetBtn) {
+    const exportBtn = document.createElement('button'); exportBtn.className = "icon-btn"; exportBtn.innerHTML = "💾"; exportBtn.title = "Экспорт прогресса"; exportBtn.onclick = exportProgress;
+    const importBtn = document.createElement('button'); importBtn.className = "icon-btn"; importBtn.innerHTML = "📂"; importBtn.title = "Импорт прогресса";
+    const fileInput = document.createElement('input'); fileInput.type = 'file'; fileInput.accept = '.json'; fileInput.style.display = 'none'; fileInput.onchange = importProgress;
+    importBtn.onclick = () => fileInput.click();
+    const actions = document.querySelector('.header-actions');
+    if (actions) { actions.insertBefore(importBtn, resetBtn); actions.insertBefore(exportBtn, resetBtn); document.body.appendChild(fileInput); }
+  }
+}, 100);
+
+})();
+</script>
+</body>
+</html>
