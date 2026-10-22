@@ -3,74 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#0a0a0a">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Latviešu Premium · B2–C2</title>
+<meta name="theme-color" content="#0b0f19">
+<title>Latviešu · Для Светланы</title>
 <link rel="manifest" href="manifest.json">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg: #f8fafc;
-  --surface: rgba(255, 255, 255, 0.7);
-  --surface-solid: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --accent: #4f46e5;
-  --accent-gradient: linear-gradient(135deg, #4f46e5, #9333ea);
-  --accent-light: #e0e7ff;
-  --danger: #e11d48;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --border: rgba(226, 232, 240, 0.8);
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-  --nav-bg: rgba(255, 255, 255, 0.9);
-  --radius: 24px;
-  --radius-sm: 16px;
+  --bg: #f8fafc; --surface: rgba(255, 255, 255, 0.7); --surface-solid: #ffffff;
+  --text: #0f172a; --muted: #64748b; --accent: #4f46e5; --accent-gradient: linear-gradient(135deg, #4f46e5, #9333ea);
+  --accent-light: #e0e7ff; --danger: #e11d48; --success: #10b981; --warning: #f59e0b;
+  --border: rgba(226, 232, 240, 0.8); --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  --nav-bg: rgba(255, 255, 255, 0.9); --radius: 24px; --radius-sm: 16px;
   --font: 'Inter', system-ui, -apple-system, sans-serif;
 }
 [data-theme="dark"]{
-  --bg: #0b0f19;
-  --surface: rgba(30, 41, 59, 0.6);
-  --surface-solid: #1e293b;
-  --text: #f8fafc;
-  --muted: #94a3b8;
-  --accent: #6366f1;
-  --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7);
-  --accent-light: rgba(99, 102, 241, 0.15);
-  --border: rgba(51, 65, 85, 0.8);
-  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-  --nav-bg: rgba(15, 23, 42, 0.9);
+  --bg: #0b0f19; --surface: rgba(30, 41, 59, 0.6); --surface-solid: #1e293b;
+  --text: #f8fafc; --muted: #94a3b8; --accent: #6366f1; --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7);
+  --accent-light: rgba(99, 102, 241, 0.15); --border: rgba(51, 65, 85, 0.8);
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); --nav-bg: rgba(15, 23, 42, 0.9);
 }
 *{box-sizing:border-box;margin:0;padding:0; -webkit-tap-highlight-color: transparent;}
 body{
-  font-family:var(--font); background:var(--bg); color:var(--text);
-  line-height:1.5; -webkit-font-smoothing:antialiased; transition: background .3s, color .3s;
-  min-height:100vh; display:flex; justify-content:center;
+  font-family:var(--font); background:#0b0f19; color:var(--text);
+  line-height:1.5; -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; justify-content:center; align-items:center;
 }
-.app{max-width:500px; width:100%; height:100vh; display:flex; flex-direction:column; position:relative; overflow:hidden;}
+.app{
+  max-width:480px; width:100%; height:100vh; max-height:900px; background:var(--bg);
+  display:flex; flex-direction:column; position:relative; overflow:hidden; box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+@media(min-width:600px){ .app { border-radius: 30px; height: 90vh; border: 8px solid #1e293b; } }
+
 .view-container{flex:1; overflow-y:auto; padding:20px 20px 100px 20px; display:none; animation:fadeIn 0.3s ease;}
 .view-container.active{display:block;}
 @keyframes fadeIn{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
 
-/* HEADER */
 header{display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;}
-h1{font-size:1.5rem; font-weight:800; letter-spacing:-0.03em;}
-h1 span{color:var(--accent); font-size:0.9rem; font-weight:700; background:var(--accent-light); padding:4px 10px; border-radius:12px; margin-left:8px; vertical-align:middle;}
+h1{font-size:1.3rem; font-weight:800; letter-spacing:-0.03em;}
+h1 span{color:var(--accent); font-size:0.85rem; font-weight:700; background:var(--accent-light); padding:4px 8px; border-radius:12px; margin-left:6px; vertical-align:middle;}
 .avatar-btn{width:44px; height:44px; border-radius:50%; background:var(--surface-solid); border:2px solid var(--accent); display:flex; align-items:center; justify-content:center; font-size:1.2rem; cursor:pointer; box-shadow:var(--shadow);}
 
-/* HOME: STATS ROW */
 .stats-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px;}
-.stat-box{background:var(--surface); backdrop-filter:blur(10px); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px; display:flex; align-items:center; gap:12px; box-shadow:var(--shadow);}
+.stat-box{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px; display:flex; align-items:center; gap:12px; box-shadow:var(--shadow);}
 .stat-icon{width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.2rem;}
 .stat-icon.fire{background:rgba(225,29,72,0.1); color:var(--danger);}
 .stat-icon.star{background:rgba(245,158,11,0.1); color:var(--warning);}
 .stat-info .val{font-size:1.2rem; font-weight:800; line-height:1.2;}
 .stat-info .lbl{font-size:0.7rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em;}
 
-/* HOME: HERO CARD (Daily Mix) */
 .hero-card{
   background:var(--accent-gradient); border-radius:var(--radius); padding:24px; color:white;
   position:relative; overflow:hidden; box-shadow:0 15px 30px -5px rgba(79,70,229,0.4);
@@ -79,34 +57,21 @@ h1 span{color:var(--accent); font-size:0.9rem; font-weight:700; background:var(-
 .hero-card:active{transform:scale(0.98);}
 .hero-card h2{font-size:1.4rem; font-weight:800; margin-bottom:8px; position:relative; z-index:2;}
 .hero-card p{font-size:0.9rem; opacity:0.9; position:relative; z-index:2; max-width:80%;}
-.hero-card .btn-start{
-  background:white; color:var(--accent); border:none; padding:12px 24px; border-radius:100px;
-  font-weight:800; font-size:0.95rem; margin-top:16px; position:relative; z-index:2; cursor:pointer;
-  box-shadow:0 4px 15px rgba(0,0,0,0.1);
-}
-.hero-card::before{content:''; position:absolute; right:-20px; top:-20px; width:150px; height:150px; background:rgba(255,255,255,0.1); border-radius:50%;}
-.hero-card::after{content:''; position:absolute; right:-40px; bottom:-40px; width:100px; height:100px; background:rgba(255,255,255,0.15); border-radius:50%;}
+.hero-card .btn-start{background:white; color:var(--accent); border:none; padding:12px 24px; border-radius:100px; font-weight:800; font-size:0.95rem; margin-top:16px; position:relative; z-index:2; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.1); font-family:inherit;}
 
-/* HOME: CATEGORY GRID */
-.section-title{font-size:1.1rem; font-weight:800; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;}
+.section-title{font-size:1.1rem; font-weight:800; margin-bottom:16px;}
 .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
-.category-card{
-  background:var(--surface-solid); border:1px solid var(--border); border-radius:var(--radius-sm);
-  padding:16px; display:flex; flex-direction:column; gap:8px; cursor:pointer; box-shadow:var(--shadow);
-  transition:transform 0.2s;
-}
+.category-card{background:var(--surface-solid); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px; display:flex; flex-direction:column; gap:8px; cursor:pointer; box-shadow:var(--shadow); transition:transform 0.2s;}
 .category-card:active{transform:scale(0.96);}
 .cat-icon{font-size:1.8rem;}
 .category-card h3{font-size:0.95rem; font-weight:700;}
 .category-card p{font-size:0.75rem; color:var(--muted);}
 
-/* DAILY GOAL RING */
 .goal-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px; display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; box-shadow:var(--shadow);}
 .goal-ring{width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:conic-gradient(var(--accent) var(--pct, 0%), var(--border) 0); position:relative;}
 .goal-ring::before{content:''; position:absolute; inset:6px; background:var(--surface-solid); border-radius:50%;}
 .goal-ring span{position:relative; z-index:1; font-weight:800; font-size:1rem; color:var(--text);}
 
-/* LISTS & CONTENT VIEW */
 .content-header{display:flex; align-items:center; gap:16px; margin-bottom:20px;}
 .back-btn{width:40px; height:40px; border-radius:12px; background:var(--surface-solid); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:1.2rem; cursor:pointer; color:var(--text);}
 .content-header h2{font-size:1.2rem; font-weight:800;}
@@ -114,7 +79,6 @@ h1 span{color:var(--accent); font-size:0.9rem; font-weight:700; background:var(-
 .list-item h4{font-size:1rem; font-weight:700;}
 .list-item p{font-size:0.8rem; color:var(--muted); margin-top:4px;}
 
-/* GAMES & DETAILS */
 .wordle-grid { display: grid; grid-template-rows: repeat(6, 1fr); gap: 6px; justify-content: center; margin: 20px 0; }
 .wordle-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
 .wordle-cell { width: 52px; height: 52px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; text-transform: uppercase; border-radius: 12px; background:var(--surface-solid); transition: 0.3s; }
@@ -124,10 +88,8 @@ h1 span{color:var(--accent); font-size:0.9rem; font-weight:700; background:var(-
 .wordle-keyboard { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 20px; }
 .wordle-key { background: var(--surface-solid); border: 1px solid var(--border); padding: 12px 14px; border-radius: 10px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-family: inherit; color: var(--text); min-width: 36px; box-shadow:var(--shadow); }
 .wordle-key:active{transform:scale(0.9);}
-.wordle-key.correct { background: var(--success); color: white; }
-.wordle-key.present { background: var(--warning); color: white; }
 
-.qf-timer { font-size: 2.5rem; font-weight: 800; color: var(--danger); text-align: center; margin-bottom: 10px; font-variant-numeric: tabular-nums;}
+.qf-timer { font-size: 2.5rem; font-weight: 800; color: var(--danger); text-align: center; margin-bottom: 10px; }
 .qf-question { font-size: 1.6rem; font-weight: 800; text-align: center; margin-bottom: 24px; color: var(--text); }
 .qf-options { display: grid; grid-template-columns: 1fr; gap: 10px; }
 .qf-btn { background: var(--surface-solid); border: 2px solid var(--border); padding: 16px; border-radius: 16px; font-weight: 700; font-size: 1rem; cursor: pointer; color: var(--text); box-shadow:var(--shadow); transition:0.2s;}
@@ -137,15 +99,13 @@ h1 span{color:var(--accent); font-size:0.9rem; font-weight:700; background:var(-
 .btn{background:var(--surface-solid); border:1px solid var(--border); color:var(--text); padding:14px 20px; border-radius:16px; font-weight:700; font-family:inherit; font-size:1rem; cursor:pointer; width:100%; box-shadow:var(--shadow); transition:0.2s;}
 .btn:active{transform:scale(0.98);}
 .btn.primary{background:var(--accent); color:white; border:none;}
-.btn.success{background:var(--success); color:white; border:none;}
 
 .info-card{background:var(--surface-solid); border:1px solid var(--border); border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:var(--shadow);}
-.speak-btn{background:var(--accent-light); border:none; border-radius:50%; width:36px; height:36px; font-size:1rem; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--accent);}
+.speak-btn{background:var(--accent-light); border:none; border-radius:50%; width:36px; height:36px; font-size:1rem; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--accent); margin-left:8px;}
 .mic-btn{background:var(--danger); color:white; border:none; border-radius:50%; width:64px; height:64px; font-size:1.6rem; display:flex; align-items:center; justify-content:center; margin:20px auto; box-shadow:0 8px 20px rgba(225,29,72,0.3); cursor:pointer;}
 .mic-btn.recording{animation:pulse 1.5s infinite;}
 @keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);}}
 
-/* BOTTOM NAVIGATION */
 .bottom-nav{
   position:absolute; bottom:0; left:0; right:0; height:80px; background:var(--nav-bg);
   backdrop-filter:blur(20px); border-top:1px solid var(--border); display:flex; justify-content:space-around;
@@ -156,14 +116,12 @@ h1 span{color:var(--accent); font-size:0.9rem; font-weight:700; background:var(-
 .nav-item .icon{font-size:1.4rem;}
 .nav-item .label{font-size:0.7rem; font-weight:700;}
 
-/* TOASTS */
 #toast-container { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 10px; align-items: center; pointer-events: none; width:90%;}
-.toast { background: var(--text); color: var(--bg); padding: 12px 20px; border-radius: 100px; font-weight: 700; font-size: 0.9rem; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 8px; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align:center;}
+.toast { background: var(--text); color: var(--bg); padding: 12px 20px; border-radius: 100px; font-weight: 700; font-size: 0.9rem; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content:center; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align:center;}
 .toast.success { background: var(--success); color: white; }
 .toast.gold { background: var(--warning); color: white; }
 @keyframes popIn { 0% { opacity: 0; transform: scale(0.8) translateY(-20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
 
-/* PROFILE PAGE */
 .profile-header{text-align:center; margin-bottom:30px;}
 .profile-avatar{width:80px; height:80px; border-radius:50%; background:var(--accent-gradient); margin:0 auto 16px; display:flex; align-items:center; justify-content:center; font-size:2.5rem; color:white; box-shadow:0 10px 20px rgba(79,70,229,0.3);}
 .badges-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; margin-bottom:24px;}
@@ -180,10 +138,10 @@ h1 span{color:var(--accent); font-size:0.9rem; font-weight:700; background:var(-
 <div id="toast-container"></div>
 
 <div class="app">
-  <!-- VIEW 1: HOME -->
+  <!-- HOME -->
   <div id="view-home" class="view-container active">
     <header>
-      <h1>Сайут! <span>B2-C2</span></h1>
+      <h1>Привет, Светлана! <span>B1-C1</span></h1>
       <div class="avatar-btn" onclick="switchTab('profile')">👤</div>
     </header>
 
@@ -208,7 +166,7 @@ h1 span{color:var(--accent); font-size:0.9rem; font-weight:700; background:var(-
 
     <div class="hero-card" onclick="startDailyMix()">
       <h2>Daily Mix 🎲</h2>
-      <p>Случайный набор заданий из всех категорий. Идеально для быстрой практики.</p>
+      <p>Случайный набор заданий. Идеально для ежедневной практики языка.</p>
       <button class="btn-start">Начать тренировку</button>
     </div>
 
@@ -216,65 +174,70 @@ h1 span{color:var(--accent); font-size:0.9rem; font-weight:700; background:var(-
     <div class="grid-2" style="margin-bottom:24px;">
       <div class="category-card" onclick="openList('shadowing')">
         <div class="cat-icon">🗣️</div>
-        <h3>Тренажер речи</h3>
+        <h3>Произношение</h3>
         <p>Слушай и повторяй</p>
       </div>
       <div class="category-card" onclick="openList('discussions')">
         <div class="cat-icon">💬</div>
         <h3>Дискуссии</h3>
-        <p>Спонтанная речь</p>
+        <p>Учись выражать мысли</p>
       </div>
     </div>
 
-    <div class="section-title">Словари</div>
+    <div class="section-title">Темы для жизни</div>
     <div class="grid-2">
-      <div class="category-card" onclick="openList('vocab')">
-        <div class="cat-icon">🌍</div>
-        <h3>Общая лексика</h3>
-        <p>Бизнес, IT</p>
+      <div class="category-card" onclick="openList('home')">
+        <div class="cat-icon">🏠</div>
+        <h3>Быт и дом</h3>
+        <p>Домашние дела, мебель</p>
       </div>
-      <div class="category-card" onclick="openList('food_tech')">
-        <div class="cat-icon">🥫</div>
-        <h3>Технологу</h3>
-        <p>Пищ. пр-во</p>
+      <div class="category-card" onclick="openList('food')">
+        <div class="cat-icon">🍎</div>
+        <h3>Еда</h3>
+        <p>Продукты и приемы пищи</p>
       </div>
-      <div class="category-card" onclick="openList('automotive')">
+      <div class="category-card" onclick="openList('transport')">
         <div class="cat-icon">🚗</div>
-        <h3>Автомобилисту</h3>
-        <p>Устройство авто</p>
+        <h3>Транспорт</h3>
+        <p>Дорога, авто, поездки</p>
       </div>
-      <div class="category-card" onclick="openList('idioms')">
+      <div class="category-card" onclick="openList('work')">
+        <div class="cat-icon">💼</div>
+        <h3>Работа</h3>
+        <p>Офис, документы, учеба</p>
+      </div>
+      <div class="category-card" onclick="openList('idioms')" style="grid-column: span 2;">
         <div class="cat-icon">🎭</div>
-        <h3>Идиомы</h3>
-        <p>Фразеологизмы</p>
+        <h3>Идиомы и сленг</h3>
+        <p>Чтобы звучать как носитель языка</p>
       </div>
     </div>
   </div>
 
-  <!-- VIEW 2: GAMES -->
+  <!-- GAMES -->
   <div id="view-games" class="view-container">
-    <header><h1>Игры</h1></header>
+    <header><h1>Игры для Светланы</h1></header>
     <div class="grid-2">
       <div class="category-card" onclick="openGame('quickfire')" style="background:linear-gradient(135deg, #e11d48, #be123c); color:white;">
         <div class="cat-icon">⚡️</div>
         <h3 style="color:white;">Быстрый огонь</h3>
-        <p style="color:rgba(255,255,255,0.8);">60 секунд</p>
+        <p style="color:rgba(255,255,255,0.8);">60 секунд на реакцию</p>
       </div>
       <div class="category-card" onclick="openGame('wordle')" style="background:linear-gradient(135deg, #10b981, #059669); color:white;">
         <div class="cat-icon">🟩</div>
         <h3 style="color:white;">Vārdu spēle</h3>
-        <p style="color:rgba(255,255,255,0.8);">Wordle</p>
+        <p style="color:rgba(255,255,255,0.8);">Угадай слово из 5 букв</p>
       </div>
     </div>
   </div>
 
-  <!-- VIEW 3: PROFILE -->
+  <!-- PROFILE -->
   <div id="view-profile" class="view-container">
-    <header><h1>Профиль</h1></header>
+    <header><h1>Профиль Светланы</h1></header>
     <div class="profile-header">
-      <div class="profile-avatar">👤</div>
-      <h2>Latviešu Students</h2>
-      <p style="color:var(--muted); font-size:0.9rem;">Уровень B2 - C2</p>
+      <div class="profile-avatar">👩‍💻</div>
+      <h2>Светлана</h2>
+      <p style="color:var(--muted); font-size:0.9rem;">Покоряет латышский язык</p>
     </div>
     
     <div class="section-title">Достижения</div>
@@ -300,70 +263,108 @@ h1 span{color:var(--accent); font-size:0.9rem; font-weight:700; background:var(-
     </div>
   </div>
 
-  <!-- CONTENT VIEW (Динамический контент) -->
+  <!-- CONTENT -->
   <div id="view-content" class="view-container" style="background:var(--bg); z-index:10; padding-bottom:20px;"></div>
 
-  <!-- BOTTOM NAV -->
+  <!-- NAV -->
   <nav class="bottom-nav">
     <div class="nav-item active" onclick="switchTab('home')" id="nav-home">
-      <div class="icon">🏠</div>
-      <div class="label">Главная</div>
+      <div class="icon">🏠</div><div class="label">Главная</div>
     </div>
     <div class="nav-item" onclick="switchTab('games')" id="nav-games">
-      <div class="icon">🎮</div>
-      <div class="label">Игры</div>
+      <div class="icon">🎮</div><div class="label">Игры</div>
     </div>
     <div class="nav-item" onclick="switchTab('profile')" id="nav-profile">
-      <div class="icon">👤</div>
-      <div class="label">Профиль</div>
+      <div class="icon">👤</div><div class="label">Профиль</div>
     </div>
   </nav>
 </div>
 
 <script>
-(function(){
-"use strict";
-
-/* ============================================================
-   ДАННЫЕ
-   ============================================================ */
+// БАЗА ДАННЫХ ДЛЯ ЖИЗНИ
 const DATA = {
   discussions: [
-    { id: "d1", level: "B2", title: "Darbs no mājām vs. Darbs birojā", ruTitle: "Удалёнка vs Офис", text: "Pēc pandēmijas daudzi uzņēmumi turpina piedāvāt iespēju strādāt attālināti. Tas dod elastību, bet var arī novest pie sociālās izolācijas.", ruText: "После пандемии многие компании продолжают предлагать удалённую работу.", questions: ["Kāda ir jūsu pieredze ar attālināto darbu?"] },
-    { id: "d2", level: "C1", title: "Pieaugošā dzīves dārdzība un inflācija", ruTitle: "Инфляция", text: "Pēdējo gadu laikā cenas pārtikai, mājoklim un pakalpojumiem ir ievērojami pieaugušas. Daudzi cilvēki saskaras ar finansiālām grūtībām.", ruText: "За последние годы цены значительно выросли.", questions: ["Vai esat pamanījuši cenu pieaugumu?"] }
+    { id: "d1", level: "B1", title: "Darbs no mājām vs. Darbs birojā", ruTitle: "Удалёнка vs Офис", text: "Pēc pandēmijas daudzi uzņēmumi turpina piedāvāt iespēju strādāt attālināti. Tas dod elastību, bet var arī novest pie sociālās izolācijas un grūtībām atdalīt darbu no personīgās dzīves.", ruText: "После пандемии многие компании продолжают предлагать удалённую работу. Это даёт гибкость, но может привести к социальной изоляции.", questions: ["Kāda ir jūsu pieredze ar attālināto darbu?", "Kā jūs uzturētu komandas garu attālināti?", "Vai jūs piekrītat, ka birojs ir labāks jauniem darbiniekiem?"] },
+    { id: "d2", level: "B2", title: "Mūsdienu steiga un stress", ruTitle: "Спешка и стресс", text: "Mūsdienās cilvēki pastāvīgi steidzas. Mums nav laika atpūsties vai vienkārši būt kopā ar ģimeni. Kā mēs varam palēnināt savu dzīves ritmu un atrast līdzsvaru?", ruText: "В наши дни люди постоянно спешат. У нас нет времени отдохнуть или просто побыть с семьей. Как мы можем замедлить свой ритм жизни и найти баланс?", questions: ["Kā jūs cīnāties ar stresu ikdienā?", "Vai jums šķiet, ka dzīve mūsdienās ir pārāk ātra?"] }
   ],
   shadowing: [
-    { id: "s1", level: "B2", text: "Labdien, kā jums iet?", ru: "Здравствуйте, как ваши дела?" },
-    { id: "s2", level: "B2", text: "Es gribētu pasūtīt kafiju, lūdzu.", ru: "Я хотел бы заказать кофе, пожалуйста." }
+    { id: "s1", level: "B1", text: "Labdien, kā jums iet?", ru: "Здравствуйте, как ваши дела?" },
+    { id: "s2", level: "B1", text: "Es gribētu pasūtīt kafiju, lūdzu.", ru: "Я хотел бы заказать кофе, пожалуйста." },
+    { id: "s3", level: "B2", text: "Vai jūs varat man pateikt, kur ir tuvākā stacija?", ru: "Вы можете сказать мне, где ближайшая станция?" },
+    { id: "s4", level: "B2", text: "Man ļoti patīk šī pilsēta, tā ir skaista.", ru: "Мне очень нравится этот город, он красивый." },
+    { id: "s5", level: "B1", text: "Es šodien jūtos ļoti labi.", ru: "Я сегодня чувствую себя очень хорошо." }
   ],
-  vocab: [
-    { id: "v1", level: "C1", title: "Эмоции и чувства", items: [ { lv: "sašutums", ru: "возмущение" }, { lv: "vīls", ru: "разочарование" } ] },
-    { id: "v2", level: "C1", title: "Бизнес и работа", items: [ { lv: "uzņēmums", ru: "предприятие" }, { lv: "ieņēmumi", ru: "доходы" } ] }
+  home: [
+    { id: "h1", level: "B1", title: "Дом и быт", items: [ 
+      { lv: "māja", ru: "дом" }, { lv: "dzīvoklis", ru: "квартира" }, { lv: "istaba", ru: "комната" }, 
+      { lv: "virtuve", ru: "кухня" }, { lv: "gulta", ru: "кровать" }, { lv: "galds", ru: "стол" }, 
+      { lv: "krēsls", ru: "стул" }, { lv: "logs", ru: "окно" }, { lv: "durvis", ru: "дверь" }, 
+      { lv: "uzkopt", ru: "убирать" }, { lv: "veļas mašīna", ru: "стиральная машина" }, { lv: "ledusskapis", ru: "холодильник" } 
+    ] }
   ],
-  food_tech: [
-    { id: "ft1", level: "C1", title: "Производство и сырье", items: [ { lv: "izejvielas", ru: "сырье" }, { lv: "pasterizācija", ru: "пастеризация" } ] },
-    { id: "ft2", level: "C1", title: "Контроль качества", items: [ { lv: "kvalitātes kontrole", ru: "контроль качества" }, { lv: "pārtikas drošība", ru: "пищевая безопасность" } ] }
+  food: [
+    { id: "f1", level: "B1", title: "Еда и продукты", items: [ 
+      { lv: "maize", ru: "хлеб" }, { lv: "piens", ru: "молоко" }, { lv: "ūdens", ru: "вода" }, 
+      { lv: "gaļa", ru: "мясо" }, { lv: "zivs", ru: "рыба" }, { lv: "dārzeņi", ru: "овощи" }, 
+      { lv: "augļi", ru: "фрукты" }, { lv: "ēdiens", ru: "еда" }, { lv: "dzēriens", ru: "напиток" }, 
+      { lv: "brokastis", ru: "завтрак" }, { lv: "pusdienas", ru: "обед" }, { lv: "vakariņas", ru: "ужин" } 
+    ] }
   ],
-  automotive: [
-    { id: "au1", level: "B2", title: "Устройство автомобиля", items: [ { lv: "dzinējs", ru: "двигатель" }, { lv: "bremzes", ru: "тормоза" } ] },
-    { id: "au2", level: "C1", title: "Дорога и правила", items: [ { lv: "brauktuve", ru: "проезжая часть" }, { lv: "luksofors", ru: "светофор" } ] }
+  transport: [
+    { id: "t1", level: "B1", title: "Транспорт и дорога", items: [ 
+      { lv: "mašīna", ru: "машина" }, { lv: "autobuss", ru: "автобус" }, { lv: "vilciens", ru: "поезд" }, 
+      { lv: "lidmašīna", ru: "самолет" }, { lv: "ceļš", ru: "дорога" }, { lv: "satiksme", ru: "движение" }, 
+      { lv: "stūre", ru: "руль" }, { lv: "bremzes", ru: "тормоза" }, { lv: "degviela", ru: "топливо" }, { lv: "biļete", ru: "билет" } 
+    ] }
+  ],
+  work: [
+    { id: "w1", level: "B2", title: "Работа и учеба", items: [ 
+      { lv: "darbs", ru: "работа" }, { lv: "birojs", ru: "офис" }, { lv: "dators", ru: "компьютер" }, 
+      { lv: "sapulce", ru: "собрание" }, { lv: "kolēģis", ru: "коллега" }, { lv: "priekšnieks", ru: "начальник" }, 
+      { lv: "alga", ru: "зарплата" }, { lv: "atvaļinājums", ru: "отпуск" }, { lv: "amats", ru: "должность" } 
+    ] }
   ],
   idioms: [
-    { id: "i1", level: "B2", phrase: "Pūst pīlītes", literal: "Дуть уточек", meaning: "Говорить ерунду.", example: "Beidz pūst pīlītes!", ruEx: "Хватит нести чушь!", mnemonic: "Дуть на уточек — глупость." }
+    { id: "i1", level: "B1", phrase: "Pūst pīlītes", literal: "Дуть уточек", meaning: "Говорить ерунду.", example: "Beidz pūst pīlītes!", ruEx: "Хватит нести чушь!", mnemonic: "Дуть на уточек — глупость." },
+    { id: "i2", level: "B1", phrase: "Kā pīlei ūdens", literal: "Как утке вода", meaning: "Быть равнодушным (как с гуся вода).", example: "Viņam tas ir kā pīlei ūdens.", ruEx: "Ему это как с гуся вода.", mnemonic: "Вода скатывается с утки." },
+    { id: "i3", level: "B2", phrase: "Sēdēt kā uz adatām", literal: "Сидеть как на иголках", meaning: "Сильно нервничать.", example: "Es sēžu kā uz adatām.", ruEx: "Я сижу как на иголках.", mnemonic: "Калька с русского." },
+    { id: "i4", level: "B2", phrase: "Palaist gar ausīm", literal: "Пропустить мимо ушей", meaning: "Игнорировать.", example: "Viņš palaida gar ausīm visus padomus.", ruEx: "Он пропустил мимо ушей все советы.", mnemonic: "Звук пролетает мимо." }
   ],
   quickfire: [
-    { q: "sašutums", a: "возмущение", w: ["радость", "спокойствие", "удивление"] },
-    { q: "izejvielas", a: "сырье", w: ["продукт", "отходы", "упаковка"] },
-    { q: "dzinējs", a: "двигатель", w: ["колесо", "кузов", "фара"] }
+    { q: "māja", a: "дом", w: ["квартира", "машина", "работа"] },
+    { q: "darbs", a: "работа", w: ["отдых", "учеба", "игра"] },
+    { q: "maize", a: "хлеб", w: ["молоко", "мясо", "вода"] },
+    { q: "ceļš", a: "дорога", w: ["мост", "лес", "поле"] },
+    { q: "piens", a: "молоко", w: ["сыр", "масло", "сок"] },
+    { q: "mašīna", a: "машина", w: ["поезд", "самолет", "велосипед"] },
+    { q: "ūdens", a: "вода", w: ["чай", "кофе", "пиво"] },
+    { q: "stūre", a: "руль", w: ["колесо", "дверь", "фара"] }
   ],
-  wordleWords: ["DARBS", "LAIKS", "VIETA", "KAFIJA", "VALODA", "DRAUGS", "SKOLA"]
+  wordleWords: ["DARBS", "LAIKS", "VIETA", "KAFIJA", "VALODA", "DRAUGS", "SKOLA", "PRATS", "SAULE", "LAPA"]
 };
 
-const ALL_ITEMS = Object.values(DATA).flat().filter(i => i.id);
+// ЮМОРИСТИЧНЫЕ И ПОДДЕРЖИВАЮЩИЕ ФРАЗЫ
+const PRAISE_PHRASES = [
+  "Светлана, ты сегодня просто космос! 🚀",
+  "Латышский сам себя не выучит, но ты справляешься на 5+!",
+  "Даже латышские роботы завидуют твоему упорству! 🤖",
+  "Еще чуть-чуть и заговоришь как истинная рижанка!",
+  "Твой мозг сегодня работает на частоте 5G!",
+  "Кто молодец? Ты молодец!",
+  "Latviešu valoda tevi mīl! (Латышский тебя любит!)",
+  "Светлана, ты умничка! Так держать!",
+  "Ого, да ты профи! 💪",
+  "Отличная работа! Продолжай в том же духе.",
+  "Учить язык — это марафон, и ты на правильном пути!",
+  "Министр иностранных дел Латвии тобой гордится!",
+  "Это был супер-ход!",
+  "Твоя сестра тобой гордится! (Даже если она тебе это не говорит)"
+];
 
-/* ============================================================
-   СОСТОЯНИЕ
-   ============================================================ */
+function getRandomPraise() {
+  return PRAISE_PHRASES[Math.floor(Math.random() * PRAISE_PHRASES.length)];
+}
+
 let state = {
   theme: localStorage.getItem("lv_theme") || "dark",
   xp: parseInt(localStorage.getItem("lv_xp")) || 0,
@@ -387,9 +388,6 @@ function saveState() {
   localStorage.setItem("lv_badges", JSON.stringify(state.badges)); localStorage.setItem("lv_progress", JSON.stringify(state.progress));
 }
 
-/* ============================================================
-   UI ФУНКЦИИ
-   ============================================================ */
 function updateUI() {
   document.getElementById('xpVal').textContent = state.xp;
   document.getElementById('streakVal').textContent = state.streak;
@@ -408,13 +406,19 @@ function updateUI() {
   });
 }
 
-function addXp(amount) {
+function addXp(amount, showPraise = false) {
   const today = new Date().toISOString().split('T')[0];
   if (state.lastXpDate !== today) { state.dailyXp = 0; state.lastXpDate = today; }
   state.xp += amount; state.dailyXp += amount; saveState(); updateUI();
   
+  if (showPraise) {
+    showToast(getRandomPraise(), "success");
+  }
+
   if (state.dailyXp >= DAILY_GOAL && state.dailyXp - amount < DAILY_GOAL) {
-    showToast("🎯 Цель достигнута! Lieliski!", "gold"); fireConfetti();
+    setTimeout(() => {
+      showToast("🎯 Цель достигнута! Ты сегодня супер-герой! 🦸‍♀️", "gold"); fireConfetti();
+    }, 1500);
   }
 }
 
@@ -430,7 +434,7 @@ function showToast(message, type = 'success') {
   const container = document.getElementById('toast-container');
   const toast = document.createElement('div'); toast.className = `toast ${type}`; toast.innerHTML = message;
   container.appendChild(toast);
-  setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
+  setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3500);
 }
 
 function fireConfetti() {
@@ -452,13 +456,9 @@ function toggleTheme() {
   saveState();
 }
 
-/* ============================================================
-   НАВИГАЦИЯ
-   ============================================================ */
 function switchTab(tabId) {
   document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  
   if (tabId === 'content') {
     document.getElementById('view-content').classList.add('active');
   } else {
@@ -471,21 +471,30 @@ function showContent(html) {
   const container = document.getElementById('view-content');
   container.innerHTML = html;
   switchTab('content');
-  window.scrollTo(0,0);
+  container.scrollTop = 0;
 }
 
-/* ============================================================
-   ЛОГИКА РЕНДЕРА
-   ============================================================ */
 function openList(type) {
   const dataArray = DATA[type];
   if (!dataArray) return;
   
-  let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('home')">←</div><h2>${type === 'vocab' ? 'Словарь' : type === 'food_tech' ? 'Технолог' : type === 'automotive' ? 'Авто' : type === 'idioms' ? 'Идиомы' : type === 'shadowing' ? 'Тренажер речи' : 'Темы'}</h2></div>`;
+  let title = 'Темы';
+  if (type === 'home') title = 'Быт и дом';
+  if (type === 'food') title = 'Еда';
+  if (type === 'transport') title = 'Транспорт';
+  if (type === 'work') title = 'Работа';
+  if (type === 'idioms') title = 'Идиомы';
+  if (type === 'shadowing') title = 'Произношение';
+  if (type === 'discussions') title = 'Дискуссии';
+
+  let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('home')">←</div><h2>${title}</h2></div>`;
   
   dataArray.forEach(item => {
-    html += `<div class="list-item" onclick="openDetail('${type}', '${item.id}')">
-      <div><h4>${item.title || item.text || item.phrase}</h4><p>${item.ruTitle || item.ru || item.meaning}</p></div>
+    const itemTitle = item.title || item.text || item.phrase;
+    const itemDesc = item.ruTitle || item.ru || item.meaning;
+    const safeId = item.id;
+    html += `<div class="list-item" onclick="openDetail('${type}', '${safeId}')">
+      <div><h4>${itemTitle}</h4><p>${itemDesc}</p></div>
       <div style="font-size:1.2rem; color:var(--accent);">›</div>
     </div>`;
   });
@@ -498,36 +507,46 @@ function openDetail(type, id) {
 
   let html = `<div class="content-header"><div class="back-btn" onclick="openList('${type}')">←</div><h2>${item.title || item.phrase || 'Детали'}</h2></div>`;
 
-  if (type === 'vocab' || type === 'food_tech' || type === 'automotive') {
+  if (type === 'home' || type === 'food' || type === 'transport' || type === 'work') {
     item.items.forEach(i => {
+      const safeText = i.lv.replace(/'/g, "\\'");
       html += `<div class="info-card" style="display:flex; justify-content:space-between; align-items:center;">
         <div><div style="font-weight:800; color:var(--accent); font-size:1.2rem;">${i.lv}</div><div style="color:var(--muted); font-size:0.9rem;">${i.ru}</div></div>
-        <button class="speak-btn" onclick="speakText('${i.lv}')">🔊</button>
+        <button class="speak-btn" onclick="speakText('${safeText}')">🔊</button>
       </div>`;
     });
   } else if (type === 'idioms') {
+    const safePhrase = item.phrase.replace(/'/g, "\\'");
+    const safeExample = item.example.replace(/'/g, "\\'");
     html += `<div class="info-card">
-      <div style="font-weight:800; color:var(--accent); font-size:1.3rem;">${item.phrase} <button class="speak-btn" onclick="speakText('${item.phrase}')">🔊</button></div>
+      <div style="font-weight:800; color:var(--accent); font-size:1.3rem;">${item.phrase} <button class="speak-btn" onclick="speakText('${safePhrase}')">🔊</button></div>
       <p style="margin-top:8px;">${item.meaning}</p>
-      <div style="margin-top:12px; padding:12px; background:var(--bg); border-radius:12px; font-style:italic;">${item.example}</div>
+      <div style="margin-top:12px; padding:12px; background:var(--bg); border-radius:12px; font-style:italic;">${item.example} <button class="speak-btn" onclick="speakText('${safeExample}')">🔊</button></div>
     </div>`;
   } else if (type === 'shadowing') {
+    const safeText = item.text.replace(/'/g, "\\'");
     html += `<div class="info-card" style="text-align:center; padding:30px 20px;">
-      <div style="font-size:1.4rem; font-weight:800; margin-bottom:16px;">${item.text} <button class="speak-btn" onclick="speakText('${item.text}')">🔊</button></div>
+      <div style="font-size:1.4rem; font-weight:800; margin-bottom:16px;">${item.text} <button class="speak-btn" onclick="speakText('${safeText}')">🔊</button></div>
       <p style="color:var(--muted); margin-bottom:24px;">${item.ru}</p>
       <div class="mic-btn" id="micBtn">🎤</div>
       <div id="shadowResult" style="font-weight:700; margin-top:16px; min-height:24px;"></div>
     </div>`;
     setTimeout(() => setupMic(item.text), 100);
+  } else if (type === 'discussions') {
+    const safeText = item.text.replace(/'/g, "\\'");
+    html += `<div class="info-card">
+      <div style="font-weight:800; color:var(--accent); margin-bottom:12px;">${item.ruTitle}</div>
+      <p style="line-height:1.6;">${item.text} <button class="speak-btn" onclick="speakText('${safeText}')">🔊</button></p>
+      <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--border);">
+        ${item.questions.map(q => `<div style="margin-bottom:8px;">❓ ${q}</div>`).join('')}
+      </div>
+    </div>`;
   }
 
-  html += `<button class="btn success" style="margin-top:20px;" onclick="addXp(10); showToast('Отлично! +10 XP'); openList('${type}')">Завершить тему</button>`;
+  html += `<button class="btn primary" style="margin-top:20px;" onclick="addXp(10, true); openList('${type}')">Завершить тему (+10 XP)</button>`;
   showContent(html);
 }
 
-/* ============================================================
-   ИГРЫ
-   ============================================================ */
 function openGame(game) {
   if (game === 'quickfire') renderQuickFire();
   if (game === 'wordle') renderWordle();
@@ -579,7 +598,7 @@ function renderQuickFire() {
       if (timeLeft <= 0) {
         clearInterval(timer); isActive = false; scoreEl.textContent = `Игра окончена! Очков: ${score}`; optsEl.innerHTML = '';
         startBtn.style.display = 'block'; startBtn.textContent = 'Играть снова'; startBtn.onclick = () => renderQuickFire();
-        if (score > 5) fireConfetti();
+        if (score > 5) { fireConfetti(); showToast(getRandomPraise(), "gold"); }
       }
     }, 1000);
   };
@@ -591,7 +610,7 @@ function renderWordle() {
 
   let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('games')">←</div><h2>🟩 Vārdu spēle</h2></div>
     <div class="wordle-grid" id="wGrid"></div>
-    <div class="hint" id="wMsg" style="text-align:center;">Угадайте слово из 5 букв</div>
+    <div class="hint" id="wMsg" style="text-align:center; color:var(--muted); margin-top:10px;">Угадайте слово из 5 букв</div>
     <div class="wordle-keyboard" id="wKeyboard"></div>`;
   showContent(html);
 
@@ -632,7 +651,8 @@ function renderWordle() {
       }
     }
     if (currentGuess === targetWord) {
-      gameOver = true; document.getElementById('wMsg').textContent = "🎉 Поздравляем!"; addXp(20); fireConfetti();
+      gameOver = true; document.getElementById('wMsg').textContent = "🎉 Поздравляем!"; addXp(20); 
+      setTimeout(() => { fireConfetti(); showToast("Шерлок Холмс отдыхает! Слово найдено! 🕵️‍♀️", "gold"); }, 500);
     } else {
       currentRow++; currentGuess = "";
       if (currentRow === 6) { gameOver = true; document.getElementById('wMsg').textContent = `Слово было: ${targetWord}`; }
@@ -647,14 +667,11 @@ function renderWordle() {
 
   const keyListener = (e) => { if (e.key === "Enter") handleKey("ENTER"); else if (e.key === "Backspace") handleKey("BACK"); else if (e.key.match(/[a-zA-Z]/)) handleKey(e.key.toUpperCase()); };
   document.addEventListener("keydown", keyListener);
-  // Cleanup listener on leaving
+  
   const backBtn = document.querySelector('.back-btn');
   backBtn.addEventListener('click', () => document.removeEventListener("keydown", keyListener));
 }
 
-/* ============================================================
-   ГОЛОС
-   ============================================================ */
 function speakText(text) {
   if ('speechSynthesis' in window) {
     window.speechSynthesis.cancel();
@@ -697,23 +714,28 @@ function setupMic(targetText) {
     const overlap = targetWords.filter(w => spokenWords.includes(w)).length;
     const accuracy = Math.round((overlap / targetWords.length) * 100);
 
-    if (accuracy === 100) { result.textContent = `🎉 Идеально!`; result.style.color = 'var(--success)'; addXp(5); unlockBadge('speaker'); fireConfetti(); }
-    else if (accuracy >= 50) { result.textContent = `👍 Хорошо! (${accuracy}%)`; result.style.color = 'var(--warning)'; addXp(2); }
-    else { result.textContent = `❌ Попробуйте еще раз (${accuracy}%)`; result.style.color = 'var(--danger)'; }
+    if (accuracy === 100) { 
+      result.textContent = `🎉 Идеально!`; result.style.color = 'var(--success)'; 
+      addXp(5); unlockBadge('speaker'); 
+      setTimeout(() => { fireConfetti(); showToast("Вау, Светлана! Твое произношение на высоте! 🎙️", "gold"); }, 500);
+    }
+    else if (accuracy >= 50) { 
+      result.textContent = `👍 Хорошо! (${accuracy}%)`; result.style.color = 'var(--warning)'; addXp(2); 
+    }
+    else { 
+      result.textContent = `❌ Попробуйте еще раз (${accuracy}%)`; result.style.color = 'var(--danger)'; 
+    }
   };
   recognition.onerror = () => { isRecording = false; micBtn.classList.remove('recording'); };
   recognition.onend = () => { isRecording = false; micBtn.classList.remove('recording'); };
 }
 
-/* ============================================================
-   ЭКСПОРТ / ИМПОРТ
-   ============================================================ */
 function exportProgress() {
   const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
   const dlAnchorElem = document.createElement('a');
   dlAnchorElem.setAttribute("href", dataStr);
-  dlAnchorElem.setAttribute("download", `latviesu_progress.json`);
-  dlAnchorElem.click(); showToast("Прогресс скачан!");
+  dlAnchorElem.setAttribute("download", `latviesu_progress_svetlana.json`);
+  dlAnchorElem.click(); showToast("Прогресс скачан, Светлана!");
 }
 
 function importProgress(e) {
@@ -724,7 +746,7 @@ function importProgress(e) {
       const imported = JSON.parse(event.target.result);
       if (imported.xp !== undefined) {
         state = { ...state, ...imported }; saveState(); updateUI();
-        showToast("Прогресс загружен!"); switchTab('home');
+        showToast("Ура! Прогресс загружен!"); switchTab('home');
       }
     } catch (err) { showToast("Ошибка файла", "danger"); }
   };
@@ -737,10 +759,7 @@ function resetProgress() {
 
 function shuffle(array) { const a = [...array]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
-/* ============================================================
-   ИНИЦИАЛИЗАЦИЯ
-   ============================================================ */
-function init() {
+document.addEventListener("DOMContentLoaded", () => {
   document.documentElement.dataset.theme = state.theme;
   updateUI();
   
@@ -751,11 +770,16 @@ function init() {
     else if (state.lastVisit !== "") state.streak = 1;
     state.lastVisit = today; saveState();
   }
-}
 
-document.addEventListener("DOMContentLoaded", init);
-if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(err => console.log('SW error', err))); }
-})();
+  // Приветствие при входе
+  setTimeout(() => {
+    showToast("Привет, Светлана! Готова покорять латышский? 😉", "success");
+  }, 1000);
+});
+
+if ('serviceWorker' in navigator) { 
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(err => console.log('SW error', err))); 
+}
 </script>
 </body>
 </html>
