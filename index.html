@@ -22,14 +22,8 @@
   --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); --nav-bg: rgba(15, 23, 42, 0.9);
 }
 *{box-sizing:border-box;margin:0;padding:0; -webkit-tap-highlight-color: transparent;}
-body{
-  font-family:var(--font); background:#0b0f19; color:var(--text);
-  line-height:1.5; -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; justify-content:center; align-items:center;
-}
-.app{
-  max-width:480px; width:100%; height:100vh; max-height:900px; background:var(--bg);
-  display:flex; flex-direction:column; position:relative; overflow:hidden; box-shadow: 0 0 50px rgba(0,0,0,0.5);
-}
+body{font-family:var(--font); background:#0b0f19; color:var(--text); line-height:1.5; -webkit-font-smoothing:antialiased; min-height:100vh; display:flex; justify-content:center; align-items:center;}
+.app{max-width:480px; width:100%; height:100vh; max-height:900px; background:var(--bg); display:flex; flex-direction:column; position:relative; overflow:hidden; box-shadow: 0 0 50px rgba(0,0,0,0.5);}
 @media(min-width:600px){ .app { border-radius: 30px; height: 90vh; border: 8px solid #1e293b; } }
 
 .view-container{flex:1; overflow-y:auto; padding:20px 20px 100px 20px; display:none; animation:fadeIn 0.3s ease;}
@@ -49,17 +43,16 @@ h1 span{color:var(--accent); font-size:0.85rem; font-weight:700; background:var(
 .stat-info .val{font-size:1.2rem; font-weight:800; line-height:1.2;}
 .stat-info .lbl{font-size:0.7rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em;}
 
-.hero-card{
-  background:var(--accent-gradient); border-radius:var(--radius); padding:24px; color:white;
-  position:relative; overflow:hidden; box-shadow:0 15px 30px -5px rgba(79,70,229,0.4);
-  cursor:pointer; margin-bottom:24px; transition:transform 0.2s;
-}
+.hero-card{background:var(--accent-gradient); border-radius:var(--radius); padding:24px; color:white; position:relative; overflow:hidden; box-shadow:0 15px 30px -5px rgba(79,70,229,0.4); cursor:pointer; margin-bottom:16px; transition:transform 0.2s;}
 .hero-card:active{transform:scale(0.98);}
 .hero-card h2{font-size:1.4rem; font-weight:800; margin-bottom:8px; position:relative; z-index:2;}
 .hero-card p{font-size:0.9rem; opacity:0.9; position:relative; z-index:2; max-width:80%;}
 .hero-card .btn-start{background:white; color:var(--accent); border:none; padding:12px 24px; border-radius:100px; font-weight:800; font-size:0.95rem; margin-top:16px; position:relative; z-index:2; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.1); font-family:inherit;}
 
-.section-title{font-size:1.1rem; font-weight:800; margin-bottom:16px;}
+.guide-card{background:var(--surface-solid); border:1px solid var(--border); border-radius:var(--radius); padding:16px; margin-bottom:24px; cursor:pointer; box-shadow:var(--shadow); transition:transform 0.2s;}
+.guide-card:active{transform:scale(0.98);}
+
+.section-title{font-size:1.1rem; font-weight:800; margin-bottom:16px; margin-top:8px;}
 .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
 .category-card{background:var(--surface-solid); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px; display:flex; flex-direction:column; gap:8px; cursor:pointer; box-shadow:var(--shadow); transition:transform 0.2s;}
 .category-card:active{transform:scale(0.96);}
@@ -101,20 +94,99 @@ h1 span{color:var(--accent); font-size:0.85rem; font-weight:700; background:var(
 .btn.primary{background:var(--accent); color:white; border:none;}
 
 .info-card{background:var(--surface-solid); border:1px solid var(--border); border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:var(--shadow);}
-.speak-btn{background:var(--accent-light); border:none; border-radius:50%; width:36px; height:36px; font-size:1rem; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--accent); margin-left:8px;}
+.speak-btn{background:var(--accent-light); border:none; border-radius:50%; width:36px; height:36px; font-size:1rem; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; color:var(--accent); margin-left:8px; flex-shrink:0;}
 .mic-btn{background:var(--danger); color:white; border:none; border-radius:50%; width:64px; height:64px; font-size:1.6rem; display:flex; align-items:center; justify-content:center; margin:20px auto; box-shadow:0 8px 20px rgba(225,29,72,0.3); cursor:pointer;}
 .mic-btn.recording{animation:pulse 1.5s infinite;}
 @keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);}}
 
-.bottom-nav{
-  position:absolute; bottom:0; left:0; right:0; height:80px; background:var(--nav-bg);
-  backdrop-filter:blur(20px); border-top:1px solid var(--border); display:flex; justify-content:space-around;
-  align-items:center; padding-bottom:env(safe-area-inset-bottom); z-index:100;
-}
-.nav-item{display:flex; flex-direction:column; align-items:center; gap:4px; color:var(--muted); cursor:pointer; transition:0.2s; padding:10px;}
+.flash-progress{text-align:center; font-weight:700; margin-bottom:16px; color:var(--muted); font-size:0.9rem;}
+.flash-card{background:var(--accent-gradient); color:white; border-radius:var(--radius); padding:50px 20px; text-align:center; min-height:220px; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 15px 30px -5px rgba(79,70,229,0.4); transition:transform 0.2s; margin-bottom:20px;}
+.flash-card:active{transform:scale(0.98);}
+.flash-card .word{font-size:2rem; font-weight:800; margin-bottom:12px;}
+.flash-card .hint{font-size:0.85rem; opacity:0.85;}
+.flash-card .tap-hint{font-size:0.75rem; opacity:0.7; margin-top:16px;}
+
+.memory-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:20px 0;}
+.memory-card{aspect-ratio:1; background:var(--accent-gradient); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.7rem; color:white; cursor:pointer; padding:4px; text-align:center; transition:0.3s; user-select:none; line-height:1.2;}
+.memory-card.flipped{background:var(--surface-solid); color:var(--text); border:2px solid var(--accent);}
+.memory-card.matched{background:var(--success); opacity:0.6; pointer-events:none;}
+
+.tf-card{background:var(--surface-solid); border:1px solid var(--border); border-radius:var(--radius); padding:30px 20px; text-align:center; margin-bottom:20px; min-height:160px; display:flex; align-items:center; justify-content:center; font-size:1.15rem; font-weight:700; line-height:1.5;}
+.tf-btns{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+.tf-btn{padding:20px; border-radius:16px; font-weight:800; font-size:1.1rem; cursor:pointer; border:none; font-family:inherit; color:white; transition:0.2s; box-shadow:var(--shadow);}
+.tf-btn.yes{background:var(--success);}
+.tf-btn.no{background:var(--danger);}
+.tf-btn:active{transform:scale(0.96);}
+
+.sentence-area{background:var(--bg); border:2px dashed var(--border); border-radius:var(--radius-sm); padding:20px; min-height:80px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin-bottom:20px;}
+.words-bank{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:20px 0;}
+.word-chip{background:var(--surface-solid); border:2px solid var(--border); padding:10px 16px; border-radius:12px; font-weight:700; cursor:pointer; font-family:inherit; color:var(--text); box-shadow:var(--shadow); font-size:0.95rem;}
+.word-chip:active{transform:scale(0.95);}
+.word-chip.used{opacity:0.3; pointer-events:none;}
+
+.number-card{background:var(--accent-gradient); color:white; border-radius:var(--radius); padding:40px 20px; text-align:center; margin-bottom:20px;}
+.number-card .num{font-size:4rem; font-weight:900; line-height:1;}
+.number-card .word{font-size:1.5rem; font-weight:700; margin-top:8px;}
+
+/* CONVERSATION */
+.level-map{display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:24px; padding:16px; background:var(--surface-solid); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow);}
+.level-node{flex:1; text-align:center; font-size:0.75rem; font-weight:800; padding:8px 4px; border-radius:10px; background:var(--bg); color:var(--muted); position:relative;}
+.level-node.done{background:var(--success); color:white;}
+.level-node.current{background:var(--accent-gradient); color:white; box-shadow:0 4px 12px rgba(99,102,241,0.4);}
+.level-arrow{color:var(--muted); font-size:1rem;}
+
+.level-section{background:var(--surface-solid); border:1px solid var(--border); border-radius:var(--radius); padding:20px; margin-bottom:16px; box-shadow:var(--shadow); cursor:pointer; transition:transform 0.2s;}
+.level-section:active{transform:scale(0.98);}
+.level-header{display:flex; align-items:center; gap:12px; margin-bottom:10px;}
+.level-emoji{font-size:2rem;}
+.level-title{font-weight:800; font-size:1.1rem;}
+.level-sub{font-size:0.8rem; color:var(--muted);}
+.level-progress-bar{height:8px; background:var(--bg); border-radius:100px; overflow:hidden; margin-top:10px;}
+.level-progress-fill{height:100%; background:var(--accent-gradient); border-radius:100px; transition:width 0.4s;}
+
+.scenario-card{background:var(--surface-solid); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; box-shadow:var(--shadow); cursor:pointer; transition:transform 0.2s;}
+.scenario-card:active{transform:scale(0.98);}
+.scenario-card.done{border-color:var(--success); background:rgba(16,185,129,0.08);}
+.scenario-card h4{font-size:1rem; font-weight:700; margin-bottom:4px;}
+.scenario-card p{font-size:0.8rem; color:var(--muted);}
+.scenario-check{font-size:1.4rem; color:var(--success);}
+
+.situation-card{background:var(--accent-gradient); color:white; border-radius:var(--radius); padding:20px; margin-bottom:20px; box-shadow:0 10px 25px -5px rgba(79,70,229,0.4);}
+.situation-card .label{font-size:0.75rem; font-weight:700; text-transform:uppercase; opacity:0.85; letter-spacing:0.05em; margin-bottom:6px;}
+.situation-card .text{font-size:1rem; font-weight:700; line-height:1.4;}
+
+.phrase-item{background:var(--surface-solid); border:1px solid var(--border); border-radius:14px; padding:12px 14px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; gap:8px; box-shadow:var(--shadow);}
+.phrase-item .lv{font-weight:800; color:var(--accent); font-size:0.98rem; line-height:1.3;}
+.phrase-item .ru{font-size:0.82rem; color:var(--muted); margin-top:2px;}
+
+.dialogue-line{display:flex; gap:10px; margin-bottom:12px;}
+.dialogue-line.a{flex-direction:row;}
+.dialogue-line.b{flex-direction:row-reverse;}
+.dialogue-bubble{max-width:85%; background:var(--surface-solid); border:1px solid var(--border); border-radius:16px; padding:12px 14px; box-shadow:var(--shadow);}
+.dialogue-line.a .dialogue-bubble{border-bottom-left-radius:4px;}
+.dialogue-line.b .dialogue-bubble{background:var(--accent-light); border-bottom-right-radius:4px;}
+.dialogue-bubble .lv{font-weight:700; font-size:0.95rem; line-height:1.35;}
+.dialogue-bubble .ru{font-size:0.8rem; color:var(--muted); margin-top:4px;}
+.dialogue-speaker{width:32px; height:32px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem; color:white; align-self:flex-end;}
+.dialogue-line.a .dialogue-speaker{background:var(--accent);}
+.dialogue-line.b .dialogue-speaker{background:var(--warning);}
+
+.play-all-btn{background:var(--accent); color:white; border:none; padding:10px 16px; border-radius:100px; font-weight:700; font-family:inherit; font-size:0.85rem; cursor:pointer; margin-bottom:16px;}
+.play-all-btn:active{transform:scale(0.96);}
+
+.prompt-item{background:var(--bg); border-left:4px solid var(--accent); border-radius:8px; padding:12px 14px; margin-bottom:10px; font-size:0.9rem;}
+.prompt-item .ru{color:var(--muted); font-size:0.8rem; margin-top:4px; font-style:italic;}
+
+.mic-practice{background:var(--surface-solid); border:2px dashed var(--accent); border-radius:var(--radius); padding:20px; margin-bottom:16px; text-align:center;}
+.mic-practice h4{font-weight:800; margin-bottom:6px; font-size:1rem;}
+.mic-practice .target{font-size:1rem; font-weight:700; color:var(--accent); margin-bottom:4px; padding:10px; background:var(--bg); border-radius:10px;}
+.mic-practice .translation{font-size:0.82rem; color:var(--muted); margin-bottom:12px;}
+
+.bottom-nav{position:absolute; bottom:0; left:0; right:0; height:80px; background:var(--nav-bg); backdrop-filter:blur(20px); border-top:1px solid var(--border); display:flex; justify-content:space-around; align-items:center; padding-bottom:env(safe-area-inset-bottom); z-index:100;}
+.nav-item{display:flex; flex-direction:column; align-items:center; gap:4px; color:var(--muted); cursor:pointer; transition:0.2s; padding:10px; flex:1;}
 .nav-item.active{color:var(--accent);}
 .nav-item .icon{font-size:1.4rem;}
-.nav-item .label{font-size:0.7rem; font-weight:700;}
+.nav-item .label{font-size:0.65rem; font-weight:700;}
 
 #toast-container { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; flex-direction: column; gap: 10px; align-items: center; pointer-events: none; width:90%;}
 .toast { background: var(--text); color: var(--bg); padding: 12px 20px; border-radius: 100px; font-weight: 700; font-size: 0.9rem; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content:center; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align:center;}
@@ -164,54 +236,82 @@ h1 span{color:var(--accent); font-size:0.85rem; font-weight:700; background:var(
       </div>
     </div>
 
+    <div class="hero-card" onclick="switchTab('conversation')" style="background:linear-gradient(135deg, #10b981, #3b82f6);">
+      <h2>Разговорная практика 💬</h2>
+      <p>От B1 до C2. Реальные диалоги, фразы и микрофон.</p>
+      <button class="btn-start">Перейти к речи</button>
+    </div>
+
     <div class="hero-card" onclick="startDailyMix()">
       <h2>Daily Mix 🎲</h2>
       <p>Случайный набор заданий. Идеально для ежедневной практики языка.</p>
       <button class="btn-start">Начать тренировку</button>
     </div>
 
+    <div class="guide-card" onclick="openGuide()">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div style="font-size:2rem;">📚</div>
+        <div style="flex:1;">
+          <div style="font-weight:800; font-size:1rem;">Как учиться эффективно</div>
+          <div style="font-size:0.8rem; color:var(--muted); margin-top:2px;">Инструкция, план и 12 лайфхаков</div>
+        </div>
+        <div style="font-size:1.3rem; color:var(--muted);">›</div>
+      </div>
+    </div>
+
+    <div class="section-title">Слова и грамматика</div>
+    <div class="grid-2" style="margin-bottom:24px;">
+      <div class="category-card" onclick="openTrainer('flashcards')">
+        <div class="cat-icon">🃏</div><h3>Карточки</h3><p>Быстрое запоминание</p>
+      </div>
+      <div class="category-card" onclick="openTrainer('grammar')">
+        <div class="cat-icon">📝</div><h3>Грамматика</h3><p>Падежи и спряжения</p>
+      </div>
+      <div class="category-card" onclick="openTrainer('translation')">
+        <div class="cat-icon">🔄</div><h3>Перевод</h3><p>Латышский ↔ русский</p>
+      </div>
+      <div class="category-card" onclick="openTrainer('sentence')">
+        <div class="cat-icon">🧩</div><h3>Собери фразу</h3><p>Строим предложения</p>
+      </div>
+      <div class="category-card" onclick="openTrainer('numbers')" style="grid-column: span 2;">
+        <div class="cat-icon">🔢</div><h3>Числа и время</h3><p>Считаем по-латышски</p>
+      </div>
+    </div>
+
     <div class="section-title">Практика речи</div>
     <div class="grid-2" style="margin-bottom:24px;">
       <div class="category-card" onclick="openList('shadowing')">
-        <div class="cat-icon">🗣️</div>
-        <h3>Произношение</h3>
-        <p>Слушай и повторяй</p>
+        <div class="cat-icon">🗣️</div><h3>Произношение</h3><p>Слушай и повторяй</p>
       </div>
       <div class="category-card" onclick="openList('discussions')">
-        <div class="cat-icon">💬</div>
-        <h3>Дискуссии</h3>
-        <p>Учись выражать мысли</p>
+        <div class="cat-icon">💬</div><h3>Дискуссии</h3><p>Учись выражать мысли</p>
       </div>
     </div>
 
     <div class="section-title">Темы для жизни</div>
     <div class="grid-2">
       <div class="category-card" onclick="openList('home')">
-        <div class="cat-icon">🏠</div>
-        <h3>Быт и дом</h3>
-        <p>Домашние дела, мебель</p>
+        <div class="cat-icon">🏠</div><h3>Быт и дом</h3><p>Домашние дела, мебель</p>
       </div>
       <div class="category-card" onclick="openList('food')">
-        <div class="cat-icon">🍎</div>
-        <h3>Еда</h3>
-        <p>Продукты и приемы пищи</p>
+        <div class="cat-icon">🍎</div><h3>Еда</h3><p>Продукты и приемы пищи</p>
       </div>
       <div class="category-card" onclick="openList('transport')">
-        <div class="cat-icon">🚗</div>
-        <h3>Транспорт</h3>
-        <p>Дорога, авто, поездки</p>
+        <div class="cat-icon">🚗</div><h3>Транспорт</h3><p>Дорога, авто, поездки</p>
       </div>
       <div class="category-card" onclick="openList('work')">
-        <div class="cat-icon">💼</div>
-        <h3>Работа</h3>
-        <p>Офис, документы, учеба</p>
+        <div class="cat-icon">💼</div><h3>Работа</h3><p>Офис, документы, учеба</p>
       </div>
       <div class="category-card" onclick="openList('idioms')" style="grid-column: span 2;">
-        <div class="cat-icon">🎭</div>
-        <h3>Идиомы и сленг</h3>
-        <p>Чтобы звучать как носитель языка</p>
+        <div class="cat-icon">🎭</div><h3>Идиомы и сленг</h3><p>Чтобы звучать как носитель языка</p>
       </div>
     </div>
+  </div>
+
+  <!-- CONVERSATION -->
+  <div id="view-conversation" class="view-container">
+    <header><h1>💬 Разговорный латышский</h1></header>
+    <div id="convBody"></div>
   </div>
 
   <!-- GAMES -->
@@ -219,14 +319,16 @@ h1 span{color:var(--accent); font-size:0.85rem; font-weight:700; background:var(
     <header><h1>Игры для Светланы</h1></header>
     <div class="grid-2">
       <div class="category-card" onclick="openGame('quickfire')" style="background:linear-gradient(135deg, #e11d48, #be123c); color:white;">
-        <div class="cat-icon">⚡️</div>
-        <h3 style="color:white;">Быстрый огонь</h3>
-        <p style="color:rgba(255,255,255,0.8);">60 секунд на реакцию</p>
+        <div class="cat-icon">⚡️</div><h3 style="color:white;">Быстрый огонь</h3><p style="color:rgba(255,255,255,0.8);">60 секунд на реакцию</p>
       </div>
       <div class="category-card" onclick="openGame('wordle')" style="background:linear-gradient(135deg, #10b981, #059669); color:white;">
-        <div class="cat-icon">🟩</div>
-        <h3 style="color:white;">Vārdu spēle</h3>
-        <p style="color:rgba(255,255,255,0.8);">Угадай слово из 5 букв</p>
+        <div class="cat-icon">🟩</div><h3 style="color:white;">Vārdu spēle</h3><p style="color:rgba(255,255,255,0.8);">Угадай слово из 5 букв</p>
+      </div>
+      <div class="category-card" onclick="openGame('memory')" style="background:linear-gradient(135deg, #f59e0b, #d97706); color:white;">
+        <div class="cat-icon">🎴</div><h3 style="color:white;">Найди пару</h3><p style="color:rgba(255,255,255,0.8);">Мемори на латышском</p>
+      </div>
+      <div class="category-card" onclick="openGame('truefalse')" style="background:linear-gradient(135deg, #8b5cf6, #7c3aed); color:white;">
+        <div class="cat-icon">⚖️</div><h3 style="color:white;">Правда или ложь</h3><p style="color:rgba(255,255,255,0.8);">Быстрая проверка знаний</p>
       </div>
     </div>
   </div>
@@ -239,14 +341,16 @@ h1 span{color:var(--accent); font-size:0.85rem; font-weight:700; background:var(
       <h2>Светлана</h2>
       <p style="color:var(--muted); font-size:0.9rem;">Покоряет латышский язык</p>
     </div>
-    
     <div class="section-title">Достижения</div>
     <div class="badges-grid" id="badgesGrid"></div>
-
     <div class="section-title">Настройки</div>
     <div class="list-item" onclick="toggleTheme()">
       <div><h4>Тема оформления</h4><p>Переключить светлую/темную</p></div>
       <div style="font-size:1.5rem;">🌓</div>
+    </div>
+    <div class="list-item" onclick="openGuide()">
+      <div><h4>Как учиться эффективно</h4><p>Инструкция и лайфхаки</p></div>
+      <div style="font-size:1.5rem;">📚</div>
     </div>
     <div class="list-item" onclick="exportProgress()">
       <div><h4>Экспорт прогресса</h4><p>Сохранить в файл</p></div>
@@ -271,6 +375,9 @@ h1 span{color:var(--accent); font-size:0.85rem; font-weight:700; background:var(
     <div class="nav-item active" onclick="switchTab('home')" id="nav-home">
       <div class="icon">🏠</div><div class="label">Главная</div>
     </div>
+    <div class="nav-item" onclick="switchTab('conversation')" id="nav-conversation">
+      <div class="icon">💬</div><div class="label">Речь</div>
+    </div>
     <div class="nav-item" onclick="switchTab('games')" id="nav-games">
       <div class="icon">🎮</div><div class="label">Игры</div>
     </div>
@@ -281,69 +388,525 @@ h1 span{color:var(--accent); font-size:0.85rem; font-weight:700; background:var(
 </div>
 
 <script>
-// БАЗА ДАННЫХ ДЛЯ ЖИЗНИ
-const DATA = {
-  discussions: [
-    { id: "d1", level: "B1", title: "Darbs no mājām vs. Darbs birojā", ruTitle: "Удалёнка vs Офис", text: "Pēc pandēmijas daudzi uzņēmumi turpina piedāvāt iespēju strādāt attālināti. Tas dod elastību, bet var arī novest pie sociālās izolācijas un grūtībām atdalīt darbu no personīgās dzīves.", ruText: "После пандемии многие компании продолжают предлагать удалённую работу. Это даёт гибкость, но может привести к социальной изоляции.", questions: ["Kāda ir jūsu pieredze ar attālināto darbu?", "Kā jūs uzturētu komandas garu attālināti?", "Vai jūs piekrītat, ka birojs ir labāks jauniem darbiniekiem?"] },
-    { id: "d2", level: "B2", title: "Mūsdienu steiga un stress", ruTitle: "Спешка и стресс", text: "Mūsdienās cilvēki pastāvīgi steidzas. Mums nav laika atpūsties vai vienkārši būt kopā ar ģimeni. Kā mēs varam palēnināt savu dzīves ritmu un atrast līdzsvaru?", ruText: "В наши дни люди постоянно спешат. У нас нет времени отдохнуть или просто побыть с семьей. Как мы можем замедлить свой ритм жизни и найти баланс?", questions: ["Kā jūs cīnāties ar stresu ikdienā?", "Vai jums šķiet, ka dzīve mūsdienās ir pārāk ātra?"] }
-  ],
-  shadowing: [
-    { id: "s1", level: "B1", text: "Labdien, kā jums iet?", ru: "Здравствуйте, как ваши дела?" },
-    { id: "s2", level: "B1", text: "Es gribētu pasūtīt kafiju, lūdzu.", ru: "Я хотел бы заказать кофе, пожалуйста." },
-    { id: "s3", level: "B2", text: "Vai jūs varat man pateikt, kur ir tuvākā stacija?", ru: "Вы можете сказать мне, где ближайшая станция?" },
-    { id: "s4", level: "B2", text: "Man ļoti patīk šī pilsēta, tā ir skaista.", ru: "Мне очень нравится этот город, он красивый." },
-    { id: "s5", level: "B1", text: "Es šodien jūtos ļoti labi.", ru: "Я сегодня чувствую себя очень хорошо." }
-  ],
-  home: [
-    { id: "h1", level: "B1", title: "Дом и быт", items: [ 
-      { lv: "māja", ru: "дом" }, { lv: "dzīvoklis", ru: "квартира" }, { lv: "istaba", ru: "комната" }, 
-      { lv: "virtuve", ru: "кухня" }, { lv: "gulta", ru: "кровать" }, { lv: "galds", ru: "стол" }, 
-      { lv: "krēsls", ru: "стул" }, { lv: "logs", ru: "окно" }, { lv: "durvis", ru: "дверь" }, 
-      { lv: "uzkopt", ru: "убирать" }, { lv: "veļas mašīna", ru: "стиральная машина" }, { lv: "ledusskapis", ru: "холодильник" } 
-    ] }
-  ],
-  food: [
-    { id: "f1", level: "B1", title: "Еда и продукты", items: [ 
-      { lv: "maize", ru: "хлеб" }, { lv: "piens", ru: "молоко" }, { lv: "ūdens", ru: "вода" }, 
-      { lv: "gaļa", ru: "мясо" }, { lv: "zivs", ru: "рыба" }, { lv: "dārzeņi", ru: "овощи" }, 
-      { lv: "augļi", ru: "фрукты" }, { lv: "ēdiens", ru: "еда" }, { lv: "dzēriens", ru: "напиток" }, 
-      { lv: "brokastis", ru: "завтрак" }, { lv: "pusdienas", ru: "обед" }, { lv: "vakariņas", ru: "ужин" } 
-    ] }
-  ],
-  transport: [
-    { id: "t1", level: "B1", title: "Транспорт и дорога", items: [ 
-      { lv: "mašīna", ru: "машина" }, { lv: "autobuss", ru: "автобус" }, { lv: "vilciens", ru: "поезд" }, 
-      { lv: "lidmašīna", ru: "самолет" }, { lv: "ceļš", ru: "дорога" }, { lv: "satiksme", ru: "движение" }, 
-      { lv: "stūre", ru: "руль" }, { lv: "bremzes", ru: "тормоза" }, { lv: "degviela", ru: "топливо" }, { lv: "biļete", ru: "билет" } 
-    ] }
-  ],
-  work: [
-    { id: "w1", level: "B2", title: "Работа и учеба", items: [ 
-      { lv: "darbs", ru: "работа" }, { lv: "birojs", ru: "офис" }, { lv: "dators", ru: "компьютер" }, 
-      { lv: "sapulce", ru: "собрание" }, { lv: "kolēģis", ru: "коллега" }, { lv: "priekšnieks", ru: "начальник" }, 
-      { lv: "alga", ru: "зарплата" }, { lv: "atvaļinājums", ru: "отпуск" }, { lv: "amats", ru: "должность" } 
-    ] }
-  ],
-  idioms: [
-    { id: "i1", level: "B1", phrase: "Pūst pīlītes", literal: "Дуть уточек", meaning: "Говорить ерунду.", example: "Beidz pūst pīlītes!", ruEx: "Хватит нести чушь!", mnemonic: "Дуть на уточек — глупость." },
-    { id: "i2", level: "B1", phrase: "Kā pīlei ūdens", literal: "Как утке вода", meaning: "Быть равнодушным (как с гуся вода).", example: "Viņam tas ir kā pīlei ūdens.", ruEx: "Ему это как с гуся вода.", mnemonic: "Вода скатывается с утки." },
-    { id: "i3", level: "B2", phrase: "Sēdēt kā uz adatām", literal: "Сидеть как на иголках", meaning: "Сильно нервничать.", example: "Es sēžu kā uz adatām.", ruEx: "Я сижу как на иголках.", mnemonic: "Калька с русского." },
-    { id: "i4", level: "B2", phrase: "Palaist gar ausīm", literal: "Пропустить мимо ушей", meaning: "Игнорировать.", example: "Viņš palaida gar ausīm visus padomus.", ruEx: "Он пропустил мимо ушей все советы.", mnemonic: "Звук пролетает мимо." }
-  ],
-  quickfire: [
-    { q: "māja", a: "дом", w: ["квартира", "машина", "работа"] },
-    { q: "darbs", a: "работа", w: ["отдых", "учеба", "игра"] },
-    { q: "maize", a: "хлеб", w: ["молоко", "мясо", "вода"] },
-    { q: "ceļš", a: "дорога", w: ["мост", "лес", "поле"] },
-    { q: "piens", a: "молоко", w: ["сыр", "масло", "сок"] },
-    { q: "mašīna", a: "машина", w: ["поезд", "самолет", "велосипед"] },
-    { q: "ūdens", a: "вода", w: ["чай", "кофе", "пиво"] },
-    { q: "stūre", a: "руль", w: ["колесо", "дверь", "фара"] }
-  ],
-  wordleWords: ["DARBS", "LAIKS", "VIETA", "KAFIJA", "VALODA", "DRAUGS", "SKOLA", "PRATS", "SAULE", "LAPA"]
+// ============================================================
+// CONVERSATIONS BY LEVEL
+// ============================================================
+const LEVEL_INFO = {
+  B1: { emoji: "🌱", name: "B1 — Izdzīvošana", ruName: "B1 — Выживание",
+        desc: "Простые повседневные ситуации: знакомство, магазин, кафе, дорога. Конкретика, короткие фразы." },
+  B2: { emoji: "🌿", name: "B2 — Brīva saruna", ruName: "B2 — Свободная беседа",
+        desc: "Мнения, аргументация, абстрактные темы. Учись объяснять, сравнивать, спорить." },
+  C1: { emoji: "🌳", name: "C1 — Tečna runa", ruName: "C1 — Плавная речь",
+        desc: "Сложные темы, нюансы, формальный и профессиональный регистр. Беглость и точность." },
+  C2: { emoji: "🌲", name: "C2 — Dzimtā līmenī", ruName: "C2 — На уровне носителя",
+        desc: "Ирония, игра слов, литература, диалекты, тонкие культурные оттенки." }
 };
 
-// ЮМОРИСТИЧНЫЕ И ПОДДЕРЖИВАЮЩИЕ ФРАЗЫ
+const CONVERSATIONS = {
+  B1: [
+    {
+      id: "b1_meet", title: "Sveicieni un iepazīšanās", ruTitle: "Приветствия и знакомство",
+      register: "Neitrāls / draudzīgs",
+      situation: "Tu esi viesībās un gribi iepazīties ar jauniem cilvēkiem.",
+      ruSituation: "Ты на вечеринке и хочешь познакомиться с новыми людьми.",
+      phrases: [
+        { lv: "Labdien! / Sveiki! / Čau!", ru: "Добрый день! / Привет! / Привет (неформ.)" },
+        { lv: "Kā jums iet? / Kā tev iet?", ru: "Как у вас дела? / Как у тебя дела?" },
+        { lv: "Man iet labi, paldies!", ru: "У меня всё хорошо, спасибо!" },
+        { lv: "Kā jūs sauc? / Kā tevi sauc?", ru: "Как вас зовут? / Как тебя зовут?" },
+        { lv: "Mani sauc...", ru: "Меня зовут..." },
+        { lv: "Ļoti patīkami!", ru: "Очень приятно!" },
+        { lv: "No kurienes jūs esat?", ru: "Откуда вы?" },
+        { lv: "Es esmu no Krievijas / Latvijas.", ru: "Я из России / Латвии." }
+      ],
+      dialogue: [
+        { who: "A", lv: "Labdien! Vai es drīkstu pievienoties?", ru: "Добрый день! Могу я присоединиться?" },
+        { who: "B", lv: "Protams, lūdzu! Mani sauc Anna. Un jūs?", ru: "Конечно, пожалуйста! Меня зовут Анна. А вас?" },
+        { who: "A", lv: "Ļoti patīkami! Es esmu Svetlana.", ru: "Очень приятно! Я Светлана." },
+        { who: "B", lv: "No kurienes jūs esat, Svetlana?", ru: "Откуда вы, Светлана?" },
+        { who: "A", lv: "Es esmu no Krievijas, bet tagad dzīvoju Rīgā.", ru: "Я из России, но сейчас живу в Риге." },
+        { who: "B", lv: "Cik ilgi jūs jau dzīvojat Rīgā?", ru: "Как давно вы уже живёте в Риге?" },
+        { who: "A", lv: "Apmēram gadu. Es mācos latviešu valodu.", ru: "Около года. Я учу латышский." },
+        { who: "B", lv: "Lieliski! Jūsu latviešu valoda jau ir ļoti laba!", ru: "Отлично! Ваш латышский уже очень хорош!" }
+      ],
+      prompts: [
+        { lv: "Iepazīsties ar jaunu cilvēku un pastāsti par sevi 30 sekundes.", ru: "Познакомься с новым человеком и расскажи о себе 30 секунд." },
+        { lv: "Pajautā jaunam cilvēkam, no kurienes viņš ir un ko viņš dara.", ru: "Спроси нового знакомого, откуда он и чем занимается." },
+        { lv: "Pastāsti, kāpēc tu mācies latviešu valodu.", ru: "Расскажи, почему ты учишь латышский." }
+      ]
+    },
+    {
+      id: "b1_cafe", title: "Kafejnīcā", ruTitle: "В кафе",
+      register: "Formāls / pieklājīgs",
+      situation: "Tu esi kafejnīcā un gribi pasūtīt kafiju un kaut ko ēst.",
+      ruSituation: "Ты в кафе и хочешь заказать кофе и что-нибудь поесть.",
+      phrases: [
+        { lv: "Es gribētu...", ru: "Я хотел(а) бы..." },
+        { lv: "Vienu kafiju, lūdzu.", ru: "Один кофе, пожалуйста." },
+        { lv: "Ar pienu / bez piena", ru: "С молоком / без молока" },
+        { lv: "Bez cukura, lūdzu.", ru: "Без сахара, пожалуйста." },
+        { lv: "Ko jūs iesakāt?", ru: "Что вы рекомендуете?" },
+        { lv: "Cik tas maksā?", ru: "Сколько это стоит?" },
+        { lv: "Rēķinu, lūdzu.", ru: "Счёт, пожалуйста." },
+        { lv: "Vai varu maksāt ar karti?", ru: "Могу я оплатить картой?" }
+      ],
+      dialogue: [
+        { who: "A", lv: "Labdien! Ko jūs vēlaties?", ru: "Добрый день! Что желаете?" },
+        { who: "B", lv: "Labdien! Es gribētu vienu kafiju ar pienu, lūdzu.", ru: "Здравствуйте! Я бы хотела один кофе с молоком." },
+        { who: "A", lv: "Vai vēlaties arī kaut ko ēst?", ru: "Хотите также что-нибудь поесть?" },
+        { who: "B", lv: "Ko jūs iesakāt?", ru: "Что вы рекомендуете?" },
+        { who: "A", lv: "Mūsu šokolādes kūka ir ļoti garšīga.", ru: "Наш шоколадный торт очень вкусный." },
+        { who: "B", lv: "Labi, vienu kūkas gabalu, lūdzu.", ru: "Хорошо, один кусок торта, пожалуйста." },
+        { who: "A", lv: "Vai vēl kaut ko?", ru: "Что-нибудь ещё?" },
+        { who: "B", lv: "Nē, paldies. Cik tas kopā maksā?", ru: "Нет, спасибо. Сколько это всего стоит?" },
+        { who: "A", lv: "Četri eiro un piecdesmit centi.", ru: "Четыре евро пятьдесят центов." },
+        { who: "B", lv: "Lūdzu. Vai varu maksāt ar karti?", ru: "Пожалуйста. Могу я оплатить картой?" }
+      ],
+      prompts: [
+        { lv: "Pasūti sev kafiju un brokastis. Paskaidro, kādu kafiju tu gribi.", ru: "Закажи себе кофе и завтрак. Объясни, какой кофе ты хочешь." },
+        { lv: "Pajautā viesmīlim par dienas piedāvājumu.", ru: "Спроси у официанта о предложении дня." },
+        { lv: "Lūdz rēķinu un pajautā, vai var maksāt ar karti.", ru: "Попроси счёт и спроси, можно ли оплатить картой." }
+      ]
+    },
+    {
+      id: "b1_shop", title: "Veikalā", ruTitle: "В магазине",
+      register: "Neitrāls",
+      situation: "Tu esi pārtikas veikalā un meklē konkrētus produktus.",
+      ruSituation: "Ты в продуктовом магазине и ищешь конкретные продукты.",
+      phrases: [
+        { lv: "Atvainojiet, kur atrodas...?", ru: "Извините, где находится...?" },
+        { lv: "Es meklēju...", ru: "Я ищу..." },
+        { lv: "Vai jums ir...?", ru: "У вас есть...?" },
+        { lv: "Cik tas maksā?", ru: "Сколько это стоит?" },
+        { lv: "Pus kilogramu, lūdzu.", ru: "Полкило, пожалуйста." },
+        { lv: "Es ņemšu šo.", ru: "Я возьму это." },
+        { lv: "Vai ir kādas atlaides?", ru: "Есть какие-нибудь скидки?" },
+        { lv: "Kur ir kase?", ru: "Где касса?" }
+      ],
+      dialogue: [
+        { who: "A", lv: "Atvainojiet, vai jūs varat man palīdzēt?", ru: "Извините, вы можете мне помочь?" },
+        { who: "B", lv: "Protams! Ko jūs meklējat?", ru: "Конечно! Что вы ищете?" },
+        { who: "A", lv: "Es meklēju svaigu maizi. Kur tā atrodas?", ru: "Я ищу свежий хлеб. Где он находится?" },
+        { who: "B", lv: "Maize ir tur, aiz dārzeņu nodaļas, labajā pusē.", ru: "Хлеб вон там, за овощным отделом, справа." },
+        { who: "A", lv: "Paldies! Un vai jums ir vietējie sieri?", ru: "Спасибо! А у вас есть местные сыры?" },
+        { who: "B", lv: "Jā, mums ir lieliska izvēle. Vai vēlaties kādu konkrētu?", ru: "Да, у нас отличный выбор. Хотите какой-то конкретный?" },
+        { who: "A", lv: "Es ņemšu to Jāņu sieru. Cik tas maksā?", ru: "Я возьму тот сыр Яниса. Сколько он стоит?" },
+        { who: "B", lv: "Astoņi eiro kilogramā. Cik daudz jums vajag?", ru: "Восемь евро за килограмм. Сколько вам нужно?" },
+        { who: "A", lv: "Pus kilogramu, lūdzu.", ru: "Полкило, пожалуйста." }
+      ],
+      prompts: [
+        { lv: "Pajautā pārdevējam, kur atrodas piena produkti.", ru: "Спроси у продавца, где находятся молочные продукты." },
+        { lv: "Nopērc 300 gramus siera un pajautā cenu.", ru: "Купи 300 граммов сыра и спроси цену." },
+        { lv: "Pajautā, vai veikalā ir atlaides šodien.", ru: "Спроси, есть ли сегодня скидки в магазине." }
+      ]
+    },
+    {
+      id: "b1_direction", title: "Kā nokļūt līdz...?", ruTitle: "Как добраться?",
+      register: "Pieklājīgs",
+      situation: "Tu esi nepazīstamā pilsētā un meklē ceļu uz konkrētu vietu.",
+      ruSituation: "Ты в незнакомом городе и ищешь дорогу к конкретному месту.",
+      phrases: [
+        { lv: "Atvainojiet, kur atrodas...?", ru: "Извините, где находится...?" },
+        { lv: "Kā es varu nokļūt līdz...?", ru: "Как я могу добраться до...?" },
+        { lv: "Vai tas ir tālu?", ru: "Это далеко?" },
+        { lv: "Kur ir tuvākā autobusa pietura?", ru: "Где ближайшая автобусная остановка?" },
+        { lv: "Ejiet taisni.", ru: "Идите прямо." },
+        { lv: "Nogriezieties pa labi / pa kreisi.", ru: "Поверните направо / налево." },
+        { lv: "Tas ir netālu.", ru: "Это недалеко." },
+        { lv: "Es esmu apmaldījies.", ru: "Я заблудился." }
+      ],
+      dialogue: [
+        { who: "A", lv: "Atvainojiet, es esmu apmaldījies. Vai varat man palīdzēt?", ru: "Извините, я заблудился. Можете мне помочь?" },
+        { who: "B", lv: "Protams! Kur jūs gribat nokļūt?", ru: "Конечно! Куда вы хотите добраться?" },
+        { who: "A", lv: "Es meklēju Vecrīgu. Kā es varu tur nokļūt?", ru: "Я ищу Старую Ригу. Как я могу туда добраться?" },
+        { who: "B", lv: "Ejiet taisni pa šo ielu apmēram piecas minūtes, tad nogriezieties pa kreisi.", ru: "Идите прямо по этой улице около пяти минут, затем поверните налево." },
+        { who: "A", lv: "Vai tas ir tālu no šejienes?", ru: "Это далеко отсюда?" },
+        { who: "B", lv: "Nē, tas ir netālu. Apmēram desmit minūtes kājām.", ru: "Нет, это недалеко. Около десяти минут пешком." },
+        { who: "A", lv: "Lieliski. Un vai tur ir arī tuvākā autobusa pietura?", ru: "Отлично. А там есть также ближайшая автобусная остановка?" },
+        { who: "B", lv: "Jā, tā ir tieši pie Vecrīgas ieejas.", ru: "Да, она прямо у входа в Старую Ригу." },
+        { who: "A", lv: "Liels paldies par palīdzību!", ru: "Большое спасибо за помощь!" }
+      ],
+      prompts: [
+        { lv: "Pajautā, kā nokļūt līdz tuvākajai aptiekai.", ru: "Спроси, как добраться до ближайшей аптеки." },
+        { lv: "Pajautā, vai līdz centram var aizbraukt ar tramvaju.", ru: "Спроси, можно ли доехать до центра на трамвае." },
+        { lv: "Pajautā, cik ilgi jāiet kājām līdz muzejam.", ru: "Спроси, сколько идти пешком до музея." }
+      ]
+    }
+  ],
+
+  B2: [
+    {
+      id: "b2_work", title: "Darbs un darba un dzīves līdzsvars", ruTitle: "Работа и баланс",
+      register: "Neitrāls / sarunvalodas",
+      situation: "Tu runā ar draugu par darbu, stresu un darba un dzīves līdzsvaru.",
+      ruSituation: "Ты говоришь с другом о работе, стрессе и балансе между работой и жизнью.",
+      phrases: [
+        { lv: "Manuprāt, ...", ru: "По моему мнению, ..." },
+        { lv: "No vienas puses..., no otras puses...", ru: "С одной стороны..., с другой стороны..." },
+        { lv: "Es uzskatu, ka...", ru: "Я считаю, что..." },
+        { lv: "Darba un dzīves līdzsvars", ru: "Баланс между работой и жизнью" },
+        { lv: "Strādāt attālināti", ru: "Работать удалённо" },
+        { lv: "Man pietrūkst laika", ru: "Мне не хватает времени" },
+        { lv: "Es gribētu mainīt darbu", ru: "Я хотел(а) бы сменить работу" },
+        { lv: "Tas ir liels izaicinājums", ru: "Это большой вызов" }
+      ],
+      dialogue: [
+        { who: "A", lv: "Kā tev iet darbā pēdējā laikā?", ru: "Как у тебя на работе в последнее время?" },
+        { who: "B", lv: "Zini, godīgi sakot, esmu ļoti noguris. Man ir pārāk daudz projektu.", ru: "Знаешь, честно говоря, я очень устал. У меня слишком много проектов." },
+        { who: "A", lv: "Es tevi saprotu. Manuprāt, tā ir mūsdienu lielākā problēma.", ru: "Я тебя понимаю. По-моему, это главная проблема современности." },
+        { who: "B", lv: "Tieši tā. No vienas puses, man patīk mans darbs, bet no otras puses, es gribu vairāk brīvā laika.", ru: "Именно так. С одной стороны, мне нравится моя работа, но с другой — я хочу больше свободного времени." },
+        { who: "A", lv: "Vai tu esi domājis par darba maiņu?", ru: "Ты думал о смене работы?" },
+        { who: "B", lv: "Jā, bet tas nav tik vienkārši. Man vajag atrast kaut ko ar labāku grafiku un līdzīgu algu.", ru: "Да, но это не так просто. Мне нужно найти что-то с лучшим графиком и похожей зарплатой." },
+        { who: "A", lv: "Es uzskatu, ka tu esi pelnījis labāku darba un dzīves līdzsvaru.", ru: "Я считаю, что ты заслуживаешь лучшего баланса между работой и жизнью." },
+        { who: "B", lv: "Paldies! Es ceru, ka drīz atradīšu pareizo risinājumu.", ru: "Спасибо! Надеюсь, что скоро найду правильное решение." }
+      ],
+      prompts: [
+        { lv: "Pastāsti, kāds ir tavs ideālais darba un dzīves līdzsvars.", ru: "Расскажи, каков твой идеальный баланс между работой и жизнью." },
+        { lv: "Argumentē, vai attālinātais darbs ir labāks par darbu birojā.", ru: "Аргументируй, лучше ли удалённая работа, чем работа в офисе." },
+        { lv: "Apraksti situāciju, kad tu biji ļoti stresā, un kā tu to risināji.", ru: "Опиши ситуацию, когда ты был в сильном стрессе, и как ты её решал." }
+      ]
+    },
+    {
+      id: "b2_hobby", title: "Brīvais laiks un hobiji", ruTitle: "Свободное время и хобби",
+      register: "Sarunvalodas",
+      situation: "Tu runā ar draugu par hobijiem, brīvo laiku un to, kā atpūsties.",
+      ruSituation: "Ты говоришь с другом о хобби, свободном времени и о том, как отдыхать.",
+      phrases: [
+        { lv: "Man patīk... / Man nepatīk...", ru: "Мне нравится... / Мне не нравится..." },
+        { lv: "Brīvajā laikā es...", ru: "В свободное время я..." },
+        { lv: "Es aizraujos ar...", ru: "Я увлекаюсь..." },
+        { lv: "Tas man palīdz atpūsties", ru: "Это помогает мне отдохнуть" },
+        { lv: "Es gribētu pamēģināt...", ru: "Я хотел(а) бы попробовать..." },
+        { lv: "Cik bieži tu...?", ru: "Как часто ты...?" },
+        { lv: "Tas ir lielisks veids, kā...", ru: "Это отличный способ..." }
+      ],
+      dialogue: [
+        { who: "A", lv: "Ko tu parasti dari brīvajā laikā?", ru: "Что ты обычно делаешь в свободное время?" },
+        { who: "B", lv: "Man ļoti patīk lasīt grāmatas un iet pārgājienos. Bet tev?", ru: "Мне очень нравится читать книги и ходить в походы. А тебе?" },
+        { who: "A", lv: "Es aizraujos ar fotografēšanu. Tas man palīdz atpūsties pēc darba.", ru: "Я увлекаюсь фотографией. Это помогает мне отдохнуть после работы." },
+        { who: "B", lv: "Cik interesanti! Cik bieži tu fotogrāfē?", ru: "Как интересно! Как часто ты фотографируешь?" },
+        { who: "A", lv: "Apmēram reizi nedēļā. Bieži eju pastaigā pa Vecrīgu un meklēju skaistus skatus.", ru: "Примерно раз в неделю. Часто гуляю по Старой Риге и ищу красивые виды." },
+        { who: "B", lv: "Tas ir lielisks veids, kā apvienot atpūtu ar radošumu.", ru: "Это отличный способ совместить отдых с творчеством." },
+        { who: "A", lv: "Jā! Un es gribētu pamēģināt arī keramiku. Vai tu esi ko tādu darījis?", ru: "Да! И я хотел бы попробовать также керамику. Ты делал что-то такое?" },
+        { who: "B", lv: "Nē, bet man šķiet, ka tas būtu ļoti relaksējoši. Varētu pamēģināt kopā!", ru: "Нет, но мне кажется, это было бы очень расслабляюще. Могли бы попробовать вместе!" }
+      ],
+      prompts: [
+        { lv: "Pastāsti par savu mīļāko hobiju un kāpēc tas tev patīk.", ru: "Расскажи о своём любимом хобби и почему оно тебе нравится." },
+        { lv: "Pajautā draugam, ko viņš dara brīvajā laikā, un pajautā 'kāpēc'.", ru: "Спроси друга, что он делает в свободное время, и спроси «почему»." },
+        { lv: "Piedāvā draugam kopīgu aktivitāti nedēļas nogalē.", ru: "Предложи другу совместное занятие на выходные." }
+      ]
+    },
+    {
+      id: "b2_travel", title: "Ceļojumi un kultūra", ruTitle: "Путешествия и культура",
+      register: "Neitrāls",
+      situation: "Tu stāsti par ceļojumiem un uzdod jautājumus par citu kultūru pieredzi.",
+      ruSituation: "Ты рассказываешь о путешествиях и задаёшь вопросы об опыте других культур.",
+      phrases: [
+        { lv: "Es nesen biju...", ru: "Я недавно был(а)..." },
+        { lv: "Man ļoti patika...", ru: "Мне очень понравилось..." },
+        { lv: "Kas tevi pārsteidza?", ru: "Что тебя удивило?" },
+        { lv: "Kultūras atšķirības", ru: "Культурные различия" },
+        { lv: "Es ieteiktu apmeklēt...", ru: "Я бы рекомендовал(а) посетить..." },
+        { lv: "Tas bija neaizmirstama pieredze", ru: "Это был незабываемый опыт" },
+        { lv: "Man šķiet, ka...", ru: "Мне кажется, что..." }
+      ],
+      dialogue: [
+        { who: "A", lv: "Es dzirdēju, ka tu nesen ceļoji. Kur tu biji?", ru: "Я слышала, что ты недавно путешествовал. Где ты был?" },
+        { who: "B", lv: "Es biju Portugālē divas nedēļas. Tā bija neaizmirstama pieredze!", ru: "Я был в Португалии две недели. Это был незабываемый опыт!" },
+        { who: "A", lv: "Cik lieliski! Kas tevi tur pārsteidza visvairāk?", ru: "Как здорово! Что тебя там удивило больше всего?" },
+        { who: "B", lv: "Man šķiet, ka visvairāk mani pārsteidza cilvēku atvērtība un tas, cik svarīga viņiem ir ģimene.", ru: "Мне кажется, больше всего меня удивила открытость людей и то, насколько важна для них семья." },
+        { who: "A", lv: "Tas ir interesanti. Un kā ar ēdienu? Vai tu pamēģināji vietējos ēdienus?", ru: "Это интересно. А как с едой? Ты пробовал местные блюда?" },
+        { who: "B", lv: "Protams! Es ēdu daudz jūras velšu. Es ieteiktu ikvienam apmeklēt Lisabonu.", ru: "Конечно! Я ел много морепродуктов. Я бы рекомендовал каждому посетить Лиссабон." },
+        { who: "A", lv: "Es arī gribētu aizbraukt. Kāda ir labākā sezona ceļošanai uz Portugāli?", ru: "Я тоже хотела бы поехать. Какой лучший сезон для поездки в Португалию?" },
+        { who: "B", lv: "Pavasarī ir ideāli – nav pārāk karsts un ir mazāk tūristu.", ru: "Весной идеально — не слишком жарко и меньше туристов." }
+      ],
+      prompts: [
+        { lv: "Pastāsti par savu neaizmirstamāko ceļojumu.", ru: "Расскажи о своём самом незабываемом путешествии." },
+        { lv: "Salīdzini divas valstis, kurās tu esi bijis. Kādas ir atšķirības?", ru: "Сравни две страны, в которых ты был. В чём различия?" },
+        { lv: "Iesaki draugam, kurp doties brīvdienās, un pamato savu izvēli.", ru: "Посоветуй другу, куда поехать в отпуск, и обоснуй свой выбор." }
+      ]
+    },
+    {
+      id: "b2_tech", title: "Tehnoloģijas mūsu dzīvē", ruTitle: "Технологии в нашей жизни",
+      register: "Neitrāls / diskusiju",
+      situation: "Tu diskutē par tehnoloģiju ietekmi uz sabiedrību un ikdienu.",
+      ruSituation: "Ты обсуждаешь влияние технологий на общество и повседневную жизнь.",
+      phrases: [
+        { lv: "Tehnoloģijas maina mūsu dzīvi", ru: "Технологии меняют нашу жизнь" },
+        { lv: "No vienas puses..., no otras puses...", ru: "С одной стороны..., с другой стороны..." },
+        { lv: "Manuprāt, tas ir bīstami", ru: "По-моему, это опасно" },
+        { lv: "Mākslīgais intelekts", ru: "Искусственный интеллект" },
+        { lv: "Sociālie mediji", ru: "Социальные сети" },
+        { lv: "Tas ietekmē mūsu veselību", ru: "Это влияет на наше здоровье" },
+        { lv: "Es piekrītu / nepiekrītu", ru: "Я согласен / не согласен" }
+      ],
+      dialogue: [
+        { who: "A", lv: "Ko tu domā par mākslīgo intelektu? Vai tas mūs aizvietos?", ru: "Что ты думаешь об искусственном интеллекте? Он нас заменит?" },
+        { who: "B", lv: "Manuprāt, tas noteikti mainīs daudzas profesijas, bet es neuzskatu, ka tas pilnībā aizvietos cilvēkus.", ru: "По-моему, он точно изменит многие профессии, но я не считаю, что он полностью заменит людей." },
+        { who: "A", lv: "Kāpēc tu tā domā?", ru: "Почему ты так думаешь?" },
+        { who: "B", lv: "Tāpēc, ka cilvēkiem ir emocijas, radošums un empātija. No vienas puses, AI ir ļoti efektīvs, bet no otras puses, tam trūkst cilvēciskuma.", ru: "Потому что у людей есть эмоции, творчество и эмпатия. С одной стороны, ИИ очень эффективен, но с другой — ему не хватает человечности." },
+        { who: "A", lv: "Es piekrītu. Bet vai tu neuztraucies par sociālajiem medijiem?", ru: "Я согласна. Но тебя не беспокоят социальные сети?" },
+        { who: "B", lv: "Protams, mani uztrauc. Tie ietekmē mūsu garīgo veselību, īpaši jauniešiem.", ru: "Конечно, меня беспокоят. Они влияют на наше психическое здоровье, особенно у молодёжи." },
+        { who: "A", lv: "Kā tu domā, ko mēs varam darīt?", ru: "Как ты думаешь, что мы можем сделать?" },
+        { who: "B", lv: "Mums jāmācās lietot tehnoloģijas apzināti. Nevis tās mūs, bet mēs tās.", ru: "Мы должны учиться использовать технологии осознанно. Не они нас, а мы их." }
+      ],
+      prompts: [
+        { lv: "Argumentē, vai sociālie mediji ir vairāk noderīgi vai kaitīgi.", ru: "Аргументируй, полезны или вредны социальные сети больше." },
+        { lv: "Pastāsti, kā tehnoloģijas ir mainījušas tavu ikdienu pēdējo 5 gadu laikā.", ru: "Расскажи, как технологии изменили твою повседневную жизнь за последние 5 лет." },
+        { lv: "Paskaidro, kāpēc tu piekrīti vai nepiekrīti, ka bērniem jālieto viedtālruņi.", ru: "Объясни, почему ты согласен или не согласен с тем, что детям нужно пользоваться смартфонами." }
+      ]
+    }
+  ],
+
+  C1: [
+    {
+      id: "c1_interview", title: "Darba intervija", ruTitle: "Собеседование на работу",
+      register: "Formāls / profesionāls",
+      situation: "Tu esi darba intervijā uz vadītāja amatu starptautiskā uzņēmumā.",
+      ruSituation: "Ты на собеседовании на руководящую должность в международной компании.",
+      phrases: [
+        { lv: "Pastāstiet, lūdzu, par sevi.", ru: "Расскажите, пожалуйста, о себе." },
+        { lv: "Mana lielākā priekšrocība ir...", ru: "Моё главное преимущество..." },
+        { lv: "Pēc manas pieredzes...", ru: "По моему опыту..." },
+        { lv: "Es protu strādāt komandā", ru: "Я умею работать в команде" },
+        { lv: "Es labprāt pieņemtu šo izaicinājumu", ru: "Я с радостью принял(а) бы этот вызов" },
+        { lv: "Es vēlētos uzzināt vairāk par...", ru: "Я хотел(а) бы узнать больше о..." },
+        { lv: "Kā jūs redzat sevi pēc pieciem gadiem?", ru: "Как вы видите себя через пять лет?" }
+      ],
+      dialogue: [
+        { who: "A", lv: "Labdien, Svetlana! Paldies, ka atnācāt. Pastāstiet, lūdzu, par savu pieredzi.", ru: "Добрый день, Светлана! Спасибо, что пришли. Расскажите, пожалуйста, о своём опыте." },
+        { who: "B", lv: "Labdien! Paldies par iespēju. Esmu strādājusi projektu vadībā septiņus gadus, pēdējos trīs – starptautiskā uzņēmumā.", ru: "Здравствуйте! Спасибо за возможность. Я работаю в управлении проектами семь лет, последние три — в международной компании." },
+        { who: "A", lv: "Kādas ir jūsu lielākās priekšrocības?", ru: "Каковы ваши главные преимущества?" },
+        { who: "B", lv: "Mana lielākā priekšrocība ir spēja vienlaikus domāt stratēģiski un rūpēties par komandas labsajūtu. Pēc manas pieredzes, veiksmīga projekta pamatā ir cilvēki.", ru: "Моё главное преимущество — способность одновременно мыслить стратегически и заботиться о благополучии команды. По моему опыту, основа успешного проекта — люди." },
+        { who: "A", lv: "Interesanti. Kā jūs risinātu konfliktu komandā?", ru: "Интересно. Как бы вы решали конфликт в команде?" },
+        { who: "B", lv: "Es uzskatu, ka pirmais solis ir uzklausīt visas puses bez aizspriedumiem. Pēc tam mēs kopīgi meklējam risinājumu, kas apmierina visus.", ru: "Я считаю, что первый шаг — выслушать все стороны без предвзятости. Затем мы вместе ищем решение, которое устраивает всех." },
+        { who: "A", lv: "Kā jūs redzat sevi pēc pieciem gadiem?", ru: "Как вы видите себя через пять лет?" },
+        { who: "B", lv: "Es vēlētos attīstīties šajā uzņēmumā un vadīt lielāku komandu. Es labprāt pieņemtu šo izaicinājumu un dotu savu ieguldījumu uzņēmuma izaugsmē.", ru: "Я хотела бы развиваться в этой компании и руководить большей командой. Я с радостью приняла бы этот вызов и внесла свой вклад в рост компании." },
+        { who: "A", lv: "Vai jums ir kādi jautājumi mums?", ru: "У вас есть к нам вопросы?" },
+        { who: "B", lv: "Jā, es vēlētos uzzināt vairāk par komandas struktūru un uzņēmuma vērtībām.", ru: "Да, я хотела бы узнать больше о структуре команды и ценностях компании." }
+      ],
+      prompts: [
+        { lv: "Ievadi sevi kā kandidātu 60 sekunžu laikā.", ru: "Представь себя как кандидата за 60 секунд." },
+        { lv: "Atbildi uz jautājumu: 'Kāda ir jūsu lielākā vājība?' un paskaidro, kā jūs to risinat.", ru: "Ответь на вопрос: «Каков ваш главный недостаток?» и объясни, как ты его решаешь." },
+        { lv: "Uzdod trīs jautājumus darba devējam par uzņēmumu.", ru: "Задай три вопроса работодателю о компании." }
+      ]
+    },
+    {
+      id: "c1_education", title: "Diskusija par izglītību", ruTitle: "Дискуссия об образовании",
+      register: "Formāls / akadēmisks",
+      situation: "Tu piedalies diskusijā par izglītības sistēmas nākotni.",
+      ruSituation: "Ты участвуешь в дискуссии о будущем системы образования.",
+      phrases: [
+        { lv: "Es vēlos norādīt, ka...", ru: "Я хочу отметить, что..." },
+        { lv: "No otras puses, varētu iebilst, ka...", ru: "С другой стороны, можно возразить, что..." },
+        { lv: "Ir svarīgi ņemt vērā...", ru: "Важно учитывать..." },
+        { lv: "Tas nav tik vienkārši, kā šķiet", ru: "Это не так просто, как кажется" },
+        { lv: "Manā skatījumā...", ru: "С моей точки зрения..." },
+        { lv: "Tas ir pretrunīgi", ru: "Это противоречиво" },
+        { lv: "Būtībā jautājums ir par...", ru: "По сути, вопрос о..." }
+      ],
+      dialogue: [
+        { who: "A", lv: "Kā jūs vērtējat mūsdienu izglītības sistēmu?", ru: "Как вы оцениваете современную систему образования?" },
+        { who: "B", lv: "Es vēlos norādīt, ka sistēma joprojām balstās uz zināšanu iegaumēšanu, nevis uz kritiskās domāšanas attīstību.", ru: "Я хочу отметить, что система всё ещё основана на запоминании знаний, а не на развитии критического мышления." },
+        { who: "A", lv: "Bet vai bez pamatzināšanām ir iespējams attīstīt kritisko domāšanu?", ru: "Но разве без базовых знаний можно развивать критическое мышление?" },
+        { who: "B", lv: "No otras puses, varētu iebilst, ka zināšanas mūsdienās ir pieejamas vienā klikšķī. Būtībā jautājums ir par to, kā mēs izmantojam šo informāciju.", ru: "С другой стороны, можно возразить, что знания сегодня доступны в один клик. По сути, вопрос в том, как мы используем эту информацию." },
+        { who: "A", lv: "Manā skatījumā, skolotāja loma mūsdienās ir mainījusies. Viņš vairs nav informācijas avots, bet gan virzītājs.", ru: "С моей точки зрения, роль учителя сегодня изменилась. Он больше не источник информации, а наставник." },
+        { who: "B", lv: "Pilnīgi piekrītu. Ir svarīgi ņemt vērā, ka bērniem jāmācās ne tikai fakti, bet arī sadarbība un empātija.", ru: "Полностью согласен. Важно учитывать, что детям нужно учиться не только фактам, но и сотрудничеству и эмпатии." },
+        { who: "A", lv: "Tomēr tas nav tik vienkārši, kā šķiet. Skolotājiem trūkst laika un resursu.", ru: "Однако это не так просто, как кажется. Учителям не хватает времени и ресурсов." },
+        { who: "B", lv: "Tas ir pretrunīgi – mēs gribam inovācijas, bet neesam gatavi ieguldīt līdzekļus. Tas ir galvenais izaicinājums.", ru: "Это противоречиво — мы хотим инноваций, но не готовы вкладывать средства. Это главный вызов." }
+      ],
+      prompts: [
+        { lv: "Argumentē, vai eksāmeni ir labākais veids, kā novērtēt skolēnu zināšanas.", ru: "Аргументируй, экзамены ли — лучший способ оценить знания учеников." },
+        { lv: "Salīdzini izglītības sistēmu Latvijā un citā valstī, ko tu pazīsti.", ru: "Сравни систему образования в Латвии и другой стране, которую ты знаешь." },
+        { lv: "Piedāvā vienu konkrētu reformu, kas uzlabotu izglītību, un pamato to.", ru: "Предложи одну конкретную реформу, которая улучшила бы образование, и обоснуй её." }
+      ]
+    },
+    {
+      id: "c1_ecology", title: "Ekoloģija un ilgtspēja", ruTitle: "Экология и устойчивость",
+      register: "Formāls / diskusiju",
+      situation: "Tu diskutē par vides aizsardzību un ilgtspējīgu attīstību.",
+      ruSituation: "Ты обсуждаешь защиту окружающей среды и устойчивое развитие.",
+      phrases: [
+        { lv: "Ilgtspējīga attīstība", ru: "Устойчивое развитие" },
+        { lv: "Oglekļa pēda", ru: "Углеродный след" },
+        { lv: "Atjaunojamā enerģija", ru: "Возобновляемая энергия" },
+        { lv: "Mēs nedrīkstam ignorēt...", ru: "Мы не должны игнорировать..." },
+        { lv: "Ir jārīkojas nekavējoties", ru: "Нужно действовать немедленно" },
+        { lv: "Tas prasa sistēmiskas pārmaiņas", ru: "Это требует системных изменений" },
+        { lv: "Katram ir sava atbildība", ru: "У каждого своя ответственность" }
+      ],
+      dialogue: [
+        { who: "A", lv: "Kā jūs vērtējat klimata krīzi? Vai mēs reaģējam pietiekami ātri?", ru: "Как вы оцениваете климатический кризис? Реагируем ли мы достаточно быстро?" },
+        { who: "B", lv: "Atklāti sakot, nē. Mēs nedrīkstam ignorēt zinātniskos datus. Ir jārīkojas nekavējoties.", ru: "Честно говоря, нет. Мы не должны игнорировать научные данные. Нужно действовать немедленно." },
+        { who: "A", lv: "Bet vai atsevišķas valsts rīcība var kaut ko mainīt?", ru: "Но может ли действие отдельной страны что-то изменить?" },
+        { who: "B", lv: "Tas prasa sistēmiskas pārmaiņas – ne tikai valstu, bet arī uzņēmumu un indivīdu līmenī. Katram ir sava atbildība.", ru: "Это требует системных изменений — не только на уровне стран, но и компаний и отдельных людей. У каждого своя ответственность." },
+        { who: "A", lv: "Vai jūs domājat, ka ilgtspējīga attīstība un ekonomiskā izaugsme ir savienojamas?", ru: "Вы думаете, устойчивое развитие и экономический рост совместимы?" },
+        { who: "B", lv: "Ilgtermiņā – jā. Īstermiņā – tas ir izaicinājums. Bet atjaunojamā enerģija jau pierāda, ka tas ir iespējams.", ru: "В долгосрочной перспективе — да. В краткосрочной — это вызов. Но возобновляемая энергия уже доказывает, что это возможно." },
+        { who: "A", lv: "Ko mēs kā sabiedrība varam darīt vairāk?", ru: "Что мы как общество можем делать больше?" },
+        { who: "B", lv: "Pirmkārt, izglītot cilvēkus. Otrkārt, atbalstīt ilgtspējīgus uzņēmumus. Treškārt, prasīt politiķiem konkrētus lēmumus.", ru: "Во-первых, образовывать людей. Во-вторых, поддерживать устойчивые компании. В-третьих, требовать от политиков конкретных решений." }
+      ],
+      prompts: [
+        { lv: "Argumentē, vai indivīda rīcība var ietekmēt klimata krīzi.", ru: "Аргументируй, может ли действие отдельного человека повлиять на климатический кризис." },
+        { lv: "Iesaki trīs konkrētus soļus, ko Latvija varētu spert ilgtspējas virzienā.", ru: "Предложи три конкретных шага, которые Латвия могла бы сделать в направлении устойчивости." },
+        { lv: "Salīdzini divas pieejas: individuālā atbildība vs. valsts regulējums.", ru: "Сравни два подхода: индивидуальная ответственность vs государственное регулирование." }
+      ]
+    },
+    {
+      id: "c1_culture", title: "Kultūru atšķirības", ruTitle: "Культурные различия",
+      register: "Formāls / starpkultūru",
+      situation: "Tu runā par kultūru atšķirībām starp Latviju, Krieviju un citām valstīm.",
+      ruSituation: "Ты говоришь о культурных различиях между Латвией, Россией и другими странами.",
+      phrases: [
+        { lv: "Man šķiet interesanti, ka...", ru: "Мне кажется интересным, что..." },
+        { lv: "Atšķirībā no...", ru: "В отличие от..." },
+        { lv: "Latviešiem raksturīgi...", ru: "Латышам свойственно..." },
+        { lv: "Tas varētu būt saistīts ar vēsturi", ru: "Это может быть связано с историей" },
+        { lv: "Es to uztveru kā...", ru: "Я это воспринимаю как..." },
+        { lv: "Ir viegli pamanīt, ka...", ru: "Легко заметить, что..." },
+        { lv: "Tas prasa kultūras izpratni", ru: "Это требует понимания культуры" }
+      ],
+      dialogue: [
+        { who: "A", lv: "Kādas ir galvenās kultūras atšķirības, ko tu esi pamanījusi dzīvojot Latvijā?", ru: "Каковы главные культурные различия, которые ты заметила, живя в Латвии?" },
+        { who: "B", lv: "Ir viegli pamanīt, ka latvieši sākumā šķiet atturīgāki nekā, piemēram, krievi vai dienvidnieki.", ru: "Легко заметить, что латыши поначалу кажутся более сдержанными, чем, например, русские или южане." },
+        { who: "A", lv: "Bet vai tas nozīmē, ka viņi ir mazāk draudzīgi?", ru: "Но означает ли это, что они менее дружелюбны?" },
+        { who: "B", lv: "Nē, es to uztveru kā citu komunikācijas stilu. Atšķirībā no atvērtākas kultūras, latvieši vispirms novēro un tikai pēc tam atveras.", ru: "Нет, я воспринимаю это как другой стиль общения. В отличие от более открытой культуры, латыши сначала наблюдают и только потом открываются." },
+        { who: "A", lv: "Tas varētu būt saistīts ar vēsturi un klimatu.", ru: "Это может быть связано с историей и климатом." },
+        { who: "B", lv: "Pilnīgi iespējams. Latviešiem raksturīga arī cieša saikne ar dabu un tradīcijām – Jāņi, dziesmas, folkloras bagātība.", ru: "Вполне возможно. Латышам свойственна также тесная связь с природой и традициями — Янис, песни, богатство фольклора." },
+        { who: "A", lv: "Vai tu esi pamanījusi atšķirības darba kultūrā?", ru: "Ты заметила различия в рабочей культуре?" },
+        { who: "B", lv: "Jā, piemēram, latvieši ļoti novērtē precizitāti un punktualitāti. Tas prasa kultūras izpratni, lai to pareizi interpretētu.", ru: "Да, например, латыши очень ценят точность и пунктуальность. Это требует понимания культуры, чтобы правильно это интерпретировать." }
+      ],
+      prompts: [
+        { lv: "Apraksti vienu kultūras atšķirību, kas tevi pārsteidza visvairāk, un paskaidro, kāpēc.", ru: "Опиши одно культурное различие, которое удивило тебя больше всего, и объясни почему." },
+        { lv: "Salīdzini komunikācijas stilu Latvijā un Krievijā. Kādas ir līdzības un atšķirības?", ru: "Сравни стиль общения в Латвии и России. В чём сходства и различия?" },
+        { lv: "Kā tu domā, kāpēc kultūras atšķirības dažkārt rada pārpratumus?", ru: "Как ты думаешь, почему культурные различия иногда вызывают недопонимание?" }
+      ]
+    }
+  ],
+
+  C2: [
+    {
+      id: "c2_humor", title: "Ironija un humors", ruTitle: "Ирония и юмор",
+      register: "Sarunvalodas / literārs",
+      situation: "Tu sarunājies ar draugu, izmantojot ironiju un spēlējoties ar valodu.",
+      ruSituation: "Ты беседуешь с другом, используя иронию и играя с языком.",
+      phrases: [
+        { lv: "Tu mani izjoko!", ru: "Ты меня разыгрываешь!" },
+        { lv: "Nopietni? To tu saki nopietni?", ru: "Серьёзно? Ты это серьёзно?" },
+        { lv: "Bez jokiem...", ru: "Без шуток..." },
+        { lv: "Tas bija sarkastiski, vai ne?", ru: "Это было саркастично, не так ли?" },
+        { lv: "Latviešiem ir sava specifiskā humora izjūta", ru: "У латышей особое чувство юмора" },
+        { lv: "Tā teikt, maigi izsakoties...", ru: "Так сказать, мягко выражаясь..." },
+        { lv: "Es tikai jokoju!", ru: "Я только шучу!" }
+      ],
+      dialogue: [
+        { who: "A", lv: "Kā tev patika vakardienas sapulce?", ru: "Как тебе вчерашнее собрание?" },
+        { who: "B", lv: "Ak, tas bija vienkārši brīnišķīgi. Divas stundas, kurās mēs vienojāmies par to, ka mums jāturpina tikties.", ru: "Ах, это было просто прекрасно. Два часа, в течение которых мы договорились о том, что нам нужно продолжать встречаться." },
+        { who: "A", lv: "Ha, tas bija sarkastiski, vai ne?", ru: "Ха, это было саркастично, не так ли?" },
+        { who: "B", lv: "Es? Nekad. Es tikai atspoguļoju realitāti, maigi izsakoties.", ru: "Я? Никогда. Я лишь отражаю реальность, мягко выражаясь." },
+        { who: "A", lv: "Zini, tu esi īsts komiķis.", ru: "Знаешь, ты настоящий комик." },
+        { who: "B", lv: "Paldies! Es cenšos. Bez humora dzīve būtu pārāk nopietna.", ru: "Спасибо! Я стараюсь. Без юмора жизнь была бы слишком серьёзной." },
+        { who: "A", lv: "Starp citu, vai tu dzirdēji, ka mūsu priekšnieks nolēma ieviest jaunu sistēmu?", ru: "Кстати, ты слышал, что наш начальник решил внедрить новую систему?" },
+        { who: "B", lv: "Ak, lieliski! Vēl viena sistēma, ko neviens nesapratīs. Es tikai jokoju... vai arī nē?", ru: "О, отлично! Ещё одна система, которую никто не поймёт. Я только шучу... или нет?" }
+      ],
+      prompts: [
+        { lv: "Pastāsti kādu smieklīgu atgadījumu no savas dzīves, izmantojot ironiju.", ru: "Расскажи какой-нибудь смешной случай из своей жизни, используя иронию." },
+        { lv: "Kā tu atbildētu uz jautājumu 'Kā tev iet?', ja tev patiesībā iet ļoti slikti, bet tu gribi atbildēt ar humoru?", ru: "Как бы ты ответил на вопрос «Как дела?», если на самом деле всё очень плохо, но ты хочешь ответить с юмором?" },
+        { lv: "Apraksti tipisku latviešu humoru – kā tas atšķiras no krievu humora?", ru: "Опиши типичный латышский юмор — чем он отличается от русского?" }
+      ]
+    },
+    {
+      id: "c2_literature", title: "Literatūra un dzeja", ruTitle: "Литература и поэзия",
+      register: "Literārs / akadēmisks",
+      situation: "Tu diskutē par literatūru, dzeju un kultūras nozīmi.",
+      ruSituation: "Ты обсуждаешь литературу, поэзию и значение культуры.",
+      phrases: [
+        { lv: "Dzejolis mani uzrunāja", ru: "Стихотворение меня тронуло" },
+        { lv: "Autors izmanto spēcīgus tēlus", ru: "Автор использует сильные образы" },
+        { lv: "Tas ir dziļi personisks", ru: "Это глубоко личное" },
+        { lv: "Valodas skaistums", ru: "Красота языка" },
+        { lv: "Rainis un Aspazija", ru: "Райнис и Аспазия" },
+        { lv: "Tas atspoguļo laikmetu", ru: "Это отражает эпоху" },
+        { lv: "Es to lasu starp rindām", ru: "Я это читаю между строк" }
+      ],
+      dialogue: [
+        { who: "A", lv: "Vai tu esi lasījusi Raini? Ko tu domā par viņa dzeju?", ru: "Ты читала Райниса? Что ты думаешь о его поэзии?" },
+        { who: "B", lv: "Jā, protams. Viņa dzeja mani vienmēr uzrunā ar savu dziļumu. It īpaši 'Ave sol' – tur ir tik daudz simbolisma.", ru: "Да, конечно. Его поэзия всегда трогает меня своей глубиной. Особенно «Ave sol» — там так много символизма." },
+        { who: "A", lv: "Kas tev šķiet visspēcīgākais viņa darbos?", ru: "Что тебе кажется самым сильным в его произведениях?" },
+        { who: "B", lv: "Man šķiet, ka viņš prot vienlaikus būt personisks un universāls. Viņa dzeja atspoguļo gan laikmetu, gan cilvēka iekšējo pasauli.", ru: "Мне кажется, он умеет одновременно быть личным и универсальным. Его поэзия отражает и эпоху, и внутренний мир человека." },
+        { who: "A", lv: "Interesanti. Bet vai mūsdienu lasītājam Raiņa valoda nav pārāk sena?", ru: "Интересно. Но разве для современного читателя язык Райниса не слишком устарел?" },
+        { who: "B", lv: "Tas ir jautājums par to, kā mēs lasām. Ja mēs lasām starp rindām, mēs atklājam, ka viņa jautājumi joprojām ir aktuāli.", ru: "Это вопрос о том, как мы читаем. Если мы читаем между строк, мы обнаруживаем, что его вопросы всё ещё актуальны." },
+        { who: "A", lv: "Tu runā kā īsts literatūras kritiķis!", ru: "Ты говоришь как настоящий литературный критик!" },
+        { who: "B", lv: "Paldies! Man vienkārši patīk valodas skaistums un tas, kā literatūra spēj mainīt mūsu domāšanu.", ru: "Спасибо! Мне просто нравится красота языка и то, как литература способна менять наше мышление." }
+      ],
+      prompts: [
+        { lv: "Apraksti savu mīļāko grāmatu un paskaidro, kāpēc tā tevi uzrunā.", ru: "Опиши свою любимую книгу и объясни, почему она тебя трогает." },
+        { lv: "Nolasi (vai atstāsti no galvas) kādu dzejoli latviešu valodā un paskaidro tā nozīmi.", ru: "Прочти (или расскажи по памяти) какое-нибудь стихотворение на латышском и объясни его значение." },
+        { lv: "Kā tu domā, kāpēc literatūra ir svarīga mūsdienu sabiedrībā?", ru: "Как ты думаешь, почему литература важна в современном обществе?" }
+      ]
+    },
+    {
+      id: "c2_philosophy", title: "Ikdienas filozofija", ruTitle: "Философия повседневности",
+      register: "Literārs / sarunvalodas",
+      situation: "Tu runā par dzīves jēgu, laimi un cilvēka vietu pasaulē.",
+      ruSituation: "Ты говоришь о смысле жизни, счастье и месте человека в мире.",
+      phrases: [
+        { lv: "Kas padara dzīvi jēgpilnu?", ru: "Что делает жизнь осмысленной?" },
+        { lv: "Man šķiet, ka laime ir...", ru: "Мне кажется, счастье — это..." },
+        { lv: "Mēs bieži aizmirstam par...", ru: "Мы часто забываем о..." },
+        { lv: "Būtībā mēs visi meklējam...", ru: "По сути, мы все ищем..." },
+        { lv: "Tā teikt, dzīves ironija", ru: "Так сказать, ирония жизни" },
+        { lv: "Mazās lietas ir vissvarīgākās", ru: "Маленькие вещи — самые важные" },
+        { lv: "Es domāju, ka jēga ir ceļā, nevis mērķī", ru: "Я думаю, смысл в пути, а не в цели" }
+      ],
+      dialogue: [
+        { who: "A", lv: "Vai tu esi kādreiz domājusi par to, kas padara dzīvi jēgpilnu?", ru: "Ты когда-нибудь думала о том, что делает жизнь осмысленной?" },
+        { who: "B", lv: "Protams, un bieži. Man šķiet, ka laime nav lielos notikumos, bet ikdienas mazajās lietās.", ru: "Конечно, и часто. Мне кажется, счастье не в больших событиях, а в маленьких повседневных вещах." },
+        { who: "A", lv: "Bet vai tas nav mierinājums tiem, kuriem neveicas?", ru: "Но разве это не утешение для тех, кому не везёт?" },
+        { who: "B", lv: "Tā teikt, dzīves ironija – mēs bieži meklējam laimi lielās lietās, bet atrodam to mazajās.", ru: "Так сказать, ирония жизни — мы часто ищем счастье в больших вещах, а находим в маленьких." },
+        { who: "A", lv: "Bet ko darīt, ja cilvēks jūt, ka viņa dzīvei nav jēgas?", ru: "Но что делать, если человек чувствует, что в его жизни нет смысла?" },
+        { who: "B", lv: "Es domāju, ka jēga ir ceļā, nevis mērķī. Mēs paši radām savu jēgu – caur attiecībām, darbu, mīlestību.", ru: "Я думаю, смысл в пути, а не в цели. Мы сами создаём свой смысл — через отношения, работу, любовь." },
+        { who: "A", lv: "Tas ir skaisti pateikts. Bet vai mēs neesam pārāk optimistiski?", ru: "Это красиво сказано. Но не слишком ли мы оптимистичны?" },
+        { who: "B", lv: "Varbūt. Bet būtībā mēs visi meklējam vienu – sajūtu, ka mūsu dzīvei ir nozīme. Un tas jau ir daudz.", ru: "Может быть. Но по сути, мы все ищем одно — ощущение, что наша жизнь имеет значение. И это уже много." }
+      ],
+      prompts: [
+        { lv: "Kas tev šodien sagādāja prieku? Paskaidro, kāpēc.", ru: "Что сегодня доставило тебе радость? Объясни, почему." },
+        { lv: "Ja tu varētu nodot vienu dzīves gudrību saviem bērniem, kāda tā būtu?", ru: "Если бы ты мог передать одну жизненную мудрость своим детям, какая бы она была?" },
+        { lv: "Kā tu domā, vai mēs paši veidojam savu laimi vai tā ir likteņa dota?", ru: "Как ты думаешь, мы сами создаём своё счастье или оно дано судьбой?" }
+      ]
+    },
+    {
+      id: "c2_language", title: "Valodas bagātība un dialekti", ruTitle: "Богатство языка и диалекты",
+      register: "Akadēmisks / valodniecisks",
+      situation: "Tu runā par latviešu valodas bagātību, dialektiem un valodas attīstību.",
+      ruSituation: "Ты говоришь о богатстве латышского языка, диалектах и развитии языка.",
+      phrases: [
+        { lv: "Latviešu valodai ir trīs galvenie dialekti", ru: "У латышского языка три основных диалекта" },
+        { lv: "Valoda nepārtraukti mainās", ru: "Язык постоянно меняется" },
+        { lv: "Aizgūti vārdi", ru: "Заимствованные слова" },
+        { lv: "Valodas bagātība atspoguļo kultūru", ru: "Богатство языка отражает культуру" },
+        { lv: "Latgaliešu valoda", ru: "Латгальский язык" },
+        { lv: "Tas ir lingvistiski saistoši", ru: "Это лингвистически увлекательно" },
+        { lv: "Valoda ir dzīva sistēma", ru: "Язык — живая система" }
+      ],
+      dialogue: [
+        { who: "A", lv: "Vai tu zini, ka latviešu valodai ir trīs galvenie dialekti?", ru: "Ты знаешь, что у латышского языка три основных диалекта?" },
+        { who: "B", lv: "Jā, vidus dialekts, lībiskais dialekts un augšzemnieku dialekts. Un latgaliešu valoda ir īpaši interesanta.", ru: "Да, средний диалект, ливский диалект и верхнеземгальский диалект. И латгальский язык особенно интересен." },
+        { who: "A", lv: "Kāpēc latgaliešu valoda tiek uzskatīta par atsevišķu valodu, nevis dialektu?", ru: "Почему латгальский считается отдельным языком, а не диалектом?" },
+        { who: "B", lv: "Tas ir lingvistiski un vēsturiski sarežģīts jautājums. Latgaliešiem ir sava rakstība, literatūra un kultūras identitāte.", ru: "Это лингвистически и исторически сложный вопрос. У латгальцев есть своя письменность, литература и культурная идентичность." },
+        { who: "A", lv: "Vai tu domā, ka dialekti mūsdienās izzūd?", ru: "Ты думаешь, диалекты сегодня исчезают?" },
+        { who: "B", lv: "Diemžēl jā. Globalizācija un urbanizācija ietekmē valodas daudzveidību. Bet valoda ir dzīva sistēma – tā mainās, nevis mirst.", ru: "К сожалению, да. Глобализация и урбанизация влияют на языковое разнообразие. Но язык — живая система — он меняется, а не умирает." },
+        { who: "A", lv: "Kā mēs varam saglabāt šo bagātību?", ru: "Как мы можем сохранить это богатство?" },
+        { who: "B", lv: "Caur izglītību, dokumentēšanu un cieņu pret vietējām kopienām. Valodas bagātība atspoguļo kultūru – ja mēs zaudējam valodu, mēs zaudējam daļu sevis.", ru: "Через образование, документирование и уважение к местным сообществам. Богатство языка отражает культуру — если мы теряем язык, мы теряем часть себя." }
+      ],
+      prompts: [
+        { lv: "Pastāsti par vienu latviešu valodas īpatnību, kas tev šķiet unikāla.", ru: "Расскажи об одной особенности латышского языка, которая кажется тебе уникальной." },
+        { lv: "Kā tu domā, kā aizgūti vārdi ietekmē valodas identitāti?", ru: "Как ты думаешь, как заимствованные слова влияют на идентичность языка?" },
+        { lv: "Salīdzini latviešu un krievu valodas skaņu sistēmu. Kādas ir galvenās atšķirības?", ru: "Сравни звуковую систему латышского и русского языков. В чём главные различия?" }
+      ]
+    }
+  ]
+};
+
 const PRAISE_PHRASES = [
   "Светлана, ты сегодня просто космос! 🚀",
   "Латышский сам себя не выучит, но ты справляешься на 5+!",
@@ -351,7 +914,7 @@ const PRAISE_PHRASES = [
   "Еще чуть-чуть и заговоришь как истинная рижанка!",
   "Твой мозг сегодня работает на частоте 5G!",
   "Кто молодец? Ты молодец!",
-  "Latviešu valoda tevi mīl! (Латышский тебя любит!)",
+  "Latviešu valoda tevi mīl!",
   "Светлана, ты умничка! Так держать!",
   "Ого, да ты профи! 💪",
   "Отличная работа! Продолжай в том же духе.",
@@ -361,9 +924,57 @@ const PRAISE_PHRASES = [
   "Твоя сестра тобой гордится! (Даже если она тебе это не говорит)"
 ];
 
-function getRandomPraise() {
-  return PRAISE_PHRASES[Math.floor(Math.random() * PRAISE_PHRASES.length)];
-}
+const LIFE_HACKS = [
+  { icon: "🎧", title: "Подкасты для ушей", text: "Слушай латышские подкасты в дороге — 'Latvijas Radio' или 'Easy Latvian'. Мозг впитывает ритм языка даже без перевода." },
+  { icon: "📺", title: "Сериалы с субтитрами", text: "Начни с мультиков на латышском. Сначала русские субтитры, потом латышские. Уши привыкают к звучанию." },
+  { icon: "🗣️", title: "Говори сама с собой", text: "Комментируй свои действия на латышском: 'Es eju uz virtuvi. Es dzeru kafiju.' Это работает!" },
+  { icon: "📌", title: "Стикеры по дому", text: "Наклей стикеры на предметы: 'ledusskapis' на холодильник, 'logs' на окно. Мозг запоминает через окружение." },
+  { icon: "🎵", title: "Пой песни", text: "Латышские песни (Prāta Vētra, BrainStorm) — отличный способ запомнить фразы и интонации." },
+  { icon: "🔄", title: "Правило 5 минут", text: "Каждый день 5 минут лучше, чем 2 часа раз в неделю. Регулярность > длительность." },
+  { icon: "📱", title: "Смени язык телефона", text: "Переключи интерфейс на латышский хотя бы на день. Узнаешь много новых слов без усилий." },
+  { icon: "🤝", title: "Найди друга по языку", text: "Tandem, HelloTalk — общайся с носителями. Даже 15 минут в неделю — огромный прогресс." },
+  { icon: "📝", title: "Дневник на латышском", text: "Пиши 2-3 предложения о своём дне. Даже простых: 'Šodien es strādāju. Vakar biju parkā.'" },
+  { icon: "🧠", title: "Ассоциации", text: "Придумывай нелепые ассоциации: 'kaķis' (кошка) → 'кактус с усами'. Смешное запоминается лучше." },
+  { icon: "❌", title: "Не бойся ошибок", text: "Латыши очень доброжелательны к тем, кто пытается. Ошибки — часть пути. Главное — говорить!" },
+  { icon: "🎯", title: "Цель — 50 XP в день", text: "Занимайся каждый день по чуть-чуть. Приложение считает твои XP. Не сдавайся!" }
+];
+
+const GUIDE_SECTIONS = [
+  {
+    title: "🚀 С чего начать",
+    items: [
+      "1️⃣ Заходи каждый день — выполни Daily Mix",
+      "2️⃣ Выучи 5 базовых слов в разделе 'Карточки'",
+      "3️⃣ Пройди тему 'Быт и дом' — там самые нужные слова",
+      "4️⃣ Поиграй в 'Быстрый огонь' — разминка для мозга",
+      "5️⃣ Попробуй произношение в разделе 'Произношение'"
+    ]
+  },
+  {
+    title: "🎯 Как построить день",
+    items: [
+      "☀️ Утро: 5 минут Карточки + 3 минуты произношение",
+      "🌤 День: Daily Mix или одна игра (5-10 минут)",
+      "🌙 Вечер: выучи 1 тему из 'Темы для жизни' (+10 XP)",
+      "💬 2-3 раза в неделю: пройди 1 сценарий в 'Речи'"
+    ]
+  },
+  {
+    title: "🧭 Что где находится",
+    items: [
+      "💬 Речь — разговорные сценарии B1 → C2 с диалогами",
+      "🎴 Карточки — учи слова, листая флеш-карты",
+      "📝 Грамматика — падежи и спряжения с объяснениями",
+      "🔄 Перевод — тренируй LV ↔ RU",
+      "🧩 Собери фразу — учись строить предложения",
+      "🔢 Числа — цифры и счёт по-латышски",
+      "🗣️ Произношение — слушай и повторяй вслух",
+      "🎮 Игры — 4 мини-игры для удовольствия"
+    ]
+  }
+];
+
+function getRandomPraise() { return PRAISE_PHRASES[Math.floor(Math.random() * PRAISE_PHRASES.length)]; }
 
 let state = {
   theme: localStorage.getItem("lv_theme") || "dark",
@@ -375,6 +986,7 @@ let state = {
   badges: JSON.parse(localStorage.getItem("lv_badges")) || [],
   progress: JSON.parse(localStorage.getItem("lv_progress")) || {}
 };
+if (!state.progress.conversations) state.progress.conversations = {};
 const DAILY_GOAL = 50;
 const ALL_BADGES = [
   { id: "first_step", icon: "🐣", name: "Первый шаг" }, { id: "streak_3", icon: "🔥", name: "3 дня" },
@@ -392,33 +1004,29 @@ function updateUI() {
   document.getElementById('xpVal').textContent = state.xp;
   document.getElementById('streakVal').textContent = state.streak;
   document.getElementById('goalText').textContent = `${state.dailyXp} / ${DAILY_GOAL} XP`;
-  
   const pct = Math.min(100, Math.round((state.dailyXp / DAILY_GOAL) * 100));
   const ring = document.getElementById('goalRing');
   ring.style.setProperty('--pct', pct + '%');
   ring.querySelector('span').textContent = pct + '%';
-
   const badgesGrid = document.getElementById('badgesGrid');
-  badgesGrid.innerHTML = '';
-  ALL_BADGES.forEach(b => {
-    const has = state.badges.includes(b.id);
-    badgesGrid.innerHTML += `<div class="badge-item ${has ? 'unlocked' : ''}"><div class="b-icon">${b.icon}</div><div class="b-name">${b.name}</div></div>`;
-  });
+  if (badgesGrid) {
+    badgesGrid.innerHTML = '';
+    ALL_BADGES.forEach(b => {
+      const has = state.badges.includes(b.id);
+      badgesGrid.innerHTML += `<div class="badge-item ${has ? 'unlocked' : ''}"><div class="b-icon">${b.icon}</div><div class="b-name">${b.name}</div></div>`;
+    });
+  }
 }
 
 function addXp(amount, showPraise = false) {
   const today = new Date().toISOString().split('T')[0];
   if (state.lastXpDate !== today) { state.dailyXp = 0; state.lastXpDate = today; }
-  state.xp += amount; state.dailyXp += amount; saveState(); updateUI();
-  
-  if (showPraise) {
-    showToast(getRandomPraise(), "success");
-  }
-
+  state.xp += amount; state.dailyXp += amount;
+  if (state.xp >= 100 && !state.badges.includes('xp_100')) unlockBadge('xp_100');
+  saveState(); updateUI();
+  if (showPraise) showToast(getRandomPraise(), "success");
   if (state.dailyXp >= DAILY_GOAL && state.dailyXp - amount < DAILY_GOAL) {
-    setTimeout(() => {
-      showToast("🎯 Цель достигнута! Ты сегодня супер-герой! 🦸‍♀️", "gold"); fireConfetti();
-    }, 1500);
+    setTimeout(() => { showToast("🎯 Цель достигнута! Ты сегодня супер-герой! 🦸‍♀️", "gold"); fireConfetti(); }, 1500);
   }
 }
 
@@ -463,7 +1071,9 @@ function switchTab(tabId) {
     document.getElementById('view-content').classList.add('active');
   } else {
     document.getElementById('view-' + tabId).classList.add('active');
-    document.getElementById('nav-' + tabId).classList.add('active');
+    const nav = document.getElementById('nav-' + tabId);
+    if (nav) nav.classList.add('active');
+    if (tabId === 'conversation') renderConversationHome();
   }
 }
 
@@ -474,10 +1084,706 @@ function showContent(html) {
   container.scrollTop = 0;
 }
 
+function shuffle(array) { const a = [...array]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+// ============================================================
+// CONVERSATION ENGINE
+// ============================================================
+function getLevelProgress(level) {
+  const list = CONVERSATIONS[level] || [];
+  const done = list.filter(s => state.progress.conversations && state.progress.conversations[s.id]).length;
+  return { done, total: list.length };
+}
+
+function renderConversationHome() {
+  const levels = ["B1", "B2", "C1", "C2"];
+  // level map
+  let mapHtml = `<div class="level-map">`;
+  levels.forEach((lv, i) => {
+    const p = getLevelProgress(lv);
+    const isDone = p.done === p.total && p.total > 0;
+    const isCurrent = p.done > 0 && !isDone;
+    let cls = "";
+    if (isDone) cls = "done";
+    else if (isCurrent) cls = "current";
+    mapHtml += `<div class="level-node ${cls}">${lv}<div style="font-size:0.6rem; margin-top:2px;">${p.done}/${p.total}</div></div>`;
+    if (i < levels.length - 1) mapHtml += `<div class="level-arrow">→</div>`;
+  });
+  mapHtml += `</div>`;
+
+  let body = `<div class="info-card" style="background:var(--accent-gradient); color:white; border:none;">
+    <div style="font-size:1.1rem; font-weight:800; margin-bottom:6px;">Разговорная практика</div>
+    <p style="font-size:0.88rem; opacity:0.95;">Реальные сценарии с диалогами, ключевыми фразами и микрофоном. От выживания B1 до уровня носителя C2.</p>
+  </div>` + mapHtml;
+
+  levels.forEach(lv => {
+    const info = LEVEL_INFO[lv];
+    const p = getLevelProgress(lv);
+    const pct = p.total > 0 ? Math.round((p.done / p.total) * 100) : 0;
+    body += `<div class="level-section" onclick="openLevel('${lv}')">
+      <div class="level-header">
+        <div class="level-emoji">${info.emoji}</div>
+        <div style="flex:1;">
+          <div class="level-title">${info.ruName}</div>
+          <div class="level-sub">${info.desc}</div>
+        </div>
+        <div style="font-size:1.2rem; color:var(--muted);">›</div>
+      </div>
+      <div class="level-progress-bar"><div class="level-progress-fill" style="width:${pct}%"></div></div>
+      <div style="font-size:0.75rem; color:var(--muted); margin-top:6px;">Пройдено ${p.done} из ${p.total} сценариев</div>
+    </div>`;
+  });
+
+  document.getElementById('convBody').innerHTML = body;
+}
+
+function openLevel(level) {
+  const info = LEVEL_INFO[level];
+  const list = CONVERSATIONS[level] || [];
+  let body = `<div class="content-header"><div class="back-btn" onclick="switchTab('conversation')">←</div><h2>${info.emoji} ${level}</h2></div>
+    <div class="info-card">
+      <div style="font-weight:800; margin-bottom:4px;">${info.ruName}</div>
+      <div style="font-size:0.85rem; color:var(--muted);">${info.desc}</div>
+    </div>`;
+  list.forEach(s => {
+    const done = state.progress.conversations && state.progress.conversations[s.id];
+    body += `<div class="scenario-card ${done ? 'done' : ''}" onclick="openScenario('${level}','${s.id}')">
+      <div>
+        <h4>${s.ruTitle}</h4>
+        <p>${s.title} · ${s.register}</p>
+      </div>
+      <div class="scenario-check">${done ? '✓' : '›'}</div>
+    </div>`;
+  });
+  showContent(body);
+}
+
+function openScenario(level, id) {
+  const s = CONVERSATIONS[level].find(x => x.id === id);
+  if (!s) return;
+
+  let body = `<div class="content-header"><div class="back-btn" onclick="openLevel('${level}')">←</div><h2>${s.ruTitle}</h2></div>`;
+
+  // situation
+  body += `<div class="situation-card">
+    <div class="label">${level} · ${s.register}</div>
+    <div class="text">${s.situation}</div>
+    <div style="font-size:0.82rem; opacity:0.9; margin-top:6px;">${s.ruSituation}</div>
+  </div>`;
+
+  // phrases
+  body += `<div class="section-title">🔑 Ключевые фразы</div>`;
+  s.phrases.forEach(p => {
+    const safe = p.lv.replace(/'/g, "\\'");
+    body += `<div class="phrase-item">
+      <div style="flex:1;">
+        <div class="lv">${p.lv}</div>
+        <div class="ru">${p.ru}</div>
+      </div>
+      <button class="speak-btn" onclick="speakText('${safe}')">🔊</button>
+    </div>`;
+  });
+
+  // dialogue
+  body += `<div class="section-title">💬 Образец диалога</div>`;
+  body += `<button class="play-all-btn" onclick="playDialogue(${JSON.stringify(s.dialogue).replace(/"/g, '&quot;')})">▶️ Прослушать весь диалог</button>`;
+  s.dialogue.forEach(line => {
+    const safe = line.lv.replace(/'/g, "\\'");
+    body += `<div class="dialogue-line ${line.who.toLowerCase()}">
+      <div class="dialogue-speaker">${line.who}</div>
+      <div class="dialogue-bubble">
+        <div class="lv">${line.lv} <button class="speak-btn" style="width:26px;height:26px;font-size:0.8rem;margin-left:4px;" onclick="speakText('${safe}')">🔊</button></div>
+        <div class="ru">${line.ru}</div>
+      </div>
+    </div>`;
+  });
+
+  // prompts
+  body += `<div class="section-title">🎯 Ролевая практика</div>`;
+  s.prompts.forEach(p => {
+    body += `<div class="prompt-item">
+      <div>💬 ${p.lv}</div>
+      <div class="ru">${p.ru}</div>
+    </div>`;
+  });
+
+  // mic practice
+  body += `<div class="mic-practice">
+    <h4>🎤 Попробуй вслух</h4>
+    <div class="target">${s.dialogue[0].lv}</div>
+    <div class="translation">${s.dialogue[0].ru}</div>
+    <div class="mic-btn" id="micBtn">🎤</div>
+    <div id="shadowResult" style="font-weight:700; margin-top:8px; min-height:24px;"></div>
+  </div>`;
+
+  // complete button
+  body += `<button class="btn primary" style="margin-top:12px;" onclick="completeScenario('${level}','${s.id}')">Завершить сценарий (+15 XP)</button>`;
+  body += `<div style="height:20px;"></div>`;
+
+  showContent(body);
+  setTimeout(() => setupMic(s.dialogue[0].lv), 100);
+}
+
+function completeScenario(level, id) {
+  if (!state.progress.conversations) state.progress.conversations = {};
+  if (!state.progress.conversations[id]) {
+    state.progress.conversations[id] = true;
+    saveState();
+    addXp(15, true);
+    fireConfetti();
+    const p = getLevelProgress(level);
+    if (p.done === p.total) {
+      setTimeout(() => showToast(`🏆 Уровень ${level} полностью пройден! Ты супер!`, "gold"), 1500);
+    }
+  } else {
+    showToast("Этот сценарий уже пройден 👌");
+  }
+  setTimeout(() => openLevel(level), 800);
+}
+
+// speak dialogue with pauses
+function playDialogue(lines) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  let idx = 0;
+  function next() {
+    if (idx >= lines.length) return;
+    const u = new SpeechSynthesisUtterance(lines[idx].lv);
+    u.lang = 'lv-LV'; u.rate = 0.9;
+    const voices = window.speechSynthesis.getVoices();
+    const lvVoice = voices.find(v => v.lang.includes('lv') || v.lang.includes('LV'));
+    if (lvVoice) u.voice = lvVoice;
+    u.onend = () => { idx++; setTimeout(next, 400); };
+    window.speechSynthesis.speak(u);
+  }
+  next();
+}
+
+// ============================================================
+// SPEECH
+// ============================================================
+function speakText(text) {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'lv-LV'; utterance.rate = 0.9;
+    const voices = window.speechSynthesis.getVoices();
+    const lvVoice = voices.find(v => v.lang.includes('lv') || v.lang.includes('LV'));
+    if (lvVoice) utterance.voice = lvVoice;
+    window.speechSynthesis.speak(utterance);
+  }
+}
+
+function setupMic(targetText) {
+  const micBtn = document.getElementById('micBtn');
+  const result = document.getElementById('shadowResult');
+  if (!micBtn || !result) return;
+  let recognition = null;
+  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRecognition();
+    recognition.lang = 'lv-LV'; recognition.interimResults = false;
+  } else {
+    micBtn.style.display = 'none';
+    result.textContent = "Микрофон не поддерживается";
+    return;
+  }
+  let isRecording = false;
+  micBtn.onclick = () => {
+    if (isRecording) { recognition.stop(); }
+    else { result.textContent = ""; recognition.start(); micBtn.classList.add('recording'); isRecording = true; }
+  };
+  recognition.onresult = (event) => {
+    isRecording = false; micBtn.classList.remove('recording');
+    const transcript = event.results[0][0].transcript;
+    const normalize = str => str.toLowerCase().replace(/[.,!?;:]/g, '').trim();
+    const targetWords = normalize(targetText).split(" ");
+    const spokenWords = normalize(transcript).split(" ");
+    const overlap = targetWords.filter(w => spokenWords.includes(w)).length;
+    const accuracy = Math.round((overlap / targetWords.length) * 100);
+    if (accuracy === 100) {
+      result.textContent = `🎉 Идеально!`; result.style.color = 'var(--success)';
+      addXp(5); unlockBadge('speaker');
+      setTimeout(() => { fireConfetti(); showToast("Вау, Светлана! Твое произношение на высоте! 🎙️", "gold"); }, 500);
+    }
+    else if (accuracy >= 50) { result.textContent = `👍 Хорошо! (${accuracy}%)`; result.style.color = 'var(--warning)'; addXp(2); }
+    else { result.textContent = `❌ Попробуйте еще раз (${accuracy}%)`; result.style.color = 'var(--danger)'; }
+  };
+  recognition.onerror = () => { isRecording = false; micBtn.classList.remove('recording'); };
+  recognition.onend = () => { isRecording = false; micBtn.classList.remove('recording'); };
+}
+
+// ============================================================
+// GUIDE
+// ============================================================
+function openGuide() {
+  let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('home')">←</div><h2>📚 Учись эффективно</h2></div>`;
+  html += `<div class="info-card" style="background:var(--accent-gradient); color:white; border:none;">
+    <div style="font-size:1.2rem; font-weight:800; margin-bottom:8px;">Привет, Светлана! 👋</div>
+    <p style="opacity:0.95;">Это твоё личное приложение для покорения латышского. Здесь всё: от игр до грамматики.</p>
+  </div>`;
+  GUIDE_SECTIONS.forEach(s => {
+    html += `<div class="section-title" style="margin-top:20px;">${s.title}</div>`;
+    s.items.forEach(item => {
+      html += `<div class="info-card" style="margin-bottom:8px; padding:12px 16px; font-size:0.95rem;">${item}</div>`;
+    });
+  });
+  html += `<div class="section-title" style="margin-top:20px;">💡 Лайфхаки для прогресса</div>`;
+  LIFE_HACKS.forEach(hack => {
+    html += `<div class="info-card" style="margin-bottom:10px;">
+      <div style="display:flex; gap:12px; align-items:flex-start;">
+        <div style="font-size:1.8rem; flex-shrink:0;">${hack.icon}</div>
+        <div>
+          <div style="font-weight:800; margin-bottom:4px;">${hack.title}</div>
+          <div style="font-size:0.88rem; color:var(--muted); line-height:1.5;">${hack.text}</div>
+        </div>
+      </div>
+    </div>`;
+  });
+  html += `<div class="info-card" style="background:var(--surface); text-align:center; padding:24px; margin-top:16px;">
+    <div style="font-size:2.5rem; margin-bottom:10px;">🌟</div>
+    <div style="font-weight:800; margin-bottom:10px; font-size:1.1rem;">Помни главное</div>
+    <div style="font-size:0.95rem; color:var(--muted); line-height:1.6;">Язык — это марафон. Лучше 10 минут каждый день, чем 2 часа раз в месяц. Ты уже сделала первый шаг — ты здесь. Продолжай!</div>
+  </div>`;
+  showContent(html);
+}
+
+// ============================================================
+// TRAINERS (flashcards, grammar, etc.)
+// ============================================================
+function openTrainer(type) {
+  if (type === 'flashcards') renderFlashcards();
+  if (type === 'grammar') renderGrammar();
+  if (type === 'translation') renderTranslation();
+  if (type === 'sentence') renderSentenceBuild();
+  if (type === 'numbers') renderNumbers();
+}
+
+function renderFlashcards() {
+  const cards = shuffle(DATA.flashcards);
+  let idx = 0, flipped = false, known = 0;
+  let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('home')">←</div><h2>🃏 Карточки</h2></div>
+    <div class="flash-progress" id="flashProgress"></div>
+    <div class="flash-card" id="flashCard">
+      <div class="word" id="flashWord"></div>
+      <div class="hint" id="flashHint">Нажми, чтобы увидеть перевод</div>
+      <div class="tap-hint">👆 Тап по карточке</div>
+    </div>
+    <div style="display:flex; gap:10px;">
+      <button class="btn" id="flashRepeat" style="background:var(--warning); color:white; border:none;">↻ Повторить</button>
+      <button class="btn" id="flashKnow" style="background:var(--success); color:white; border:none;">✓ Знаю</button>
+    </div>`;
+  showContent(html);
+  const cardEl = document.getElementById('flashCard');
+  const wordEl = document.getElementById('flashWord');
+  const hintEl = document.getElementById('flashHint');
+  const progEl = document.getElementById('flashProgress');
+  function render() {
+    if (idx >= cards.length) {
+      showContent(`<div class="content-header"><div class="back-btn" onclick="switchTab('home')">←</div><h2>🃏 Готово!</h2></div>
+        <div class="info-card" style="text-align:center; padding:40px 20px;">
+          <div style="font-size:3rem; margin-bottom:16px;">🎉</div>
+          <div style="font-weight:800; font-size:1.3rem; margin-bottom:8px;">Отлично!</div>
+          <div style="color:var(--muted);">Ты знаешь ${known} из ${cards.length} слов</div>
+        </div>`);
+      fireConfetti(); showToast("Умница! Продолжай! 🎴", "gold");
+      return;
+    }
+    const c = cards[idx];
+    flipped = false;
+    wordEl.textContent = c.lv;
+    hintEl.textContent = "Нажми, чтобы увидеть перевод";
+    cardEl.style.background = "var(--accent-gradient)";
+    cardEl.style.color = "white";
+    progEl.textContent = `${idx + 1} / ${cards.length} · Знаю: ${known}`;
+  }
+  cardEl.onclick = () => {
+    flipped = !flipped;
+    if (flipped) {
+      wordEl.textContent = cards[idx].ru;
+      hintEl.textContent = cards[idx].lv;
+      cardEl.style.background = "var(--surface-solid)";
+      cardEl.style.color = "var(--text)";
+    } else {
+      wordEl.textContent = cards[idx].lv;
+      hintEl.textContent = "Нажми, чтобы увидеть перевод";
+      cardEl.style.background = "var(--accent-gradient)";
+      cardEl.style.color = "white";
+    }
+  };
+  document.getElementById('flashKnow').onclick = () => { known++; addXp(1); idx++; render(); };
+  document.getElementById('flashRepeat').onclick = () => { const c = cards[idx]; cards.push(c); idx++; render(); };
+  render();
+}
+
+function renderGrammar() {
+  const questions = shuffle(DATA.grammar);
+  let idx = 0, score = 0;
+  let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('home')">←</div><h2>📝 Грамматика</h2></div>
+    <div id="gBody"></div>`;
+  showContent(html);
+  function render() {
+    if (idx >= questions.length) {
+      document.getElementById('gBody').innerHTML = `<div class="info-card" style="text-align:center; padding:40px 20px;">
+          <div style="font-size:3rem; margin-bottom:16px;">📝</div>
+          <div style="font-weight:800; font-size:1.3rem; margin-bottom:8px;">Результат: ${score} / ${questions.length}</div>
+          <div style="color:var(--muted); margin-bottom:20px;">${score >= 7 ? 'Отличная работа!' : 'Продолжай тренироваться!'}</div>
+        </div>`;
+      if (score >= 7) { fireConfetti(); showToast("Грамматика — твой конёк! 📝✨", "gold"); }
+      return;
+    }
+    const q = questions[idx];
+    let body = `<div class="info-card" style="font-size:1.1rem; font-weight:700; text-align:center; padding:20px;">${q.q}</div><div class="qf-options">`;
+    shuffle(q.options).forEach(opt => { body += `<button class="qf-btn" data-opt="${opt}">${opt}</button>`; });
+    body += `</div><div id="gMsg" style="text-align:center; margin-top:16px; font-weight:700; min-height:24px;"></div>`;
+    document.getElementById('gBody').innerHTML = body;
+    document.querySelectorAll('.qf-btn').forEach(btn => {
+      btn.onclick = () => {
+        const chosen = btn.dataset.opt;
+        document.querySelectorAll('.qf-btn').forEach(b => b.disabled = true);
+        if (chosen === q.a) { btn.classList.add('correct'); score++; addXp(3); document.getElementById('gMsg').innerHTML = `<span style="color:var(--success);">✅ ${q.exp}</span>`; }
+        else { btn.classList.add('wrong'); document.querySelectorAll('.qf-btn').forEach(b => { if (b.dataset.opt === q.a) b.classList.add('correct'); }); document.getElementById('gMsg').innerHTML = `<span style="color:var(--danger);">❌ ${q.exp}</span>`; }
+        setTimeout(() => { idx++; render(); }, 1800);
+      };
+    });
+  }
+  render();
+}
+
+function renderTranslation() {
+  const items = shuffle(DATA.translation);
+  let idx = 0;
+  let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('home')">←</div><h2>🔄 Перевод</h2></div><div id="tBody"></div>`;
+  showContent(html);
+  function render() {
+    if (idx >= items.length) {
+      document.getElementById('tBody').innerHTML = `<div class="info-card" style="text-align:center; padding:40px 20px;"><div style="font-size:3rem;">🎉</div><div style="font-weight:800; font-size:1.2rem; margin-top:12px;">Готово!</div></div>`;
+      fireConfetti(); return;
+    }
+    const item = items[idx];
+    const showLv = Math.random() > 0.5;
+    const question = showLv ? item.lv : item.ru;
+    const answer = showLv ? item.ru : item.lv;
+    const dirLabel = showLv ? "🇱🇻 → 🇷🇺" : "🇷🇺 → 🇱🇻";
+    const others = DATA.translation.filter((_, i) => DATA.translation[i] !== item);
+    const wrongs = shuffle(others).slice(0, 3).map(o => showLv ? o.ru : o.lv);
+    const options = shuffle([answer, ...wrongs]);
+    let body = `<div style="text-align:center; color:var(--muted); font-size:0.85rem; margin-bottom:8px;">${dirLabel} · ${idx+1}/${items.length}</div>
+      <div class="info-card" style="font-size:1.2rem; font-weight:800; text-align:center; padding:24px;">${question}</div>
+      <div class="qf-options">`;
+    options.forEach(opt => { body += `<button class="qf-btn" data-opt="${opt}">${opt}</button>`; });
+    body += `</div>`;
+    document.getElementById('tBody').innerHTML = body;
+    document.querySelectorAll('.qf-btn').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.qf-btn').forEach(b => b.disabled = true);
+        if (btn.dataset.opt === answer) { btn.classList.add('correct'); addXp(3); }
+        else { btn.classList.add('wrong'); document.querySelectorAll('.qf-btn').forEach(b => { if (b.dataset.opt === answer) b.classList.add('correct'); }); }
+        setTimeout(() => { idx++; render(); }, 900);
+      };
+    });
+  }
+  render();
+}
+
+function renderSentenceBuild() {
+  const items = shuffle(DATA.sentenceBuild);
+  let idx = 0;
+  let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('home')">←</div><h2>🧩 Собери фразу</h2></div><div id="sBody"></div>`;
+  showContent(html);
+  function render() {
+    if (idx >= items.length) {
+      document.getElementById('sBody').innerHTML = `<div class="info-card" style="text-align:center; padding:40px 20px;"><div style="font-size:3rem;">🎉</div><div style="font-weight:800; font-size:1.2rem; margin-top:12px;">Все фразы собраны!</div></div>`;
+      fireConfetti(); return;
+    }
+    const item = items[idx];
+    const bank = shuffle(item.words);
+    let body = `<div style="text-align:center; color:var(--muted); font-size:0.85rem; margin-bottom:8px;">${idx+1}/${items.length} · ${item.ru}</div>
+      <div class="sentence-area" id="sentenceArea"></div>
+      <div class="words-bank" id="wordsBank"></div>
+      <button class="btn primary" id="checkBtn" style="margin-top:10px;" disabled>Проверить</button>
+      <div id="sMsg" style="text-align:center; margin-top:12px; font-weight:700; min-height:24px;"></div>`;
+    document.getElementById('sBody').innerHTML = body;
+    let selected = [];
+    const area = document.getElementById('sentenceArea');
+    const bankEl = document.getElementById('wordsBank');
+    const checkBtn = document.getElementById('checkBtn');
+    function refresh() {
+      area.innerHTML = '';
+      selected.forEach((w, i) => {
+        const chip = document.createElement('button');
+        chip.className = 'word-chip';
+        chip.textContent = w;
+        chip.onclick = () => { selected.splice(i, 1); refresh(); };
+        area.appendChild(chip);
+      });
+      bankEl.innerHTML = '';
+      bank.forEach((w) => {
+        const chip = document.createElement('button');
+        chip.className = 'word-chip';
+        chip.textContent = w;
+        const usedCount = selected.filter(x => x === w).length;
+        const totalCount = bank.filter(x => x === w).length;
+        if (usedCount >= totalCount) chip.classList.add('used');
+        chip.onclick = () => { selected.push(w); refresh(); };
+        bankEl.appendChild(chip);
+      });
+      checkBtn.disabled = selected.length !== item.words.length;
+    }
+    checkBtn.onclick = () => {
+      const guess = selected.join(' ');
+      if (guess === item.answer) {
+        document.getElementById('sMsg').innerHTML = `<span style="color:var(--success);">✅ Правильно! ${item.answer}</span>`;
+        addXp(5); fireConfetti();
+        setTimeout(() => { idx++; render(); }, 1400);
+      } else {
+        document.getElementById('sMsg').innerHTML = `<span style="color:var(--danger);">❌ Попробуй ещё раз</span>`;
+        setTimeout(() => { document.getElementById('sMsg').innerHTML = ''; }, 1200);
+      }
+    };
+    refresh();
+  }
+  render();
+}
+
+function renderNumbers() {
+  let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('home')">←</div><h2>🔢 Числа</h2></div>
+    <div style="text-align:center; color:var(--muted); margin-bottom:16px;">Нажми на число — услышишь произношение</div>
+    <div class="grid-2">`;
+  DATA.numbers.forEach(n => {
+    html += `<div class="category-card" onclick="speakText('${n.lv}')" style="text-align:center; align-items:center;">
+      <div style="font-size:1.8rem; font-weight:900; color:var(--accent);">${n.n}</div>
+      <div style="font-weight:700;">${n.lv}</div>
+    </div>`;
+  });
+  html += `</div><button class="btn primary" style="margin-top:20px;" onclick="addXp(5,true); switchTab('home')">Завершить (+5 XP)</button>`;
+  showContent(html);
+}
+
+// ============================================================
+// GAMES
+// ============================================================
+function openGame(game) {
+  if (game === 'quickfire') renderQuickFire();
+  if (game === 'wordle') renderWordle();
+  if (game === 'memory') renderMemory();
+  if (game === 'truefalse') renderTrueFalse();
+}
+
+function startDailyMix() {
+  const modes = ['quickfire', 'wordle', 'memory', 'truefalse', 'flashcards', 'grammar', 'translation', 'sentence', 'shadowing', 'conversation'];
+  const randomMode = modes[Math.floor(Math.random() * modes.length)];
+  if (randomMode === 'conversation') { switchTab('conversation'); return; }
+  if (['flashcards','grammar','translation','sentence'].includes(randomMode)) openTrainer(randomMode);
+  else if (randomMode === 'shadowing') openList('shadowing');
+  else openGame(randomMode);
+}
+
+function renderQuickFire() {
+  let score = 0, timeLeft = 60, timer, isActive = false;
+  let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('games')">←</div><h2>⚡️ Быстрый огонь</h2></div>
+    <div class="qf-timer" id="qfTimer">01:00</div>
+    <div class="qf-question" id="qfQuestion">Нажмите старт!</div>
+    <div class="qf-options" id="qfOptions"></div>
+    <button class="btn primary" id="qfStart" style="margin-top:20px;">Старт</button>`;
+  showContent(html);
+  const timerEl = document.getElementById('qfTimer');
+  const scoreEl = document.getElementById('qfQuestion');
+  const optsEl = document.getElementById('qfOptions');
+  const startBtn = document.getElementById('qfStart');
+  function nextQuestion() {
+    if (!isActive) return;
+    const q = DATA.quickfire[Math.floor(Math.random() * DATA.quickfire.length)];
+    scoreEl.textContent = q.q;
+    const allOpts = shuffle([q.a, ...q.w]);
+    optsEl.innerHTML = '';
+    allOpts.forEach(opt => {
+      const btn = document.createElement('button'); btn.className = 'qf-btn'; btn.textContent = opt;
+      btn.onclick = () => {
+        if (!isActive) return;
+        if (opt === q.a) { btn.classList.add('correct'); score++; addXp(2); setTimeout(nextQuestion, 200); }
+        else { btn.classList.add('wrong'); scoreEl.textContent = "❌ Ошибка! " + q.q; setTimeout(nextQuestion, 800); }
+      };
+      optsEl.appendChild(btn);
+    });
+  }
+  startBtn.onclick = () => {
+    startBtn.style.display = 'none'; isActive = true; score = 0; timeLeft = 60; nextQuestion();
+    timer = setInterval(() => {
+      timeLeft--; timerEl.textContent = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
+      if (timeLeft <= 0) {
+        clearInterval(timer); isActive = false; scoreEl.textContent = `Игра окончена! Очков: ${score}`; optsEl.innerHTML = '';
+        startBtn.style.display = 'block'; startBtn.textContent = 'Играть снова'; startBtn.onclick = () => renderQuickFire();
+        if (score > 5) { fireConfetti(); showToast(getRandomPraise(), "gold"); }
+      }
+    }, 1000);
+  };
+}
+
+function renderWordle() {
+  const targetWord = DATA.wordleWords[Math.floor(Math.random() * DATA.wordleWords.length)];
+  let currentRow = 0, currentGuess = "", gameOver = false;
+  let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('games')">←</div><h2>🟩 Vārdu spēle</h2></div>
+    <div class="wordle-grid" id="wGrid"></div>
+    <div id="wMsg" style="text-align:center; color:var(--muted); margin-top:10px;">Угадайте слово из 5 букв</div>
+    <div class="wordle-keyboard" id="wKeyboard"></div>`;
+  showContent(html);
+  const grid = document.getElementById('wGrid');
+  for (let i = 0; i < 6; i++) {
+    const row = document.createElement('div'); row.className = 'wordle-row';
+    for (let j = 0; j < 5; j++) { const cell = document.createElement('div'); cell.className = 'wordle-cell'; row.appendChild(cell); }
+    grid.appendChild(row);
+  }
+  const keys = ["Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M","ENTER","BACK"];
+  const kb = document.getElementById('wKeyboard');
+  keys.forEach(k => {
+    const btn = document.createElement('button'); btn.className = 'wordle-key'; btn.textContent = k === 'BACK' ? '⌫' : (k === 'ENTER' ? '⏎' : k);
+    btn.onclick = () => handleKey(k); kb.appendChild(btn);
+  });
+  function handleKey(key) {
+    if (gameOver) return;
+    if (key === "BACK") { if (currentGuess.length > 0) { currentGuess = currentGuess.slice(0, -1); updateGrid(); } }
+    else if (key === "ENTER") { if (currentGuess.length === 5) checkGuess(); }
+    else if (currentGuess.length < 5 && key.match(/[A-Z]/)) { currentGuess += key; updateGrid(); }
+  }
+  function updateGrid() {
+    const row = grid.children[currentRow];
+    for (let i = 0; i < 5; i++) row.children[i].textContent = currentGuess[i] || "";
+  }
+  function checkGuess() {
+    const row = grid.children[currentRow]; const targetArr = targetWord.split(""); const guessArr = currentGuess.split(""); const used = new Array(5).fill(false);
+    for (let i = 0; i < 5; i++) if (guessArr[i] === targetArr[i]) { row.children[i].classList.add("correct"); updateKeyColor(guessArr[i], "correct"); used[i] = true; }
+    for (let i = 0; i < 5; i++) {
+      if (!row.children[i].classList.contains("correct")) {
+        const foundIdx = targetArr.findIndex((char, idx) => char === guessArr[i] && !used[idx]);
+        if (foundIdx !== -1) { row.children[i].classList.add("present"); updateKeyColor(guessArr[i], "present"); used[foundIdx] = true; }
+        else { row.children[i].classList.add("absent"); updateKeyColor(guessArr[i], "absent"); }
+      }
+    }
+    if (currentGuess === targetWord) {
+      gameOver = true; document.getElementById('wMsg').textContent = "🎉 Поздравляем!";
+      addXp(20);
+      setTimeout(() => { fireConfetti(); showToast("Шерлок Холмс отдыхает! Слово найдено! 🕵️‍♀️", "gold"); }, 500);
+    } else {
+      currentRow++; currentGuess = "";
+      if (currentRow === 6) { gameOver = true; document.getElementById('wMsg').textContent = `Слово было: ${targetWord}`; }
+    }
+  }
+  function updateKeyColor(letter, color) {
+    document.querySelectorAll(".wordle-key").forEach(k => {
+      if (k.textContent === letter && !k.classList.contains("correct")) { k.classList.remove("present", "absent"); k.classList.add(color); }
+    });
+  }
+  const keyListener = (e) => { if (e.key === "Enter") handleKey("ENTER"); else if (e.key === "Backspace") handleKey("BACK"); else if (e.key.match(/[a-zA-Z]/)) handleKey(e.key.toUpperCase()); };
+  document.addEventListener("keydown", keyListener);
+  const backBtn = document.querySelector('.back-btn');
+  backBtn.addEventListener('click', () => document.removeEventListener("keydown", keyListener));
+}
+
+function renderMemory() {
+  const pairs = shuffle(DATA.flashcards).slice(0, 8);
+  const cards = [];
+  pairs.forEach((p, i) => {
+    cards.push({ id: i, text: p.lv, type: 'lv' });
+    cards.push({ id: i, text: p.ru, type: 'ru' });
+  });
+  const deck = shuffle(cards);
+  let flipped = [];
+  let matched = 0;
+  let locked = false;
+  let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('games')">←</div><h2>🎴 Найди пару</h2></div>
+    <div style="text-align:center; color:var(--muted); font-size:0.9rem; margin-bottom:8px;">Соедини латышское слово с русским</div>
+    <div class="memory-grid" id="memGrid"></div>
+    <div style="text-align:center; font-weight:700;" id="memStatus">Найдено: 0 / 8</div>`;
+  showContent(html);
+  const grid = document.getElementById('memGrid');
+  const status = document.getElementById('memStatus');
+  function render() {
+    grid.innerHTML = '';
+    deck.forEach((c, i) => {
+      const card = document.createElement('div');
+      card.className = 'memory-card';
+      card.dataset.idx = i;
+      if (c.revealed || c.matched) {
+        card.classList.add('flipped');
+        card.textContent = c.text;
+        if (c.matched) card.classList.add('matched');
+      } else { card.textContent = '?'; }
+      card.onclick = () => handleClick(i);
+      grid.appendChild(card);
+    });
+  }
+  function handleClick(i) {
+    if (locked) return;
+    const c = deck[i];
+    if (c.matched || c.revealed) return;
+    c.revealed = true; flipped.push(i); render();
+    if (flipped.length === 2) {
+      locked = true;
+      const [a, b] = flipped;
+      const cardA = deck[a], cardB = deck[b];
+      if (cardA.id === cardB.id && cardA.type !== cardB.type) {
+        cardA.matched = cardB.matched = true;
+        matched++; addXp(2);
+        status.textContent = `Найдено: ${matched} / 8`;
+        flipped = []; locked = false;
+        setTimeout(() => {
+          render();
+          if (matched === 8) {
+            fireConfetti(); showToast("Все пары найдены! 🎴", "gold");
+            setTimeout(() => { document.getElementById('memStatus').innerHTML = '<div style="font-size:2rem; margin:12px 0;">🎉</div><div>Победа!</div>'; }, 300);
+          }
+        }, 200);
+      } else {
+        setTimeout(() => { cardA.revealed = cardB.revealed = false; flipped = []; locked = false; render(); }, 900);
+      }
+    }
+  }
+  render();
+}
+
+function renderTrueFalse() {
+  const items = shuffle(DATA.trueFalse);
+  let idx = 0, score = 0;
+  let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('games')">←</div><h2>⚖️ Правда или ложь</h2></div><div id="tfBody"></div>`;
+  showContent(html);
+  function render() {
+    if (idx >= items.length) {
+      document.getElementById('tfBody').innerHTML = `<div class="info-card" style="text-align:center; padding:40px 20px;">
+          <div style="font-size:3rem; margin-bottom:16px;">⚖️</div>
+          <div style="font-weight:800; font-size:1.3rem; margin-bottom:8px;">Результат: ${score} / ${items.length}</div>
+        </div>`;
+      if (score >= 7) fireConfetti();
+      return;
+    }
+    const it = items[idx];
+    document.getElementById('tfBody').innerHTML = `<div style="text-align:center; color:var(--muted); font-size:0.85rem; margin-bottom:8px;">${idx+1}/${items.length}</div>
+      <div class="tf-card">${it.text}</div>
+      <div class="tf-btns">
+        <button class="tf-btn yes" id="tfYes">✓ Правда</button>
+        <button class="tf-btn no" id="tfNo">✗ Ложь</button>
+      </div>
+      <div id="tfMsg" style="text-align:center; margin-top:16px; font-weight:700; min-height:24px;"></div>`;
+    document.getElementById('tfYes').onclick = () => answer(true);
+    document.getElementById('tfNo').onclick = () => answer(false);
+    function answer(guess) {
+      document.getElementById('tfYes').disabled = true;
+      document.getElementById('tfNo').disabled = true;
+      const correct = guess === it.a;
+      if (correct) { score++; addXp(3); document.getElementById('tfMsg').innerHTML = `<span style="color:var(--success);">✅ ${it.exp}</span>`; }
+      else { document.getElementById('tfMsg').innerHTML = `<span style="color:var(--danger);">❌ ${it.exp}</span>`; }
+      setTimeout(() => { idx++; render(); }, 1500);
+    }
+  }
+  render();
+}
+
+// ============================================================
+// LISTS / DETAIL (life topics)
+// ============================================================
 function openList(type) {
   const dataArray = DATA[type];
   if (!dataArray) return;
-  
   let title = 'Темы';
   if (type === 'home') title = 'Быт и дом';
   if (type === 'food') title = 'Еда';
@@ -486,14 +1792,11 @@ function openList(type) {
   if (type === 'idioms') title = 'Идиомы';
   if (type === 'shadowing') title = 'Произношение';
   if (type === 'discussions') title = 'Дискуссии';
-
   let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('home')">←</div><h2>${title}</h2></div>`;
-  
   dataArray.forEach(item => {
     const itemTitle = item.title || item.text || item.phrase;
     const itemDesc = item.ruTitle || item.ru || item.meaning;
-    const safeId = item.id;
-    html += `<div class="list-item" onclick="openDetail('${type}', '${safeId}')">
+    html += `<div class="list-item" onclick="openDetail('${type}', '${item.id}')">
       <div><h4>${itemTitle}</h4><p>${itemDesc}</p></div>
       <div style="font-size:1.2rem; color:var(--accent);">›</div>
     </div>`;
@@ -504,9 +1807,7 @@ function openList(type) {
 function openDetail(type, id) {
   const item = DATA[type].find(i => i.id === id);
   if (!item) return;
-
   let html = `<div class="content-header"><div class="back-btn" onclick="openList('${type}')">←</div><h2>${item.title || item.phrase || 'Детали'}</h2></div>`;
-
   if (type === 'home' || type === 'food' || type === 'transport' || type === 'work') {
     item.items.forEach(i => {
       const safeText = i.lv.replace(/'/g, "\\'");
@@ -542,194 +1843,13 @@ function openDetail(type, id) {
       </div>
     </div>`;
   }
-
   html += `<button class="btn primary" style="margin-top:20px;" onclick="addXp(10, true); openList('${type}')">Завершить тему (+10 XP)</button>`;
   showContent(html);
 }
 
-function openGame(game) {
-  if (game === 'quickfire') renderQuickFire();
-  if (game === 'wordle') renderWordle();
-}
-
-function startDailyMix() {
-  const modes = ['quickfire', 'wordle', 'shadowing'];
-  const randomMode = modes[Math.floor(Math.random() * modes.length)];
-  if (randomMode === 'shadowing') openList('shadowing');
-  else openGame(randomMode);
-}
-
-function renderQuickFire() {
-  let score = 0, timeLeft = 60, timer, isActive = false;
-  
-  let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('games')">←</div><h2>⚡️ Быстрый огонь</h2></div>
-    <div class="qf-timer" id="qfTimer">01:00</div>
-    <div class="qf-question" id="qfQuestion">Нажмите старт!</div>
-    <div class="qf-options" id="qfOptions"></div>
-    <button class="btn primary" id="qfStart" style="margin-top:20px;">Старт</button>`;
-  showContent(html);
-
-  const timerEl = document.getElementById('qfTimer');
-  const scoreEl = document.getElementById('qfQuestion');
-  const optsEl = document.getElementById('qfOptions');
-  const startBtn = document.getElementById('qfStart');
-
-  function nextQuestion() {
-    if (!isActive) return;
-    const q = DATA.quickfire[Math.floor(Math.random() * DATA.quickfire.length)];
-    scoreEl.textContent = q.q;
-    const allOpts = shuffle([q.a, ...q.w]);
-    optsEl.innerHTML = '';
-    allOpts.forEach(opt => {
-      const btn = document.createElement('button'); btn.className = 'qf-btn'; btn.textContent = opt;
-      btn.onclick = () => {
-        if (!isActive) return;
-        if (opt === q.a) { btn.classList.add('correct'); score++; addXp(2); setTimeout(nextQuestion, 200); }
-        else { btn.classList.add('wrong'); scoreEl.textContent = "❌ Ошибка! " + q.q; setTimeout(nextQuestion, 800); }
-      };
-      optsEl.appendChild(btn);
-    });
-  }
-
-  startBtn.onclick = () => {
-    startBtn.style.display = 'none'; isActive = true; score = 0; timeLeft = 60; nextQuestion();
-    timer = setInterval(() => {
-      timeLeft--; timerEl.textContent = `00:${timeLeft < 10 ? '0' : ''}${timeLeft}`;
-      if (timeLeft <= 0) {
-        clearInterval(timer); isActive = false; scoreEl.textContent = `Игра окончена! Очков: ${score}`; optsEl.innerHTML = '';
-        startBtn.style.display = 'block'; startBtn.textContent = 'Играть снова'; startBtn.onclick = () => renderQuickFire();
-        if (score > 5) { fireConfetti(); showToast(getRandomPraise(), "gold"); }
-      }
-    }, 1000);
-  };
-}
-
-function renderWordle() {
-  const targetWord = DATA.wordleWords[Math.floor(Math.random() * DATA.wordleWords.length)];
-  let currentRow = 0, currentGuess = "", gameOver = false;
-
-  let html = `<div class="content-header"><div class="back-btn" onclick="switchTab('games')">←</div><h2>🟩 Vārdu spēle</h2></div>
-    <div class="wordle-grid" id="wGrid"></div>
-    <div class="hint" id="wMsg" style="text-align:center; color:var(--muted); margin-top:10px;">Угадайте слово из 5 букв</div>
-    <div class="wordle-keyboard" id="wKeyboard"></div>`;
-  showContent(html);
-
-  const grid = document.getElementById('wGrid');
-  for (let i = 0; i < 6; i++) {
-    const row = document.createElement('div'); row.className = 'wordle-row';
-    for (let j = 0; j < 5; j++) { const cell = document.createElement('div'); cell.className = 'wordle-cell'; row.appendChild(cell); }
-    grid.appendChild(row);
-  }
-
-  const keys = ["Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M","BACK"];
-  const kb = document.getElementById('wKeyboard');
-  keys.forEach(k => {
-    const btn = document.createElement('button'); btn.className = 'wordle-key'; btn.textContent = k === 'BACK' ? '⌫' : k;
-    btn.onclick = () => handleKey(k); kb.appendChild(btn);
-  });
-
-  function handleKey(key) {
-    if (gameOver) return;
-    if (key === "BACK") { if (currentGuess.length > 0) { currentGuess = currentGuess.slice(0, -1); updateGrid(); } }
-    else if (key === "ENTER") { if (currentGuess.length === 5) checkGuess(); }
-    else if (currentGuess.length < 5 && key.match(/[A-Z]/)) { currentGuess += key; updateGrid(); }
-  }
-
-  function updateGrid() {
-    const row = grid.children[currentRow];
-    for (let i = 0; i < 5; i++) row.children[i].textContent = currentGuess[i] || "";
-  }
-
-  function checkGuess() {
-    const row = grid.children[currentRow]; const targetArr = targetWord.split(""); const guessArr = currentGuess.split(""); const used = new Array(5).fill(false);
-    for (let i = 0; i < 5; i++) if (guessArr[i] === targetArr[i]) { row.children[i].classList.add("correct"); updateKeyColor(guessArr[i], "correct"); used[i] = true; }
-    for (let i = 0; i < 5; i++) {
-      if (!row.children[i].classList.contains("correct")) {
-        const foundIdx = targetArr.findIndex((char, idx) => char === guessArr[i] && !used[idx]);
-        if (foundIdx !== -1) { row.children[i].classList.add("present"); updateKeyColor(guessArr[i], "present"); used[foundIdx] = true; }
-        else { row.children[i].classList.add("absent"); updateKeyColor(guessArr[i], "absent"); }
-      }
-    }
-    if (currentGuess === targetWord) {
-      gameOver = true; document.getElementById('wMsg').textContent = "🎉 Поздравляем!"; addXp(20); 
-      setTimeout(() => { fireConfetti(); showToast("Шерлок Холмс отдыхает! Слово найдено! 🕵️‍♀️", "gold"); }, 500);
-    } else {
-      currentRow++; currentGuess = "";
-      if (currentRow === 6) { gameOver = true; document.getElementById('wMsg').textContent = `Слово было: ${targetWord}`; }
-    }
-  }
-
-  function updateKeyColor(letter, color) {
-    document.querySelectorAll(".wordle-key").forEach(k => {
-      if (k.textContent === letter && !k.classList.contains("correct")) { k.classList.remove("present", "absent"); k.classList.add(color); }
-    });
-  }
-
-  const keyListener = (e) => { if (e.key === "Enter") handleKey("ENTER"); else if (e.key === "Backspace") handleKey("BACK"); else if (e.key.match(/[a-zA-Z]/)) handleKey(e.key.toUpperCase()); };
-  document.addEventListener("keydown", keyListener);
-  
-  const backBtn = document.querySelector('.back-btn');
-  backBtn.addEventListener('click', () => document.removeEventListener("keydown", keyListener));
-}
-
-function speakText(text) {
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'lv-LV'; utterance.rate = 0.9;
-    const voices = window.speechSynthesis.getVoices();
-    const lvVoice = voices.find(v => v.lang.includes('lv') || v.lang.includes('LV'));
-    if (lvVoice) utterance.voice = lvVoice;
-    window.speechSynthesis.speak(utterance);
-  }
-}
-
-function setupMic(targetText) {
-  const micBtn = document.getElementById('micBtn');
-  const result = document.getElementById('shadowResult');
-  let recognition = null;
-
-  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    recognition = new SpeechRecognition();
-    recognition.lang = 'lv-LV'; recognition.interimResults = false;
-  } else {
-    micBtn.style.display = 'none';
-    result.textContent = "Микрофон не поддерживается";
-    return;
-  }
-
-  let isRecording = false;
-  micBtn.onclick = () => {
-    if (isRecording) { recognition.stop(); }
-    else { result.textContent = ""; recognition.start(); micBtn.classList.add('recording'); isRecording = true; }
-  };
-
-  recognition.onresult = (event) => {
-    isRecording = false; micBtn.classList.remove('recording');
-    const transcript = event.results[0][0].transcript;
-    const normalize = str => str.toLowerCase().replace(/[.,!?;:]/g, '').trim();
-    const targetWords = normalize(targetText).split(" ");
-    const spokenWords = normalize(transcript).split(" ");
-    const overlap = targetWords.filter(w => spokenWords.includes(w)).length;
-    const accuracy = Math.round((overlap / targetWords.length) * 100);
-
-    if (accuracy === 100) { 
-      result.textContent = `🎉 Идеально!`; result.style.color = 'var(--success)'; 
-      addXp(5); unlockBadge('speaker'); 
-      setTimeout(() => { fireConfetti(); showToast("Вау, Светлана! Твое произношение на высоте! 🎙️", "gold"); }, 500);
-    }
-    else if (accuracy >= 50) { 
-      result.textContent = `👍 Хорошо! (${accuracy}%)`; result.style.color = 'var(--warning)'; addXp(2); 
-    }
-    else { 
-      result.textContent = `❌ Попробуйте еще раз (${accuracy}%)`; result.style.color = 'var(--danger)'; 
-    }
-  };
-  recognition.onerror = () => { isRecording = false; micBtn.classList.remove('recording'); };
-  recognition.onend = () => { isRecording = false; micBtn.classList.remove('recording'); };
-}
-
+// ============================================================
+// IMPORT / EXPORT
+// ============================================================
 function exportProgress() {
   const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
   const dlAnchorElem = document.createElement('a');
@@ -745,7 +1865,9 @@ function importProgress(e) {
     try {
       const imported = JSON.parse(event.target.result);
       if (imported.xp !== undefined) {
-        state = { ...state, ...imported }; saveState(); updateUI();
+        state = { ...state, ...imported };
+        if (!state.progress.conversations) state.progress.conversations = {};
+        saveState(); updateUI();
         showToast("Ура! Прогресс загружен!"); switchTab('home');
       }
     } catch (err) { showToast("Ошибка файла", "danger"); }
@@ -757,12 +1879,126 @@ function resetProgress() {
   if (confirm("Удалить весь прогресс?")) { localStorage.clear(); location.reload(); }
 }
 
-function shuffle(array) { const a = [...array]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+// ============================================================
+// DATA (from previous version — kept for trainers/games)
+// ============================================================
+const DATA = {
+  discussions: [
+    { id: "d1", level: "B1", title: "Darbs no mājām vs. Darbs birojā", ruTitle: "Удалёнка vs Офис", text: "Pēc pandēmijas daudzi uzņēmumi turpina piedāvāt iespēju strādāt attālināti. Tas dod elastību, bet var arī novest pie sociālās izolācijas un grūtībām atdalīt darbu no personīgās dzīves.", ruText: "После пандемии многие компании продолжают предлагать удалённую работу. Это даёт гибкость, но может привести к социальной изоляции.", questions: ["Kāda ir jūsu pieredze ar attālināto darbu?", "Kā jūs uzturētu komandas garu attālināti?", "Vai jūs piekrītat, ka birojs ir labāks jauniem darbiniekiem?"] },
+    { id: "d2", level: "B2", title: "Mūsdienu steiga un stress", ruTitle: "Спешка и стресс", text: "Mūsdienās cilvēki pastāvīgi steidzas. Mums nav laika atpūsties vai vienkārši būt kopā ar ģimeni. Kā mēs varam palēnināt savu dzīves ritmu un atrast līdzsvaru?", ruText: "В наши дни люди постоянно спешат. У нас нет времени отдохнуть или просто побыть с семьей. Как мы можем замедлить свой ритм жизни и найти баланс?", questions: ["Kā jūs cīnāties ar stresu ikdienā?", "Vai jums šķiet, ka dzīve mūsdienās ir pārāk ātra?"] }
+  ],
+  shadowing: [
+    { id: "s1", level: "B1", text: "Labdien, kā jums iet?", ru: "Здравствуйте, как ваши дела?" },
+    { id: "s2", level: "B1", text: "Es gribētu pasūtīt kafiju, lūdzu.", ru: "Я хотел бы заказать кофе, пожалуйста." },
+    { id: "s3", level: "B2", text: "Vai jūs varat man pateikt, kur ir tuvākā stacija?", ru: "Вы можете сказать мне, где ближайшая станция?" },
+    { id: "s4", level: "B2", text: "Man ļoti patīk šī pilsēta, tā ir skaista.", ru: "Мне очень нравится этот город, он красивый." },
+    { id: "s5", level: "B1", text: "Es šodien jūtos ļoti labi.", ru: "Я сегодня чувствую себя очень хорошо." }
+  ],
+  home: [{ id: "h1", level: "B1", title: "Дом и быт", items: [ 
+    { lv: "māja", ru: "дом" }, { lv: "dzīvoklis", ru: "квартира" }, { lv: "istaba", ru: "комната" }, 
+    { lv: "virtuve", ru: "кухня" }, { lv: "gulta", ru: "кровать" }, { lv: "galds", ru: "стол" }, 
+    { lv: "krēsls", ru: "стул" }, { lv: "logs", ru: "окно" }, { lv: "durvis", ru: "дверь" }, 
+    { lv: "uzkopt", ru: "убирать" }, { lv: "veļas mašīna", ru: "стиральная машина" }, { lv: "ledusskapis", ru: "холодильник" } 
+  ]}],
+  food: [{ id: "f1", level: "B1", title: "Еда и продукты", items: [ 
+    { lv: "maize", ru: "хлеб" }, { lv: "piens", ru: "молоко" }, { lv: "ūdens", ru: "вода" }, 
+    { lv: "gaļa", ru: "мясо" }, { lv: "zivs", ru: "рыба" }, { lv: "dārzeņi", ru: "овощи" }, 
+    { lv: "augļi", ru: "фрукты" }, { lv: "ēdiens", ru: "еда" }, { lv: "dzēriens", ru: "напиток" }, 
+    { lv: "brokastis", ru: "завтрак" }, { lv: "pusdienas", ru: "обед" }, { lv: "vakariņas", ru: "ужин" } 
+  ]}],
+  transport: [{ id: "t1", level: "B1", title: "Транспорт и дорога", items: [ 
+    { lv: "mašīna", ru: "машина" }, { lv: "autobuss", ru: "автобус" }, { lv: "vilciens", ru: "поезд" }, 
+    { lv: "lidmašīna", ru: "самолет" }, { lv: "ceļš", ru: "дорога" }, { lv: "satiksme", ru: "движение" }, 
+    { lv: "stūre", ru: "руль" }, { lv: "bremzes", ru: "тормоза" }, { lv: "degviela", ru: "топливо" }, { lv: "biļete", ru: "билет" } 
+  ]}],
+  work: [{ id: "w1", level: "B2", title: "Работа и учеба", items: [ 
+    { lv: "darbs", ru: "работа" }, { lv: "birojs", ru: "офис" }, { lv: "dators", ru: "компьютер" }, 
+    { lv: "sapulce", ru: "собрание" }, { lv: "kolēģis", ru: "коллега" }, { lv: "priekšnieks", ru: "начальник" }, 
+    { lv: "alga", ru: "зарплата" }, { lv: "atvaļinājums", ru: "отпуск" }, { lv: "amats", ru: "должность" } 
+  ]}],
+  idioms: [
+    { id: "i1", level: "B1", phrase: "Pūst pīlītes", literal: "Дуть уточек", meaning: "Говорить ерунду.", example: "Beidz pūst pīlītes!", ruEx: "Хватит нести чушь!", mnemonic: "Дуть на уточек — глупость." },
+    { id: "i2", level: "B1", phrase: "Kā pīlei ūdens", literal: "Как утке вода", meaning: "Быть равнодушным.", example: "Viņam tas ir kā pīlei ūdens.", ruEx: "Ему это как с гуся вода.", mnemonic: "Вода скатывается с утки." },
+    { id: "i3", level: "B2", phrase: "Sēdēt kā uz adatām", literal: "Сидеть как на иголках", meaning: "Сильно нервничать.", example: "Es sēžu kā uz adatām.", ruEx: "Я сижу как на иголках.", mnemonic: "Калька с русского." },
+    { id: "i4", level: "B2", phrase: "Palaist gar ausīm", literal: "Пропустить мимо ушей", meaning: "Игнорировать.", example: "Viņš palaida gar ausīm visus padomus.", ruEx: "Он пропустил мимо ушей все советы.", mnemonic: "Звук пролетает мимо." }
+  ],
+  quickfire: [
+    { q: "māja", a: "дом", w: ["квартира", "машина", "работа"] },
+    { q: "darbs", a: "работа", w: ["отдых", "учеба", "игра"] },
+    { q: "maize", a: "хлеб", w: ["молоко", "мясо", "вода"] },
+    { q: "ceļš", a: "дорога", w: ["мост", "лес", "поле"] },
+    { q: "piens", a: "молоко", w: ["сыр", "масло", "сок"] },
+    { q: "mašīna", a: "машина", w: ["поезд", "самолет", "велосипед"] },
+    { q: "ūdens", a: "вода", w: ["чай", "кофе", "пиво"] },
+    { q: "stūre", a: "руль", w: ["колесо", "дверь", "фара"] }
+  ],
+  wordleWords: ["DARBS", "LAIKS", "VIETA", "KAFIJA", "VALODA", "DRAUGS", "SKOLA", "PRATS", "SAULE", "LAPA"],
+  flashcards: [
+    { lv: "sveiki", ru: "привет" }, { lv: "paldies", ru: "спасибо" }, { lv: "lūdzu", ru: "пожалуйста" },
+    { lv: "atvainojiet", ru: "извините" }, { lv: "jā", ru: "да" }, { lv: "nē", ru: "нет" },
+    { lv: "labs", ru: "хороший" }, { lv: "slikts", ru: "плохой" }, { lv: "liels", ru: "большой" },
+    { lv: "mazs", ru: "маленький" }, { lv: "skaists", ru: "красивый" }, { lv: "gudrs", ru: "умный" },
+    { lv: "iet", ru: "идти" }, { lv: "runāt", ru: "говорить" }, { lv: "ēst", ru: "есть" },
+    { lv: "dzert", ru: "пить" }, { lv: "mācīties", ru: "учиться" }, { lv: "strādāt", ru: "работать" },
+    { lv: "mīlēt", ru: "любить" }, { lv: "saprast", ru: "понимать" }
+  ],
+  translation: [
+    { lv: "Es mācos latviešu valodu", ru: "Я учу латышский язык" },
+    { lv: "Kā tevi sauc?", ru: "Как тебя зовут?" },
+    { lv: "Man patīk kafija", ru: "Мне нравится кофе" },
+    { lv: "Kur tu dzīvo?", ru: "Где ты живёшь?" },
+    { lv: "Es strādāju birojā", ru: "Я работаю в офисе" },
+    { lv: "Rīt būs silts laiks", ru: "Завтра будет тёплая погода" },
+    { lv: "Vai tu runā angliski?", ru: "Ты говоришь по-английски?" },
+    { lv: "Es gribu ēst", ru: "Я хочу есть" },
+    { lv: "Mums ir divi bērni", ru: "У нас двое детей" },
+    { lv: "Viņš nāk no Latvijas", ru: "Он из Латвии" }
+  ],
+  grammar: [
+    { q: "Es eju uz ___ (veikals)", options: ["veikals", "veikalu", "veikalā", "veikala"], a: "veikalu", exp: "После 'uz' (направление) — винительный падеж: veikalu" },
+    { q: "Es dzīvoju ___ (Rīga)", options: ["Rīga", "Rīgu", "Rīgā", "Rīgas"], a: "Rīgā", exp: "Местный падеж (Locative): Rīgā" },
+    { q: "Man ir ___ (grāmata)", options: ["grāmata", "grāmatu", "grāmatā", "grāmatas"], a: "grāmata", exp: "После 'ir' — именительный падеж: grāmata" },
+    { q: "Viņa ___ (būt) skolotāja", options: ["ir", "esmu", "esi", "būs"], a: "ir", exp: "3-е лицо ед.ч. от būt = ir" },
+    { q: "Mēs ___ (iet) uz parku", options: ["eju", "iet", "ejam", "ietu"], a: "ejam", exp: "1-е лицо мн.ч. от iet = ejam" },
+    { q: "Es ___ (lasīt) grāmatu", options: ["lasa", "lasu", "lasām", "lasīt"], a: "lasu", exp: "1-е лицо ед.ч. от lasīt = lasu" },
+    { q: "Bez ___ (ūdens) nevar dzīvot", options: ["ūdens", "ūdeni", "ūdenim", "ūdenī"], a: "ūdens", exp: "После 'bez' — родительный падеж: ūdens" },
+    { q: "Ar ___ (draugs) es eju uz kino", options: ["draugs", "draugu", "draugam", "draugā"], a: "draugu", exp: "После 'ar' — творительный падеж: draugu" },
+    { q: "___ (Es) ir māsa", options: ["Es", "Mani", "Man", "Mana"], a: "Man", exp: "Дательный падеж: Man ir" },
+    { q: "Vai tu gribi ___ (kafija)?", options: ["kafija", "kafiju", "kafijas", "kafijā"], a: "kafiju", exp: "Винительный падеж: kafiju" }
+  ],
+  sentenceBuild: [
+    { words: ["Es", "mācos", "latviešu", "valodu"], answer: "Es mācos latviešu valodu", ru: "Я учу латышский" },
+    { words: ["Man", "patīk", "dzert", "kafiju"], answer: "Man patīk dzert kafiju", ru: "Мне нравится пить кофе" },
+    { words: ["Mēs", "ejam", "uz", "veikalu"], answer: "Mēs ejam uz veikalu", ru: "Мы идём в магазин" },
+    { words: ["Rīt", "būs", "silts", "laiks"], answer: "Rīt būs silts laiks", ru: "Завтра будет тёплая погода" },
+    { words: ["Vai", "tu", "runā", "angliski"], answer: "Vai tu runā angliski", ru: "Ты говоришь по-английски?" },
+    { words: ["Es", "gribu", "ēst", "maizi"], answer: "Es gribu ēst maizi", ru: "Я хочу есть хлеб" }
+  ],
+  numbers: [
+    { n: 1, lv: "viens" }, { n: 2, lv: "divi" }, { n: 3, lv: "trīs" }, { n: 4, lv: "četri" },
+    { n: 5, lv: "pieci" }, { n: 6, lv: "seši" }, { n: 7, lv: "septiņi" }, { n: 8, lv: "astoņi" },
+    { n: 9, lv: "deviņi" }, { n: 10, lv: "desmit" }, { n: 20, lv: "divdesmit" }, { n: 100, lv: "simts" }
+  ],
+  trueFalse: [
+    { text: "'Sveiki' означает 'спасибо'", a: false, exp: "'Sveiki' — привет. Спасибо — 'paldies'" },
+    { text: "'Paldies' означает 'спасибо'", a: true, exp: "Верно! Paldies = спасибо" },
+    { text: "'Māja' означает 'машина'", a: false, exp: "Māja = дом. Машина = mašīna" },
+    { text: "'Kafija' — это кофе", a: true, exp: "Верно!" },
+    { text: "Латышский алфавит содержит 33 буквы", a: true, exp: "Верно! 24 латинские + 9 с диакритикой" },
+    { text: "'Labdien' — это 'добрый день'", a: true, exp: "Верно!" },
+    { text: "'Ūdens' означает 'огонь'", a: false, exp: "Ūdens = вода. Огонь = uguns" },
+    { text: "Ударение почти всегда на первом слоге", a: true, exp: "Верно!" },
+    { text: "'Grāmata' — это тетрадь", a: false, exp: "Grāmata = книга. Тетрадь = burtnīca" },
+    { text: "'Skolotājs' — учитель", a: true, exp: "Верно!" }
+  ]
+};
 
+// ============================================================
+// INIT
+// ============================================================
 document.addEventListener("DOMContentLoaded", () => {
   document.documentElement.dataset.theme = state.theme;
   updateUI();
-  
   const today = new Date().toISOString().split('T')[0];
   if (state.lastVisit !== today) {
     const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
@@ -770,15 +2006,14 @@ document.addEventListener("DOMContentLoaded", () => {
     else if (state.lastVisit !== "") state.streak = 1;
     state.lastVisit = today; saveState();
   }
-
-  // Приветствие при входе
   setTimeout(() => {
     showToast("Привет, Светлана! Готова покорять латышский? 😉", "success");
   }, 1000);
+  if (!state.badges.includes('first_step')) unlockBadge('first_step');
 });
 
-if ('serviceWorker' in navigator) { 
-  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(err => console.log('SW error', err))); 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(err => console.log('SW error', err)));
 }
 </script>
 </body>
